@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+{% bootstrap_messages %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Perfil do usu&aacute;rio</h3>
+                    </div>
+			         <div class="panel-body">
+						<form method="post" class="form">
+						    {% csrf_token %}
+						    {% bootstrap_form_errors form %}
+						    {% bootstrap_form form %}
+						    {% buttons %}
+						    <div class="text-right">
+						        <button type="submit" class="btn btn-primary">Atualizar Perfil</button>
+						    </div>
+						    {% endbuttons %}
+						</form>
+			         </div>            <!-- /.panel-body -->                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

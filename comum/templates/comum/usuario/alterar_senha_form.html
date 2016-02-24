@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+{% bootstrap_messages %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form class="form-horizontal" method="post">{% csrf_token %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Alterar senha</h3>
+                </div>
+                <div class="panel-body">
+            		{% bootstrap_form form layout='horizontal' %}
+            		<div class="text-right">
+                        <button class="btn btn-primary" type="submit">Alterar senha</button>
+            		</div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

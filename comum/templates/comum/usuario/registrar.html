@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% bootstrap_messages %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Cadastre-se</h3>
+                    </div>
+			         <div class="panel-body">
+						<form method="post" class="form">
+						    {% csrf_token %}
+						    {% bootstrap_form_errors form %}
+						    {% bootstrap_form form %}
+						    {% buttons %}
+						        <button type="submit" class="btn btn-primary">Cadastrar-se</button>
+						    {% endbuttons %}
+						</form>
+			         </div>            <!-- /.panel-body -->                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

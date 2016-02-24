@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>{{ minicurso.nome }}</h2>
+    <form method="post" action="{% url 'minicursos:inscricao' minicurso.pk %}" class="text-right">
+    {% csrf_token %}
+    {% if inscricao %}
+        <input type="hidden" name="cancelar" value="true"/>
+        {% if inscricao.espera %}
+        <input type="hidden" name="espera" value="true"/>
+        <button class="btn btn-danger" type="submit">Cancelar Espera</button>
+        {% else %}
+        <button class="btn btn-danger" type="submit">Cancelar Inscrição</button>        
+        {% endif %}
+    {% else %} 
+        {% if not pode_inscrever %}
+        <button class="btn btn-warning" disabled>
+            Você só pode se inscrever em {{ inscricao_maximimo }} minicurso(s)
+        </button>
+        {% elif minicurso.tem_vagas_disponiveis %}
+        <button class="btn btn-success" type="submit">Inscreva-se</button>
+        {% elif minicurso.tem_vagas_espera %}
+        <input type="hidden" name="espera" value="true"/>
+        <button class="btn btn-success" type="submit">Entrar na Lista de Espera</button>
+        {% else %}
+        <button class="btn btn-warning" disabled>Não há mais vagas disponiveis</button>
+        {% endif %}
+    {% endif %}
+    </form>
+
+    <div class="row">
+        <div class="col-md-3"><b>Hor&aacute;rio</b></div>
+        <div class="col-md-9">
+        {% for horario in minicurso.horarios.all %}
+            <div>
+            {{ horario.data | date:"j" }} {{ horario.data | date:"F" }} das
+            {{ horario.hora_inicial | time:"g:iA" }} &agrave;s {{ horario.hora_final | time:"g:iA"}}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><b>Local</b></div>
+        <div class="col-md-9">{{ minicurso.local|default:'A definir' }}</div>
+    </div>
+    <div class="row">
+        {% if minicurso.descricao %}
+        <div class="col-md-3"><b>Descrição</b></div>
+        <div class="col-md-9">{{ minicurso.descricao|default:'&nbsp;' }}</div>
+        {% endif %}
+    </div>
+    <div class="row">
+        {% if minicurso.pre_requisitos %}
+        <div class="col-md-3"><b>Pré-requisitos</b></div>
+        <div class="col-md-9">{{ minicurso.pre_requisitos|default:'&nbsp;' }}</div>
+        {% endif %}
+    </div>
+    {% if minicurso.palestrante %}
+    <div class="row">
+        <div class="col-md-3"><b>Ministrante</b></div>
+        <div class="col-md-9">{{ minicurso.palestrante.nome }}</div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

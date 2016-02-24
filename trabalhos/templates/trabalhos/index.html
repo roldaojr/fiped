@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+{% if pode_submeter %}
+<div class="alert alert-success" role="alert">
+    Os trabalhos podem ser enviados até {{ def_trabalhos.prazo }}.
+</div>
+{% endif %}
+{% if not pode_submeter %}
+<div class="alert alert-danger" role="alert">
+    O prazo para submiss&atilde;o de trabalhos terminou!
+</div>
+{% endif %}
+<div class="row">
+{% if def_trabalhos.submeter_poster %}
+<div class="col-md-6">
+    <h2>Poster</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Documentos importantes</h3>
+        </div>
+        <div class="list-group">
+            {% if def_trabalhos.modelo_poster.url %}
+            <a class="list-group-item" href="{{ def_trabalhos.modelo_poster.url }}">Modelo de poster</a>
+            {% endif %}
+        </div>
+    </div>
+    {% if pode_submeter %}
+    <a class="btn btn-primary" href="{% url 'trabalhos:submeter_poster' %}">Submeter poster</a>
+    {% endif %}
+</div>
+{% endif %}
+{% if def_trabalhos.submeter_mostra %}
+<div class="col-md-6">
+    <h2>Mostra tecnológica</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Documentos importantes</h3>
+        </div>
+        <div class="list-group">
+            {% if def_trabalhos.modelo_plano_pesquisa %}
+            <a class="list-group-item" href="{{ def_trabalhos.modelo_plano_pesquisa.url }}">Modelo de Plano de pesquisa</a>
+            {% endif %}
+            {% if def_trabalhos.modelo_relatorio %}
+            <a class="list-group-item" href="{{ def_trabalhos.modelo_relatorio.url }}">Modelo de relat&oacute;rio</a>
+            {% endif %}
+            {% if def_trabalhos.modelo_resumo %}
+            <a class="list-group-item" href="{{ def_trabalhos.modelo_plano_pesquisa.url }}">Modelo de resumo</a>
+            {% endif %}
+        </div>
+    </div>
+    {% if pode_submeter %}
+    <a class="btn btn-primary" href="{% url 'trabalhos:submeter_mostra' %}">Submeter mostra tecnol&oacute;gica</a>
+    {% endif %}
+</div>
+{% endif %}
+</div>
+</div>
+{% endblock %}

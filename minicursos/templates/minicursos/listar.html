@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+<div class="container">
+<h2>Minicursos</h2>
+<div class="table-responsive">
+<table class="table table-striped">
+    <tr>
+        <th>T&iacute;tulo</th>
+        <th>Pr&eacute;-requisitos</th>
+        <th>Ministrante</th>
+        <th>Vagas dispon&iacute;veis</th>
+    </tr>
+{% for minicurso in minicursos %}
+    <tr>
+        <td>
+            <a href="{% url 'minicursos:detalhes' minicurso.pk %}">{{ minicurso.nome }}</a>
+            {% if minicurso.inscricoes_do_usuario.0 %}
+            {% if minicurso.inscricoes_do_usuario.0.espera %}
+            <span class="label label-warning">Lista de espera</span>
+            {% else %}
+            <span class="label label-success">Inscrito</span>
+            {% endif %}
+            {% endif %}
+        </td>
+        <td>{{ minicurso.pre_requisitos }}</td>
+        <td>{{ minicurso.palestrante }}</td>
+        <td>{{ minicurso.vagas_disponiveis }}</td>
+    </tr>
+{% endfor %}
+</table>
+</div>
+</div>
+{% endblock %}
