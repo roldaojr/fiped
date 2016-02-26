@@ -4,6 +4,7 @@ from django.db import models
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.timezone import now
 from eventos.models import Inscricao, Evento
 
 
@@ -11,16 +12,16 @@ class Definicoes(models.Model):
     evento = models.OneToOneField(Evento, on_delete=models.CASCADE,
                                   primary_key=True,
                                   related_name='def_trabalhos')
-    prazo = models.DateTimeField('prazo para submissão')
+    prazo = models.DateTimeField('prazo para submissão', default=now)
     # poster
     submeter_poster = models.BooleanField(
-        'habilitar submissão de poster', default=True)
+        'habilitar submissão de poster', default=False)
     modelo_poster = models.FileField(
         'Modelo de Poster', null=True, blank=True,
         upload_to='modelos/poster')
     # mostra tecnologica
     submeter_mostra = models.BooleanField(
-        'habilitar submissão de mostra tecnologica', default=True)
+        'habilitar submissão de mostra tecnologica', default=False)
     modelo_plano_pesquisa = models.FileField(
         'Modelo de Plano de pesquisa', null=True, blank=True,
         upload_to='modelos/plano_pesquisa')
@@ -30,6 +31,12 @@ class Definicoes(models.Model):
     modelo_resumo = models.FileField(
         'Modelo de Resumo', null=True, blank=True,
         upload_to='modelos/resumo')
+
+    @classmethod
+    def do_evento(cls, evento):
+        if not hasattr(evento, 'def_trabalhos'):
+            evento.def_trabalhos = cls.objects.create(evento=evento)
+        return evento.def_trabalhos
     
     class Meta:
         verbose_name = 'definição de trabalhos'

@@ -16,6 +16,12 @@ class Definicoes(models.Model):
                                   related_name='def_minicursos')
     maximo = models.IntegerField('máximo de inscrições por pessoa', default=1)
     
+    @classmethod
+    def do_evento(cls, evento):
+        if not hasattr(evento, 'def_minicursos'):
+            evento.def_minicursos = cls.objects.create(evento=evento)
+        return evento.def_minicursos
+    
     class Meta:
         verbose_name = 'definição de minicurso'
         verbose_name_plural = 'definições de minicurso'

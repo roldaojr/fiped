@@ -7,21 +7,22 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.utils.timezone import now
-from .forms import PosterForm, MostraTecnologicaForm
 from eventos.models import Evento
+from .forms import PosterForm, MostraTecnologicaForm
+from .models import Definicoes
 
 
 @login_required
 def submeter(request):
-    evento = Evento.objects.first()
+    def_trabalhos = Definicoes.do_evento(Evento.objects.first())
     return render(request, 'trabalhos/index.html', {
-        'pode_submeter': evento.def_trabalhos.prazo > now(),
-        'def_trabalhos': evento.def_trabalhos
+        'pode_submeter': def_trabalhos.prazo > now(),
+        'def_trabalhos': def_trabalhos
     })
 
 @login_required
 def submeter_poster(request):
-    def_trabalhos = Evento.objects.first().def_trabalhos
+    def_trabalhos = Definicoes.do_evento(Evento.objects.first())
     if not def_trabalhos.submeter_poster:
         raise Http404
     if request.method == 'POST':
@@ -38,7 +39,7 @@ def submeter_poster(request):
 
 @login_required
 def submeter_mostra(request):
-    def_trabalhos = Evento.objects.first().def_trabalhos
+    def_trabalhos = Definicoes.do_evento(Evento.objects.first())
     if not def_trabalhos.submeter_mostra:
         raise Http404
     if request.method == 'POST':

@@ -34,7 +34,7 @@ class AtividadeAdmin(admin.ModelAdmin):
     list_display = ('nome', 'tipo', 'local')
     list_filter = ('tipo',)
     inlines = [HorarioInline]
-    ordering = ('nome',)
+    ordering = ('horarios__data', 'horarios__hora_inicial', 'horarios__hora_final')
     search_fields = ('nome',)
 
 
@@ -42,7 +42,7 @@ class AtividadeAdmin(admin.ModelAdmin):
 class HorarioAdmin(admin.ModelAdmin):
     list_display = ('atividade', 'data', 'hora_inicial', 'hora_final')
     list_display_links = []
-    list_filter = ('atividade__tipo',)
+    list_filter = ('atividade__tipo', 'data')
 
     def has_change_permission(self, request, obj=None, *args, **kwargs):
         if obj is None:

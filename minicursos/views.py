@@ -9,7 +9,7 @@ from django.db import IntegrityError, transaction
 from django.db.models.query import Prefetch
 from eventos.models import Inscricao, Evento
 from eventos.decorators import evento_view
-from .models import Minicurso
+from .models import Minicurso, Definicoes
 
 
 @login_required
@@ -26,7 +26,7 @@ def minicurso_listar(request):
 @login_required
 def minicurso_detalhes(request, minicurso_id):
     minicurso = Minicurso.objects.get(pk=minicurso_id)
-    def_minicursos = Evento.objects.first().def_minicursos
+    def_minicursos = Definicoes.do_evento(Evento.objects.first())
     qtd_inscricoes = request.user.inscricoes.filter(atividade__tipo='Minicurso').count()
     try:
         inscricao = minicurso.inscricoes.get(usuario=request.user)
