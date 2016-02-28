@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.conf import settings
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.formats import date_format, time_format
 from comum.models import Usuario
 
 
@@ -36,7 +38,10 @@ class Horario(models.Model):
     hora_final = models.TimeField()
 
     def __str__(self):
-        return '{0} das {1} ãs {2}'.format(self.data, self.hora_inicial, self.hora_final)
+        data   = date_format(self.data)
+        hora_i = time_format(self.hora_inicial)
+        hora_f = time_format(self.hora_final)
+        return '{0}, {1} às {2}'.format(data, hora_i, hora_f)
 
     class Meta:
         ordering = ('data', 'hora_inicial', 'hora_final')

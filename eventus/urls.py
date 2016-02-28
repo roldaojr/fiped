@@ -16,10 +16,12 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from comum.urls import urlpatterns as comum_urls
+from eventos.urls import urlpatterns as eventos_urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^trabalhos/', include('trabalhos.urls', namespace='trabalhos')),
     url(r'^minicursos/', include('minicursos.urls', namespace='minicursos')),
-    url(r'', include('comum.urls')),
+    url(r'',  include(eventos_urls + comum_urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
