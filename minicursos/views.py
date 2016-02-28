@@ -35,7 +35,9 @@ def minicurso_detalhes(request, minicurso_id):
     return render(request, 'minicursos/detalhes.html', {
         'minicurso': minicurso,
         'inscricao': inscricao,
+        'qtd_inscricoes': qtd_inscricoes,
         'pode_inscrever': qtd_inscricoes < def_minicursos.maximo,
+        'tem_vagas': minicurso.tem_vagas_disponiveis or minicurso.tem_vagas_espera,
         'inscricao_maximimo': def_minicursos.maximo
     })
 

@@ -8,7 +8,7 @@
     <tr>
         <th>T&iacute;tulo</th>
         <th>Pr&eacute;-requisitos</th>
-        <th>Ministrante</th>
+        <th>Horarios</th>
         <th>Vagas dispon&iacute;veis</th>
     </tr>
 {% for minicurso in minicursos %}
@@ -24,7 +24,9 @@
             {% endif %}
         </td>
         <td>{{ minicurso.pre_requisitos }}</td>
-        <td>{{ minicurso.ministrante }}</td>
+        <td>{% for horario in minicurso.horarios.all %}
+            <nobr>{{ horario }}</nobr><br/>
+        {% endfor %}</td>
         <td>{{ minicurso.vagas_disponiveis }}</td>
     </tr>
 {% endfor %}
