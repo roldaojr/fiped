@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+table, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.minicurso {
+    page-break-after: always;
+}
+</style>
+</head>
+<body>
+{% for minicurso in minicursos %}
+<div class="minicurso">
+    <h2>{{ minicurso.nome }}</h2>
+    <table width="100%" border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                {% for horario in minicurso.horarios.all %}
+                <th>{{ horario.data|date:'SHORT_DATE_FORMAT' }} {{ horario.hora_inicial }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for inscricao in minicurso.inscricoes.all %}
+            <tr>
+                <td>{{ inscricao.usuario }}</td>
+                {% for horario in minicurso.horarios.all %}
+                <th>&nbsp;</th>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endfor %}
+</body>
+</html>
