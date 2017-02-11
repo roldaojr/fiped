@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('espera', models.BooleanField(default=False, editable=False)),
-                ('atividade', models.ForeignKey(related_name='inscricoes', editable=False, to='eventos.Atividade')),
+                ('atividade', models.ForeignKey(related_name='inscricoes', editable=False, to='eventos.Atividade', null=True)),
                 ('usuario', models.ForeignKey(related_name='inscricoes', editable=False, to=settings.AUTH_USER_MODEL)),
             ],
             options={

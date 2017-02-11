@@ -5,10 +5,9 @@ from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError, transaction
+from django.db import transaction
 from django.db.models.query import Prefetch
 from eventos.models import Inscricao, Evento
-from eventos.decorators import evento_view
 from .models import Minicurso, Definicoes
 
 
@@ -16,7 +15,8 @@ from .models import Minicurso, Definicoes
 def minicurso_listar(request):
     inscricoes = Inscricao.objects.filter(usuario=request.user)
     minicursos = Minicurso.objects.prefetch_related(
-        Prefetch('inscricoes', queryset=inscricoes, to_attr='inscricoes_do_usuario')
+        Prefetch('inscricoes', queryset=inscricoes,
+                 to_attr='inscricoes_do_usuario')
     )
     return render(request, 'minicursos/listar.html', {
         'minicursos': minicursos,
@@ -45,18 +45,15 @@ def minicurso_detalhes(request, minicurso_id):
 @login_required
 @transaction.atomic
 def minicurso_inscricao(request, minicurso_id):
-    def_minicursos = Evento.objects.first().def_minicursos
     if request.method == 'POST':
         minicurso = Minicurso.objects.get(pk=minicurso_id)
         cancelar = request.POST.get('cancelar', 'false') == 'true'
-        espera   = request.POST.get('espera', 'false') == 'true'
-        print cancelar
-        print espera
-        if cancelar: # cancelar inscrição
+        espera = request.POST.get('espera', 'false') == 'true'
+        if cancelar:  # cancelar inscrição
             minicurso.inscricoes.get(usuario=request.user).delete()
         else:
             if (minicurso.tem_vagas_disponiveis or
-                (espera and minicurso.tem_vagas_espera)):
+               (espera and minicurso.tem_vagas_espera)):
                 minicurso.inscricoes.create(usuario=request.user, espera=espera)
                 messages.success(request, 'Inscrito no minicurso {}.'.format(minicurso.nome))
             else:

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
-from django.conf import settings
-from django.core.files.storage import FileSystemStorage
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from eventos.models import Inscricao, Evento
@@ -37,7 +35,7 @@ class Definicoes(models.Model):
         if not hasattr(evento, 'def_trabalhos'):
             evento.def_trabalhos = cls.objects.create(evento=evento)
         return evento.def_trabalhos
-    
+
     class Meta:
         verbose_name = 'definição de trabalhos'
         verbose_name_plural = 'definições de trabalhos'

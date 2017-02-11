@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+import django.utils.timezone
 
 
 class Migration(migrations.Migration):
@@ -22,10 +23,10 @@ class Migration(migrations.Migration):
             name='Definicoes',
             fields=[
                 ('evento', models.OneToOneField(related_name='def_trabalhos', primary_key=True, serialize=False, to='eventos.Evento')),
-                ('prazo', models.DateTimeField(verbose_name='prazo para submiss\xe3o')),
-                ('submeter_poster', models.BooleanField(default=True, verbose_name='habilitar submiss\xe3o de poster')),
+                ('prazo', models.DateTimeField(default=django.utils.timezone.now, verbose_name='prazo para submiss\xe3o')),
+                ('submeter_poster', models.BooleanField(default=False, verbose_name='habilitar submiss\xe3o de poster')),
                 ('modelo_poster', models.FileField(upload_to='modelos/poster', null=True, verbose_name='Modelo de Poster', blank=True)),
-                ('submeter_mostra', models.BooleanField(default=True, verbose_name='habilitar submiss\xe3o de mostra tecnologica')),
+                ('submeter_mostra', models.BooleanField(default=False, verbose_name='habilitar submiss\xe3o de mostra tecnologica')),
                 ('modelo_plano_pesquisa', models.FileField(upload_to='modelos/plano_pesquisa', null=True, verbose_name='Modelo de Plano de pesquisa', blank=True)),
                 ('modelo_relatorio', models.FileField(upload_to='modelos/relatorio', null=True, verbose_name='Modelo de Relat\xf3rio', blank=True)),
                 ('modelo_resumo', models.FileField(upload_to='modelos/resumo', null=True, verbose_name='Modelo de Resumo', blank=True)),

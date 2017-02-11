@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('nome', models.CharField(max_length=100)),
-                ('foto', models.ImageField(null=True, upload_to='fotos/palestrante', blank=True)),
+                ('foto', models.ImageField(null=True, upload_to='fotos/ministrante', blank=True)),
                 ('bio', models.TextField(null=True, blank=True)),
             ],
         ),

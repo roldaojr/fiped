@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.shortcuts import render
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -20,6 +19,7 @@ def submeter(request):
         'def_trabalhos': def_trabalhos
     })
 
+
 @login_required
 def submeter_poster(request):
     def_trabalhos = Definicoes.do_evento(Evento.objects.first())
@@ -36,6 +36,7 @@ def submeter_poster(request):
     else:
         form = PosterForm()
     return render(request, 'trabalhos/submeter_form.html', {'form': form})
+
 
 @login_required
 def submeter_mostra(request):

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.conf import settings
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.formats import date_format, time_format
@@ -38,7 +37,7 @@ class Horario(models.Model):
     hora_final = models.TimeField()
 
     def __str__(self):
-        data   = date_format(self.data)
+        data = date_format(self.data)
         hora_i = time_format(self.hora_inicial)
         hora_f = time_format(self.hora_final)
         return '{0}, {1} às {2}'.format(data, hora_i, hora_f)
@@ -48,7 +47,7 @@ class Horario(models.Model):
 
 
 class Inscricao(models.Model):
-    atividade = models.ForeignKey(Atividade, related_name="inscricoes", editable=False)
+    atividade = models.ForeignKey(Atividade, related_name="inscricoes", editable=False, null=True)
     usuario = models.ForeignKey(Usuario, related_name="inscricoes", editable=False)
     espera = models.BooleanField(default=False, editable=False)
 
