@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 from django.shortcuts import render
 from django.contrib import admin
 from eventos.admin import HorarioInline, EventoAdmin
@@ -25,8 +23,9 @@ class MinicursoAdmin(admin.ModelAdmin):
                       {'minicursos': queryset})
     lista_de_presenca.short_description = 'Lista de presença'
 
+
 class MinicursoDefinicaoInline(admin.StackedInline):
     model = Definicoes
 
-EventoAdmin.inlines = list(getattr(EventoAdmin, 'inlines', [])) + \
-                      [MinicursoDefinicaoInline]
+
+EventoAdmin.inlines = list(getattr(EventoAdmin, 'inlines', [])) + [MinicursoDefinicaoInline]

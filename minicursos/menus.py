@@ -1,6 +1,11 @@
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from menu import Menu, MenuItem
+
+
+def usuario_autenticado(request):
+    return lambda request: request.user.is_authenticated()
+
 
 Menu.add_item("main", MenuItem("Mincursos",
                                reverse("minicursos:listar"),
-                               check=lambda request: request.user.is_authenticated()))
+                               check=usuario_autenticado))

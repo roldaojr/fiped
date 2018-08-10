@@ -7,8 +7,8 @@ from eventos.models import Inscricao, Evento
 
 
 class Definicoes(models.Model):
-    evento = models.OneToOneField(Evento, on_delete=models.CASCADE,
-                                  primary_key=True,
+    evento = models.OneToOneField(Evento, primary_key=True,
+                                  on_delete=models.CASCADE,
                                   related_name='def_trabalhos')
     prazo = models.DateTimeField('prazo para submissão', default=now)
     # poster
@@ -52,11 +52,14 @@ class Area(models.Model):
 @python_2_unicode_compatible
 class Trabalho(Inscricao):
     titulo = models.CharField('título', max_length=255)
-    nome_autor = models.CharField('nome completo do autor principal', max_length=255)
+    nome_autor = models.CharField('nome completo do autor principal',
+                                  max_length=255)
     cpf_autor = models.CharField('CPF do autor principal', max_length=11)
-    nome_orientador = models.CharField('nome completo do orientador', max_length=255)
+    nome_orientador = models.CharField('nome completo do orientador',
+                                       max_length=255)
     cpf_orientador = models.CharField('CPF do orientador', max_length=11)
-    area = models.ForeignKey(Area, verbose_name="área de interesse")
+    area = models.ForeignKey(Area, on_delete=models.CASCADE,
+                             verbose_name="área de interesse")
     aprovado = models.BooleanField(default=False, editable=False)
 
     def __str__(self):

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 from django.contrib import admin
 from .models import Evento, Inscricao, Atividade, Horario
 
@@ -34,7 +32,8 @@ class AtividadeAdmin(admin.ModelAdmin):
     list_display = ('nome', 'tipo', 'local')
     list_filter = ('tipo',)
     inlines = [HorarioInline]
-    ordering = ('horarios__data', 'horarios__hora_inicial', 'horarios__hora_final')
+    ordering = ('horarios__data', 'horarios__hora_inicial',
+                'horarios__hora_final')
     search_fields = ('nome',)
 
 
@@ -49,7 +48,7 @@ class HorarioAdmin(admin.ModelAdmin):
             return True
         else:
             return False
-    
+
     def has_add_permission(self, *args, **kwargs):
         return False
 

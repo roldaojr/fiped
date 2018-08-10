@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.conf.urls import include, url
 from django.contrib.auth  import views as auth
 from .views import (usuario_perfil, usuario_registrar,

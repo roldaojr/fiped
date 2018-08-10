@@ -13,4 +13,5 @@ class UsuarioAdmin(admin.ModelAdmin):
     exclude = ('password', 'last_login')
     #form = AlterarUsuarioForm
 
+
 admin.site.unregister(Group)

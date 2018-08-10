@@ -11,17 +11,17 @@ from eventos.models import Atividade, Inscricao, Evento
 
 
 class Definicoes(models.Model):
-    evento = models.OneToOneField(Evento, on_delete=models.CASCADE,
-                                  primary_key=True,
+    evento = models.OneToOneField(Evento, primary_key=True,
+                                  on_delete=models.CASCADE,
                                   related_name='def_minicursos')
     maximo = models.IntegerField('máximo de inscrições por pessoa', default=1)
-    
+
     @classmethod
     def do_evento(cls, evento):
         if not hasattr(evento, 'def_minicursos'):
             evento.def_minicursos = cls.objects.create(evento=evento)
         return evento.def_minicursos
-    
+
     class Meta:
         verbose_name = 'definição de minicurso'
         verbose_name_plural = 'definições de minicurso'
@@ -30,7 +30,8 @@ class Definicoes(models.Model):
 @python_2_unicode_compatible
 class Ministrante(models.Model):
     nome = models.CharField(max_length=100)
-    foto = models.ImageField(upload_to="fotos/ministrante", blank=True, null=True)
+    foto = models.ImageField(blank=True, null=True,
+                             upload_to="fotos/ministrante")
     bio = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -39,7 +40,7 @@ class Ministrante(models.Model):
 
 @python_2_unicode_compatible
 class Minicurso(Atividade):
-    ministrante = models.ForeignKey(Ministrante)
+    ministrante = models.ForeignKey(Ministrante, on_delete=models.CASCADE)
     descricao = models.TextField('descrição', null=True, blank=True)
     pre_requisitos = models.TextField('pré-requisitos', null=True, blank=True)
     vagas = models.PositiveIntegerField(default=0)

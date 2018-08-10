@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.contrib import admin
 from eventos.admin import EventoAdmin
 from .models import Area, Poster, MostraTecnologica, Definicoes
@@ -34,5 +33,6 @@ class MostraTecnologicaAdmin(admin.ModelAdmin):
 
 class EventoConfigInline(admin.StackedInline):
     model = Definicoes
+
 
 EventoAdmin.inlines = list(getattr(EventoAdmin, 'inlines', [])) + [EventoConfigInline]

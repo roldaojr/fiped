@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
@@ -17,7 +16,7 @@ class UsuarioForm(UsuarioPerfilForm):
     password = forms.CharField(
         label='Senha',
         help_text='Use pelo menos 6 caracteres.',
-        widget=forms.PasswordInput(), 
+        widget=forms.PasswordInput(),
         min_length=6)
 
     confirm_password = forms.CharField(
@@ -29,6 +28,7 @@ class UsuarioForm(UsuarioPerfilForm):
     class Meta:
         model = Usuario
         fields = ('nome_completo', 'cpf', 'email', 'instituicao', 'curso')
+
 
 class AlterarUsuarioForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField(label='Senha')

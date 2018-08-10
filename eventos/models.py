@@ -31,7 +31,8 @@ class Atividade(models.Model):
 
 @python_2_unicode_compatible
 class Horario(models.Model):
-    atividade = models.ForeignKey(Atividade, related_name='horarios')
+    atividade = models.ForeignKey(Atividade, on_delete=models.CASCADE,
+                                  related_name='horarios')
     data = models.DateField()
     hora_inicial = models.TimeField()
     hora_final = models.TimeField()
@@ -47,8 +48,12 @@ class Horario(models.Model):
 
 
 class Inscricao(models.Model):
-    atividade = models.ForeignKey(Atividade, related_name="inscricoes", editable=False, null=True)
-    usuario = models.ForeignKey(Usuario, related_name="inscricoes", editable=False)
+    atividade = models.ForeignKey(Atividade, editable=False, null=True,
+                                  on_delete=models.CASCADE,
+                                  related_name="inscricoes")
+    usuario = models.ForeignKey(Usuario, editable=False,
+                                on_delete=models.CASCADE,
+                                related_name="inscricoes")
     espera = models.BooleanField(default=False, editable=False)
 
     class Meta:

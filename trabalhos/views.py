@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.utils.timezone import now
