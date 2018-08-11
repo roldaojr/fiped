@@ -1,12 +1,6 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-import os
-from PIL import Image
-from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-from django.utils.encoding import python_2_unicode_compatible
 from eventos.models import Atividade, Inscricao, Evento
 
 
@@ -27,7 +21,6 @@ class Definicoes(models.Model):
         verbose_name_plural = 'definições de minicurso'
 
 
-@python_2_unicode_compatible
 class Ministrante(models.Model):
     nome = models.CharField(max_length=100)
     foto = models.ImageField(blank=True, null=True,
@@ -38,7 +31,6 @@ class Ministrante(models.Model):
         return self.nome
 
 
-@python_2_unicode_compatible
 class Minicurso(Atividade):
     ministrante = models.ForeignKey(Ministrante, on_delete=models.CASCADE)
     descricao = models.TextField('descrição', null=True, blank=True)

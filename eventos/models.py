@@ -1,12 +1,8 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.formats import date_format, time_format
 from comum.models import Usuario
 
 
-@python_2_unicode_compatible
 class Evento(models.Model):
     nome = models.CharField("nome", max_length=255, unique=True)
     data_inicial = models.DateField("data inicial")
@@ -16,7 +12,6 @@ class Evento(models.Model):
         return self.nome
 
 
-@python_2_unicode_compatible
 class Atividade(models.Model):
     nome = models.CharField("nome", max_length=255)
     local = models.CharField(max_length=255, null=True, blank=True)
@@ -29,7 +24,6 @@ class Atividade(models.Model):
             return '{0}'.format(self.nome)
 
 
-@python_2_unicode_compatible
 class Horario(models.Model):
     atividade = models.ForeignKey(Atividade, on_delete=models.CASCADE,
                                   related_name='horarios')

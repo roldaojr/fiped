@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.utils.encoding import python_2_unicode_compatible
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
+                                        Group)
 
 
 class UsuarioManager(BaseUserManager):
@@ -26,7 +26,6 @@ class UsuarioManager(BaseUserManager):
         return user
 
 
-@python_2_unicode_compatible
 class Usuario(AbstractBaseUser):
     nome_completo = models.CharField(max_length=255)
     cpf = models.CharField('CPF', unique=True, max_length=11)

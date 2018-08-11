@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from eventos.models import Inscricao, Evento
 
@@ -41,7 +38,6 @@ class Definicoes(models.Model):
         verbose_name_plural = 'definições de trabalhos'
 
 
-@python_2_unicode_compatible
 class Area(models.Model):
     nome = models.CharField(max_length=255)
 
@@ -49,7 +45,6 @@ class Area(models.Model):
         return self.nome
 
 
-@python_2_unicode_compatible
 class Trabalho(Inscricao):
     titulo = models.CharField('título', max_length=255)
     nome_autor = models.CharField('nome completo do autor principal',
