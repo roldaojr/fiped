@@ -1,0 +1,14 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block title %}Inscrever-se{% endblock %}
+
+{% block content %}
+<div class="ui top attached warning message">
+Já se inscreveu? <a href="{% url 'cbvadmin:login' %}">Faça login</a> ao invés disso.
+</div>
+<form class="ui form attached fluid segment {% if form.errors %} error{% endif %}" method="post" novalidate>
+{% crispy form %}
+<button type="submit" class="ui primary button">Inscrever-se</button>
+</form>
+{% endblock %}

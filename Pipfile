@@ -13,6 +13,11 @@ cbvadmin = {git = "https://github.com/roldaojr/cbvadmin"}
 cbvadmin-semantic-ui = {git = "https://github.com/roldaojr/cbvadmin-semantic-ui"}
 pillow = "*"
 django-localflavor = "*"
+django-registration-redux = "*"
+pyaml = "*"
+django-extra-views = "*"
+django-dynamic-preferences = "*"
+django-choices = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
@@ -24,3 +29,4 @@ python_version = "3.6"
 server = "python manage.py runserver"
 test = "python manage.py test"
 migrate = "python manage.py migrate"
+createsuperuser = "python manage.py createsuperuser"

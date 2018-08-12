@@ -1,56 +1,55 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-from django.http import Http404
-from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.shortcuts import redirect, render
-from django.contrib import messages
-from django.utils.timezone import now
-from eventos.models import Evento
-from .forms import PosterForm, MostraTecnologicaForm
-from .models import Definicoes
+from django.db.models import Q
+from extra_views import InlineFormSet
+from crispy_forms.helper import FormHelper
+from comum.views import DetailView, AddWithInlinesView, EditWithInlinesView
+from cbvadmin.views.list import TableListView
+from .models import Avaliador_AreaTema
 
 
-@login_required
-def submeter(request):
-    def_trabalhos = Definicoes.do_evento(Evento.objects.first())
-    return render(request, 'trabalhos/index.html', {
-        'pode_submeter': def_trabalhos.prazo > now(),
-        'def_trabalhos': def_trabalhos
-    })
+class TrabalhoDetalhes(DetailView):
+    pass
 
 
-@login_required
-def submeter_poster(request):
-    def_trabalhos = Definicoes.do_evento(Evento.objects.first())
-    if not def_trabalhos.submeter_poster:
-        raise Http404
-    if request.method == 'POST':
-        form = PosterForm(request.POST, request.FILES)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.usuario = request.user
-            instance.save()
-            messages.success(request, 'Poster submetido com êxito!')
-            return redirect(reverse('area_usuario'))
-    else:
-        form = PosterForm()
-    return render(request, 'trabalhos/submeter_form.html', {'form': form})
+class TrabalhoListView(TableListView):
+    def get_queryset(self, *args, **kwargs):
+        user = self.request.user
+        qs = super().get_queryset(*args, **kwargs)
+
+        if (user.is_authenticated and user.is_superuser):
+            return qs
+
+        if user.has_perm('trabalhos.change_trabalho'):
+            return qs.filter(area_tema__avaliadores__id=user.pk)
+
+        return qs.filter(
+            Q(autor=user) | Q(coautor1=user) |
+            Q(coautor2=user) | Q(coautor3=user)
+        )
 
 
-@login_required
-def submeter_mostra(request):
-    def_trabalhos = Definicoes.do_evento(Evento.objects.first())
-    if not def_trabalhos.submeter_mostra:
-        raise Http404
-    if request.method == 'POST':
-        form = MostraTecnologicaForm(request.POST, request.FILES)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.usuario = request.user
-            instance.save()
-            messages.success(request, 'Mostra tecnológica submetida com êxito!')
-            return redirect(reverse('trabalhos:submeter'))
-    else:
-        form = MostraTecnologicaForm()
-    return render(request, 'trabalhos/submeter_form.html', {'form': form})
+class Avaliador_AreaTemaesInline(InlineFormSet):
+    model = Avaliador_AreaTema
+    fields = ['usuario']
+    factory_kwargs = {'extra': 1}
+
+
+class AreaTemaAdd(AddWithInlinesView):
+    inlines = [Avaliador_AreaTemaesInline]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        helper = FormHelper()
+        helper.form_tag = False
+        context.update({'formhelper': helper})
+        return context
+
+
+class AreaTemaEdit(EditWithInlinesView):
+    inlines = [Avaliador_AreaTemaesInline]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        helper = FormHelper()
+        helper.form_tag = False
+        context.update({'formhelper': helper})
+        return context

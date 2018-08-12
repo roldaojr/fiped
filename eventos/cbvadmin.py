@@ -1,16 +1,5 @@
 import cbvadmin
-from .models import Evento, Atividade, Inscricao
-
-
-@cbvadmin.register(Evento)
-class EventoAdmin(cbvadmin.ModelAdmin):
-    list_display = ('nome', 'data_inicial', 'data_final')
-    menu_weight = 1
-
-    def get_menu(self):
-        menus = super().get_menu()
-        menus[0].submenu = False
-        return menus
+from .models import Atividade, Inscricao, TipoInscricao
 
 
 @cbvadmin.register(Atividade)
@@ -18,18 +7,15 @@ class AtividadeAdmin(cbvadmin.ModelAdmin):
     list_display = ('nome', 'tipo', 'local')
     menu_weight = 2
 
-    def get_menu(self):
-        menus = super().get_menu()
-        menus[0].submenu = False
-        return menus
+
+@cbvadmin.register(TipoInscricao)
+class TipoInscricaoAdmin(cbvadmin.ModelAdmin):
+    list_display = ('nome', 'preco')
+    menu_weight = 4
 
 
 @cbvadmin.register(Inscricao)
 class InscricaoAdmin(cbvadmin.ModelAdmin):
-    list_display = ('atividade', 'usuario')
+    list_display = ('usuario', 'tipo', 'alojamento', 'deficiencia')
+    filter_fields = ('tipo', 'alojamento', 'deficiencia')
     menu_weight = 3
-
-    def get_menu(self):
-        menus = super().get_menu()
-        menus[0].submenu = False
-        return menus

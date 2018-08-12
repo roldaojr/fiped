@@ -1,4 +1,10 @@
+import sys
 import environ
+from cbvadmin_semantic_ui.settings import update_cbvadmin_settings
+
+TESTIMG = len(sys.argv) > 1 and sys.argv[1] == 'test'
+
+update_cbvadmin_settings(locals())
 
 env_settings = {
     'DEBUG': (bool, True),
@@ -15,6 +21,9 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 INSTALLED_APPS = (
+    'comum',
+    'eventos',
+    'trabalhos',
     'cbvadmin',
     'cbvadmin_semantic_ui',
     'semantic_ui',
@@ -22,16 +31,13 @@ INSTALLED_APPS = (
     'django_tables2',
     'django_filters',
     'menu',
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'comum',
-    'eventos',
-    'minicursos',
-    'trabalhos',
 )
 
 MIDDLEWARE = [
@@ -79,15 +85,25 @@ USE_L10N = True
 USE_TZ = True
 STATIC_URL = env('STATIC_URL', default='/static/')
 STATIC_ROOT = env('STATIC_ROOT', default=str(root.path('static')))
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+if not TESTIMG:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_URL = env('MEDIA_URL', default='/media/')
-MEDIA_ROOT = env('MEDIA_ROOT', default=str(root.path('uploaded')))
+MEDIA_ROOT = env('MEDIA_ROOT', default=str(root.path('media')))
 AUTH_USER_MODEL = 'comum.Usuario'
 
 CBVADMIN_SITE_TITLE = env('SITE_TITLE', default='Eventus')
 CBVADMIN_TEMPLATE_PACK = 'semantic-ui'
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('semantic-ui',)
 CRISPY_TEMPLATE_PACK = 'semantic-ui'
+
+# Regstration
+ACCOUNT_ACTIVATION_DAYS = 2
+REGISTRATION_DEFAULT_FROM_EMAIL = None
+REGISTRATION_EMAIL_HTML = True
+REGISTRATION_FORM = 'eventos.forms.InscricaoForm'
+INCLUDE_AUTH_URLS = False
 
 # Configure debug toolbar
 DEBUG_TOOLBAR = env('DEBUG_TOOLBAR', default=DEBUG)

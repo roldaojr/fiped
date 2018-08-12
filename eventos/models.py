@@ -1,21 +1,12 @@
 from django.db import models
-from django.utils.formats import date_format, time_format
+from django.utils.formats import date_format, time_format, number_format
 from comum.models import Usuario
 
 
-class Evento(models.Model):
-    nome = models.CharField("nome", max_length=255, unique=True)
-    data_inicial = models.DateField("data inicial")
-    data_final = models.DateField("data final")
-
-    def __str__(self):
-        return self.nome
-
-
 class Atividade(models.Model):
-    nome = models.CharField("nome", max_length=255)
+    nome = models.CharField(max_length=255)
     local = models.CharField(max_length=255, null=True, blank=True)
-    tipo = models.CharField(max_length=255, null=True, blank=True)
+    modalidade = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         if self.tipo:
@@ -41,16 +32,46 @@ class Horario(models.Model):
         ordering = ('data', 'hora_inicial', 'hora_final')
 
 
+class TipoInscricao(models.Model):
+    nome = models.CharField('nome', max_length=200)
+    preco = models.DecimalField(max_digits=10, decimal_places=2,
+                                verbose_name='preço')
+
+    class Meta:
+        verbose_name = 'tipo de inscrição'
+        verbose_name_plural = 'tipos de inscrições'
+
+    def __str__(self):
+        return '%s (R$ %s)' % (
+            self.nome, number_format(self.preco)
+        )
+
+
 class Inscricao(models.Model):
-    atividade = models.ForeignKey(Atividade, editable=False, null=True,
-                                  on_delete=models.CASCADE,
-                                  related_name="inscricoes")
-    usuario = models.ForeignKey(Usuario, editable=False,
-                                on_delete=models.CASCADE,
-                                related_name="inscricoes")
-    espera = models.BooleanField(default=False, editable=False)
+    usuario = models.OneToOneField(
+        Usuario, on_delete=models.CASCADE, editable=False,
+        related_name='inscricao')
+    # Inistituição
+    instituicao = models.CharField(max_length=100, blank=True, null=True,
+                                   verbose_name='instituição')
+    titulacao = models.CharField(max_length=50, blank=True, null=True,
+                                 verbose_name='titulação')
+    deficiencia = models.CharField(max_length=300, blank=True, null=True,
+                                   verbose_name='deficiência')
+    # Endereço
+    endereco = models.CharField(max_length=300, blank=True, null=True,
+                                verbose_name='endereço')
+    numero = models.CharField(max_length=10, blank=True, null=True,
+                              verbose_name='número')
+    cidade = models.CharField(max_length=50, blank=True, null=True)
+    uf = models.CharField(max_length=2, blank=True, null=True,
+                          verbose_name='UF')
+    # relativo ao evento
+    tipo = models.ForeignKey(TipoInscricao, on_delete=models.CASCADE,
+                             related_name='inscricoes', blank=False, null=True)
+    alojamento = models.BooleanField(default=False)
+    certificado = models.BooleanField(default=False, editable=False)
 
     class Meta:
         verbose_name = 'inscrição'
         verbose_name_plural = 'inscrições'
-        unique_together = ('atividade', 'usuario')

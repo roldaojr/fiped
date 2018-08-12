@@ -1,19 +1,25 @@
+from django.urls import reverse
+from menu import MenuItem
+from django.contrib.auth.models import Group
 import cbvadmin
+from cbvadmin.cbvadmin import DefaultAdmin
 from cbvadmin.options import GroupAdmin
-from cbvadmin.views.user import PasswordReset
-from .models import Usuario, Group
+from .models import Usuario
+from .views import Dashboard
+
+
+@cbvadmin.register('default')
+class EventusDefaultAdmin(DefaultAdmin):
+    dashboard_view_class = Dashboard
+
+    def get_menu(self):
+        return [MenuItem('Painel', reverse('cbvadmin:dashboard'))]
 
 
 @cbvadmin.register(Usuario)
 class UsuarioAdmin(cbvadmin.ModelAdmin):
-    list_display = ('id', 'nome_completo', 'email', 'instituicao', 'ativo')
-    passwordreset_view_class = PasswordReset
+    list_display = ('nome_completo', 'nome_social', 'email', 'is_active')
     menu_weight = 2
-
-    def get_actions(self):
-        actions = super().get_actions()
-        actions['passwordreset'] = 'object'
-        return actions
 
     def get_menu(self):
         menus = super().get_menu()
@@ -22,7 +28,7 @@ class UsuarioAdmin(cbvadmin.ModelAdmin):
 
 
 @cbvadmin.register(Group)
-class GroupAdmin(GroupAdmin):
+class UsuarioGroupAdmin(GroupAdmin):
     menu_weight = 3
 
     def get_menu(self):

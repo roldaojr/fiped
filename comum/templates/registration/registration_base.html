@@ -1,0 +1,21 @@
+{% extends 'cbvadmin/semantic-ui/base.html' %}
+{% block extrahead %}
+{% endblock %}
+
+{% block outer_content %}
+<div class="ui fixed inverted menu">
+  <div class="ui container">
+    <a href="#" class="header item">
+      Personal GYM
+    </a>
+  </div>
+</div>
+<div class="ui main text container" style="margin-top: 4em">
+<div class="ui basic segment">
+{% block pageheader %}
+<h1 class="ui header">{% block title %}{% endblock %}</h1>
+{% endblock %}
+{% block content %}{% endblock %}
+</div>
+</div>
+{% endblock %}

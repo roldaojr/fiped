@@ -1,13 +1,8 @@
 from django.db import models
-from django.db.models.signals import post_save, post_delete
-from django.dispatch import receiver
-from eventos.models import Atividade, Inscricao, Evento
+from eventos.models import Atividade
 
 
 class Definicoes(models.Model):
-    evento = models.OneToOneField(Evento, primary_key=True,
-                                  on_delete=models.CASCADE,
-                                  related_name='def_minicursos')
     maximo = models.IntegerField('máximo de inscrições por pessoa', default=1)
 
     @classmethod
@@ -63,23 +58,3 @@ class Minicurso(Atividade):
 
     class Meta:
         ordering = ('nome',)
-
-
-@receiver(post_save, sender=Inscricao)
-def minicurso_vagas_create(sender, instance, created, **kwargs):
-    if type(instance.atividade) == Minicurso:
-        if instance.espera:
-            instance.atividade.inscritos_reserva += 1
-        else:
-            instance.atividade.inscritos += 1
-        instance.atividade.save()
-
-
-@receiver(post_delete, sender=Inscricao)
-def minicurso_vagas_delete(sender, instance, **kwargs):
-    if type(instance.atividade) == Minicurso:
-        if instance.espera:
-            instance.atividade.inscritos_reserva -= 1
-        else:
-            instance.atividade.inscritos -= 1
-        instance.atividade.save()

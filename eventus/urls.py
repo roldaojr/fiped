@@ -1,16 +1,20 @@
 from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.static import serve
 import cbvadmin
 
 urlpatterns = [
-    url(r'^admin2/', cbvadmin.site.urls),
     url(r'^admin/', admin.site.urls),
-    url(r'^trabalhos/', include('trabalhos.urls', namespace='trabalhos')),
-    url(r'^minicursos/', include('minicursos.urls', namespace='minicursos')),
-    url(r'^eventos/', include('eventos.urls')),
-    url(r'', include('comum.urls')),
+    url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'', cbvadmin.site.urls),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^%s(?P<path>.*)$' % settings.MEDIA_URL.lstrip('/'),
+            serve, {'document_root': settings.MEDIA_ROOT})
+    ]
 
 if settings.DEBUG_TOOLBAR:
     import debug_toolbar

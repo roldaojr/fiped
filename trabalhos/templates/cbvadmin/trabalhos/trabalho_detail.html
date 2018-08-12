@@ -1,0 +1,65 @@
+{% extends 'cbvadmin/semantic-ui/base_site.html' %}
+{% load i18n %}
+
+{% block title %}Visualizar trabalho{% endblock %}
+
+{% block content %}
+{% block actions %}
+<div class="ui secondary mobile hidden menu">
+  <div class="right item">
+    {% if admin.urls.edit %}
+    <a href="{% url admin.urls.edit object.pk %}" class="ui primary button">
+      <i class="plus icon"></i> Alterar
+    </a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+<table class="ui definition unstackable table">
+  <tr>
+    <td>Modalidade</td>
+    <td>{{ object.modalidade }}</td>
+  </tr>
+  <tr>
+    <td>Título</td>
+    <td>{{ object.titulo }}</td>
+  </tr>
+  <tr>
+    <td>Autor</td>
+    <td>{{ object.autor }}</td>
+  </tr>
+  <tr>
+    <td>Co-autores</td>
+    <td>
+      {{ object.coautor1|default:'-' }}
+      {{ object.coautor2|default:'' }}
+      {{ object.coautor3|default:'' }}
+    </td>
+  </tr>
+  <tr>
+    <td>Área/tema</td><td>{{ object.area_tema }}</td>
+  </tr>
+  <tr>
+    <td>Arquivo</td><td><a href="{{ object.arquivo.url }}">{{ object.arquivo }}</a></td>
+  </tr>
+  <tr>
+    <td>Aprovado</td>
+    <td>
+      {% if object.situacao == 1 %}
+      <div class="ui green label">
+        {{ object.get_situacao_display }}
+      </div>
+      {% elif object.situacao == 2 %}
+      <div class="ui orange label">
+        {{ object.get_situacao_display }}
+      </div>
+      {% else %}
+      <div class="ui grey label">
+        {{ object.get_situacao_display }}
+      </div>
+      {% endif %}
+    </td>
+  </tr>
+</table>
+{% endblock %}

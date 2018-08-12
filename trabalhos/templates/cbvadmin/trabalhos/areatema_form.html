@@ -1,0 +1,90 @@
+{% extends 'cbvadmin/semantic-ui/change_form.html' %}
+{% load i18n static crispy_forms_tags crispy_forms_field %}
+
+{% block content %}
+<form class="ui form" method="post" id="change-form" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+{% crispy form %}
+
+<h4 class="ui dividing header">Avaliadores</h4>
+{% block inlines %}
+{% with formset=inlines.0 %}
+<div id="{{ formset.prefix }}-inline" data-formset-prefix="{{ formset.prefix }}">
+  {{ formset.management_form }}
+  <div data-formset-body>
+    {% for inline_form in formset %}
+    <div class="ui vertical segment" data-formset-form>
+      {{ inline_form.usuario|as_crispy_field }}
+      <div class="hidden">{{ inline_form.DELETE }}</div>
+      <button type="button" class="red ui button" data-formset-delete-button>Remover</button>
+    </div>
+    {% endfor %}
+  </div>
+  <div style="display: none" data-formset-empty-form>
+    <div class="ui vertical segment">
+      {{ formset.empty_form.usuario|as_crispy_field }}
+      <div class="hidden">{{ formset.empty_form.DELETE }}</div>
+      <button type="button" class="red ui button" data-formset-delete-button>Remover</button>
+    </div>
+  </div>
+  <div class="ui vertical segment">
+    <button type="button" class="primary ui button" data-formset-add>Adicionar avaliador</button>
+  </div>
+</div>
+{% endwith %}
+
+{% endblock %}
+{% block actions %}
+<div class="actions">
+  <div class="ui mobile only fluid">
+    <button type="submit" class="ui fluid green save button">
+      <i class="save icon"></i>
+      {% trans 'Save' %}
+    </button>
+    {% if object and admin.urls.delete %}
+    <div class="ui basic fluid red delete button">
+      <i class="trash icon"></i>
+      {% trans 'Delete' %}
+    </div>
+    {% endif %}
+  </div>
+  <div class="ui secondary mobile hidden menu">
+  {% if object and admin.urls.delete %}
+    <div class="item">
+      <div class="ui basic red delete button">
+        <i class="trash icon"></i>
+        {% trans 'Delete' %}
+      </div>
+    </div>
+  {% endif %}
+    <div class="right item">
+      <button type="submit" class="ui green save button">
+        <i class="save icon"></i>
+        {% trans 'Save' %}
+      </button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+</form>
+{% if object and admin.urls.delete %}
+{% include 'cbvadmin/semantic-ui/delete_modal.html' %}
+{% endif %}
+{% endblock %}
+
+{% block extrascript %}
+{{ block.super }}
+{{ form.media.js }}
+<script type="text/javascript" src="{% static 'js/jquery.formset.min.js' %}"></script>
+<script type="text/javascript">
+$(function(){
+  {% for formset in inlines %}
+  // Inicializar o formset
+  var {{ formset.prefix }}_formset = $("#{{ formset.prefix }}-inline").formset({
+    emptyForm: 'div[data-formset-empty-form]',
+    animateForms: true
+  })
+  console.log({{ formset.prefix }}_formset);
+  {% endfor %}
+})
+</script>
+{% endblock %}

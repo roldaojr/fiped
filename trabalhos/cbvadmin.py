@@ -1,20 +1,52 @@
+from django.urls import reverse
+from menu import MenuItem
 import cbvadmin
-from .models import Area, Poster, MostraTecnologica
+from .forms import TrabalhoChangeForm
+from .models import Modalidade, AreaTema, Trabalho
+from .views import (TrabalhoDetalhes, TrabalhoListView,
+                    AreaTemaAdd, AreaTemaEdit)
 
 
-@cbvadmin.register(Area)
-class AreaAdmin(cbvadmin.ModelAdmin):
+@cbvadmin.register(Modalidade)
+class ModalidadeAdmin(cbvadmin.ModelAdmin):
     list_display = ('nome',)
     menu_weight = 1
 
 
-@cbvadmin.register(Poster)
-class PosterAdmin(cbvadmin.ModelAdmin):
-    list_display = ('titulo', 'nome_autor', 'area', 'aprovado')
+@cbvadmin.register(AreaTema)
+class AreaTemaAdmin(cbvadmin.ModelAdmin):
+    list_display = ('nome',)
+    add_view_class = AreaTemaAdd
+    edit_view_class = AreaTemaEdit
+    menu_weight = 1
+
+
+@cbvadmin.register(Trabalho)
+class TrabalhoAdmin(cbvadmin.ModelAdmin):
+    list_display = ('titulo', 'autor', 'area_tema', 'modalidade',
+                    'situacao')
+    filter_fields = ('modalidade', 'area_tema', 'situacao')
+    list_view_class = TrabalhoListView
+    detail_view_class = TrabalhoDetalhes
+    default_object_action = 'detail'
     menu_weight = 2
 
+    def get_actions(self):
+        actions = super().get_actions()
+        actions.update({'detail': 'object'})
+        return actions
 
-@cbvadmin.register(MostraTecnologica)
-class MostraTecnologicaAdmin(cbvadmin.ModelAdmin):
-    list_display = ('titulo', 'nome_autor', 'area', 'aprovado')
-    menu_weight = 3
+    def get_form_class(self, request, obj=None, **kwargs):
+        if obj and not request.user.is_superuser:
+            return TrabalhoChangeForm
+        return super().get_form_class(request, obj=None, **kwargs)
+
+    def get_menu(self):
+        menus = super().get_menu()
+        menus.append(
+            MenuItem('Submeter trabalho',
+                     reverse(self.urls['add']),
+                     weight=self.menu_weight + 1, icon=self.menu_icon,
+                     check=lambda r: r.user.has_perm('trabalhos.add_trabalho'))
+        )
+        return menus
