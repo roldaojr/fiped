@@ -7,6 +7,7 @@ import cbvadmin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^preferences/', include('dynamic_preferences.urls')),
     url(r'', cbvadmin.site.urls),
 ]
 

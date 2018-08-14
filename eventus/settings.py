@@ -19,8 +19,9 @@ BASE_DIR = root()
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+INTERNAL_IPS = ['127.0.0.1']
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'comum',
     'eventos',
     'trabalhos',
@@ -32,13 +33,14 @@ INSTALLED_APPS = (
     'django_filters',
     'menu',
     'registration',
+    'dynamic_preferences',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-)
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'dynamic_preferences.processors.global_preferences',
             ],
         },
     },
@@ -93,7 +96,6 @@ MEDIA_URL = env('MEDIA_URL', default='/media/')
 MEDIA_ROOT = env('MEDIA_ROOT', default=str(root.path('media')))
 AUTH_USER_MODEL = 'comum.Usuario'
 
-CBVADMIN_SITE_TITLE = env('SITE_TITLE', default='Eventus')
 CBVADMIN_TEMPLATE_PACK = 'semantic-ui'
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('semantic-ui',)
 CRISPY_TEMPLATE_PACK = 'semantic-ui'

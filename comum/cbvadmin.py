@@ -13,7 +13,11 @@ class EventusDefaultAdmin(DefaultAdmin):
     dashboard_view_class = Dashboard
 
     def get_menu(self):
-        return [MenuItem('Painel', reverse('cbvadmin:dashboard'))]
+        return [
+            MenuItem('Painel', reverse('cbvadmin:dashboard')),
+            MenuItem('Configurações', reverse("dynamic_preferences:global"),
+                     weight=100)
+        ]
 
 
 @cbvadmin.register(Usuario)
