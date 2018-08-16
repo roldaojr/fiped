@@ -4,7 +4,7 @@ import cbvadmin
 from .forms import TrabalhoChangeForm
 from .models import Modalidade, AreaTema, Trabalho
 from .views import (TrabalhoDetalhes, TrabalhoListView,
-                    AreaTemaAdd, AreaTemaEdit)
+                    AreaTemaAdd, AreaTemaEdit, AvaliarTrabalhoView)
 
 
 @cbvadmin.register(Modalidade)
@@ -28,13 +28,19 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
     filter_fields = ('modalidade', 'area_tema', 'situacao')
     list_view_class = TrabalhoListView
     detail_view_class = TrabalhoDetalhes
+    avaliar_view_class = AvaliarTrabalhoView
     default_object_action = 'detail'
     menu_weight = 2
 
     def get_actions(self):
         actions = super().get_actions()
-        actions.update({'detail': 'object'})
+        actions.update({'detail': 'object', 'avaliar': 'object'})
         return actions
+
+    def has_permission(self, request, action, obj=None):
+        if action == 'avaliar':
+            action = 'edit'
+        return super().has_permission(request, action, obj)
 
     def get_form_class(self, request, obj=None, **kwargs):
         if obj and not request.user.is_superuser:

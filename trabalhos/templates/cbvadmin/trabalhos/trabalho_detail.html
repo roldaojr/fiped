@@ -5,11 +5,62 @@
 
 {% block content %}
 {% block actions %}
+<div class="ui mobile only fluid">
+  {% if admin.urls.edit %}
+  <div class="ui two fluid buttons">
+    <div class="ui labeled icon top left floating pointing dropdown positive avaliar 
+    button">
+      <i class="thumbs up icon"></i>
+      Aprovar
+      <form class="menu" method="post" action="{% url admin.urls.avaliar object.pk %}">
+        {% csrf_token %}
+        <input type="hidden" name="situacao" value="1">
+        <div class="item"><button class="ui small button">Confirmar</button></div>
+      </form>
+    </div>
+    <div class="ui labeled icon top right floating pointing dropdown negative avaliar 
+    button">
+      <i class="thumbs down icon"></i>
+      Reprovar
+      <form class="menu" method="post" action="{% url admin.urls.avaliar object.pk %}">
+        {% csrf_token %}
+        <input type="hidden" name="situacao" value="2">
+        <div class="item"><button class="ui small button">Confirmar</button></div>
+      </form>
+    </div>
+  </div>
+  <a href="{% url admin.urls.edit object.pk %}" class="ui primary fluid button">
+    <i class="plus icon"></i> Alterar
+  </a>
+  {% endif %}
+</div>
 <div class="ui secondary mobile hidden menu">
-  <div class="right item">
+  <div class="ui right item">
     {% if admin.urls.edit %}
+    <div class="ui buttons">
+      <div class="ui labeled icon floating pointing dropdown positive avaliar 
+      button">
+        <i class="thumbs up icon"></i>
+        Aprovar
+        <form class="menu" method="post" action="{% url admin.urls.avaliar object.pk %}">
+          {% csrf_token %}
+          <input type="hidden" name="situacao" value="1">
+          <div class="item"><button class="ui small button">Confirmar</button></div>
+        </form>
+      </div>
+      <div class="ui labeled icon floating pointing dropdown negative avaliar 
+      button">
+        <i class="thumbs down icon"></i>
+        Reprovar
+        <form class="menu" method="post" action="{% url admin.urls.avaliar object.pk %}">
+          {% csrf_token %}
+          <input type="hidden" name="situacao" value="2">
+          <div class="item"><button class="ui small button">Confirmar</button></div>
+        </form>
+      </div>
+    </div>
     <a href="{% url admin.urls.edit object.pk %}" class="ui primary button">
-      <i class="plus icon"></i> Alterar
+      <i class="pencil icon"></i> Alterar
     </a>
     {% endif %}
   </div>
@@ -62,4 +113,12 @@
     </td>
   </tr>
 </table>
+{% endblock %}
+
+{% block extrascript %}
+{{ block.super }}
+{{ form.media.js }}
+<script type="text/javascript">
+$('.avaliar.button').dropdown()
+</script>
 {% endblock %}

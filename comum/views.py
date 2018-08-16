@@ -1,11 +1,16 @@
 from django.utils.translation import ugettext_lazy as _
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 from django.views.generic import DetailView as _DetailView
+from django.views.generic import View
 from cbvadmin.views.mixins import (
-    FormMixin, AdminMixin, PermissionRequiredMixin)
+    FormMixin, AdminMixin, PermissionRequiredMixin, SuccessMixin)
 from cbvadmin.views.dashboard import Dashboard as DashboardView
 from eventos.models import Inscricao
 from trabalhos.models import Trabalho, Avaliador_AreaTema
+
+
+class BasicView(PermissionRequiredMixin, AdminMixin, SuccessMixin, View):
+    model = None
 
 
 class DetailView(PermissionRequiredMixin, AdminMixin, _DetailView):

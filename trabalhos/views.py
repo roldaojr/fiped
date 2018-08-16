@@ -1,7 +1,10 @@
+from django.http import HttpResponseRedirect
 from django.db.models import Q
+from django.views.generic.detail import SingleObjectMixin
 from extra_views import InlineFormSet
 from crispy_forms.helper import FormHelper
-from comum.views import DetailView, AddWithInlinesView, EditWithInlinesView
+from comum.views import (DetailView, BasicView,
+                         AddWithInlinesView, EditWithInlinesView)
 from cbvadmin.views.list import TableListView
 from .models import Avaliador_AreaTema
 
@@ -53,3 +56,17 @@ class AreaTemaEdit(EditWithInlinesView):
         helper.form_tag = False
         context.update({'formhelper': helper})
         return context
+
+
+class AvaliarTrabalhoView(SingleObjectMixin, BasicView):
+    def get(self, request, *args, **kwargs):
+        success_url = self.get_success_url()
+        return HttpResponseRedirect(success_url)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        avaliacao = request.POST.get('situacao')
+        self.object.situacao = avaliacao
+        self.object.save()
+        return HttpResponseRedirect(success_url)
