@@ -18,6 +18,8 @@ pyaml = "*"
 django-extra-views = "*"
 django-dynamic-preferences = "*"
 django-choices = "*"
+faker = "*"
+factory-boy = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
