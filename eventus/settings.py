@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'menu',
     'registration',
     'dynamic_preferences',
+    'django_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

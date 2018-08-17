@@ -5,6 +5,7 @@ import cbvadmin
 from cbvadmin.cbvadmin import DefaultAdmin
 from cbvadmin.options import GroupAdmin
 from .models import Usuario
+from .forms import UsuarioForm
 from .views import Dashboard
 
 
@@ -23,6 +24,7 @@ class EventusDefaultAdmin(DefaultAdmin):
 @cbvadmin.register(Usuario)
 class UsuarioAdmin(cbvadmin.ModelAdmin):
     list_display = ('nome_completo', 'nome_social', 'email', 'is_active')
+    form_class = UsuarioForm
     menu_weight = 2
 
     def get_menu(self):

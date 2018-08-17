@@ -1,12 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.views.generic.detail import SingleObjectMixin
-from extra_views import InlineFormSet
-from crispy_forms.helper import FormHelper
-from comum.views import (DetailView, BasicView,
-                         AddWithInlinesView, EditWithInlinesView)
+from comum.views import DetailView, BasicView
 from cbvadmin.views.list import TableListView
-from .models import Avaliador_AreaTema
 
 
 class TrabalhoDetalhes(DetailView):
@@ -28,34 +24,6 @@ class TrabalhoListView(TableListView):
             Q(autor=user) | Q(coautor1=user) |
             Q(coautor2=user) | Q(coautor3=user)
         )
-
-
-class Avaliador_AreaTemaesInline(InlineFormSet):
-    model = Avaliador_AreaTema
-    fields = ['usuario']
-    factory_kwargs = {'extra': 1}
-
-
-class AreaTemaAdd(AddWithInlinesView):
-    inlines = [Avaliador_AreaTemaesInline]
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        helper = FormHelper()
-        helper.form_tag = False
-        context.update({'formhelper': helper})
-        return context
-
-
-class AreaTemaEdit(EditWithInlinesView):
-    inlines = [Avaliador_AreaTemaesInline]
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        helper = FormHelper()
-        helper.form_tag = False
-        context.update({'formhelper': helper})
-        return context
 
 
 class AvaliarTrabalhoView(SingleObjectMixin, BasicView):

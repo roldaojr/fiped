@@ -20,6 +20,7 @@ django-dynamic-preferences = "*"
 django-choices = "*"
 faker = "*"
 factory-boy = "*"
+"django-select2" = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"

@@ -1,10 +1,10 @@
 from django.urls import reverse
 from menu import MenuItem
 import cbvadmin
-from .forms import TrabalhoChangeForm
+from .forms import TrabalhoChangeForm, TrabalhoAddForm, AreaTemaForm
 from .models import Modalidade, AreaTema, Trabalho
 from .views import (TrabalhoDetalhes, TrabalhoListView,
-                    AreaTemaAdd, AreaTemaEdit, AvaliarTrabalhoView)
+                    AvaliarTrabalhoView)
 
 
 @cbvadmin.register(Modalidade)
@@ -16,8 +16,7 @@ class ModalidadeAdmin(cbvadmin.ModelAdmin):
 @cbvadmin.register(AreaTema)
 class AreaTemaAdmin(cbvadmin.ModelAdmin):
     list_display = ('nome',)
-    add_view_class = AreaTemaAdd
-    edit_view_class = AreaTemaEdit
+    form_class = AreaTemaForm
     menu_weight = 1
 
 
@@ -29,6 +28,7 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
     list_view_class = TrabalhoListView
     detail_view_class = TrabalhoDetalhes
     avaliar_view_class = AvaliarTrabalhoView
+    form_class = TrabalhoAddForm
     default_object_action = 'detail'
     menu_weight = 2
 

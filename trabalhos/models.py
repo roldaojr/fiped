@@ -5,8 +5,7 @@ from comum.models import Usuario
 
 class AreaTema(models.Model):
     nome = models.CharField(max_length=300)
-    avaliadores = models.ManyToManyField(
-        Usuario, through='Avaliador_AreaTema')
+    avaliadores = models.ManyToManyField(Usuario)
 
     class Meta:
         verbose_name = 'área/tema'

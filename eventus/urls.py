@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^preferences/', include('dynamic_preferences.urls')),
+    url(r'^select2/', include('django_select2.urls')),
     url(r'', cbvadmin.site.urls),
 ]
 
