@@ -1,39 +1,26 @@
-from faker import Faker
+from django.forms.models import model_to_dict
 from django.test import TestCase
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
-from comum.models import Usuario
-from .factory import TrabalhoFactory, AreaTemaFactory, ModalidadeFactory
+from comum.tests.factories import UsuarioFactory
+from .factories import TrabalhoFactory, AreaTemaFactory, ModalidadeFactory
 from ..models import Trabalho
+import factory
 
 
 class SubmeterTrabalhoTestCase(TestCase):
     def setUp(self):
-        self.faker = Faker()
-        self.area = AreaTemaFactory.create()
-        self.modalidade = ModalidadeFactory.create()
-        self.usuario = Usuario.objects.create_superuser(
-            email=self.faker.email(),
-            nome_completo=self.faker.name(),
-            password='123456'
-        )
+        AreaTemaFactory.create()
+        ModalidadeFactory.create()
+        self.usuario = UsuarioFactory.create(perms=['trabalhos.add_trabalho'])
         self.client.force_login(self.usuario)
 
     def test_submeter(self):
-        trabalho_dict = {
-            'modalidade': self.modalidade.pk,
-            'titulo': self.faker.words(nb=8, ext_word_list=None),
-            'autor': self.usuario.pk,
-            'coautor1': '',
-            'coautor2': '',
-            'coautor3': '',
-            'area_tema': self.area.pk,
-            'arquivo': SimpleUploadedFile(
-                self.faker.file_name(),
-                self.faker.binary(length=10240),
-                content_type="application/ms-word"
-            )
-        }
+        trabalho = TrabalhoFactory.build(
+            autor=self.usuario, coautor1=None,
+            coautor2=None, coautor3=None,
+            arquivo__data=factory.Faker('binary', length=1024))
+        trabalho_dict = model_to_dict(
+            trabalho, exclude=('coautor1', 'coautor2', 'coautor3'))
         resp = self.client.post(reverse('cbvadmin:trabalhos_trabalho_add'),
                                 trabalho_dict)
         self.assertEqual(resp.status_code, 302)
@@ -44,17 +31,14 @@ class SubmeterTrabalhoTestCase(TestCase):
 
 class AvaliarTrabalhoTestCase(TestCase):
     def setUp(self):
-        self.faker = Faker()
-        self.usuario = Usuario.objects.create_superuser(
-            email=self.faker.email(),
-            nome_completo=self.faker.name(),
-            password=self.faker.password()
-        )
+        AreaTemaFactory.create()
+        ModalidadeFactory.create()
+        self.usuario = UsuarioFactory.create(
+            perms=['trabalhos.change_trabalho'])
         self.client.force_login(self.usuario)
-        self.trabalho = TrabalhoFactory.create()
 
     def test_aprovar(self):
-        trabalho = TrabalhoFactory()
+        trabalho = TrabalhoFactory.create()
         self.assertEqual(trabalho.situacao, Trabalho.Situacao.Pendente)
         self.client.post(
             reverse('cbvadmin:trabalhos_trabalho_avaliar', args=[trabalho.pk]),
@@ -64,7 +48,7 @@ class AvaliarTrabalhoTestCase(TestCase):
         self.assertEqual(trabalho.situacao, Trabalho.Situacao.Aprovado)
 
     def test_reprovar(self):
-        trabalho = TrabalhoFactory()
+        trabalho = TrabalhoFactory.create()
         self.assertEqual(trabalho.situacao, Trabalho.Situacao.Pendente)
         self.client.post(
             reverse('cbvadmin:trabalhos_trabalho_avaliar', args=[trabalho.pk]),
