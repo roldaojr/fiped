@@ -1,0 +1,35 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n crispy_forms_tags crispy_forms_filters %}
+
+{% block extrahead %}
+{{ block.super }}
+<style type="text/css">
+body > .grid {
+  height: 100%;
+}
+</style>
+{% endblock %}
+
+{% block title %}{% trans 'Log in' %}{% endblock %}
+
+{% block content %}
+<div class="ui top attached message">
+  Não possui cadastro? <a href="{% url 'registration_register' %}">Cadastrar-se</a> ao invés disso.
+</div>
+<form class="ui form attached fluid primary segment" method="post" novalidate>
+  {% csrf_token %}
+  {% if form.errors and form.non_field_errors %}
+  <div class="ui negative message">
+  {% for error in form.non_field_errors %}
+  <p>{{ error|escape }}</p>
+  {% endfor %}
+  </div>
+  {% endif %}
+  <input type="hidden" name="next" value="{{ next }}" />
+  {{ form|crispy }}
+  <button type="submit" class="ui primary button">Fazer login</button>
+</form>
+<div class="ui bottom attached segment">
+  <a href="{% url 'cbvadmin:password_reset' %}">Esqueceu sua senha?</a>
+</div>
+{% endblock %}

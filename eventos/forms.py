@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import ValidationError
 from crispy_forms.helper import FormHelper
 from comum.models import Usuario
 from .models import Inscricao, TipoInscricao
@@ -20,6 +21,8 @@ class InscricaoForm(forms.ModelForm):
     instituicao = forms.CharField(label='Filiação institucional')
     tipo = forms.ModelChoiceField(queryset=TipoInscricao.objects.all(),
                                   label='Categoria')
+    senha = forms.CharField(widget=forms.PasswordInput)
+    confirmar_senha = forms.CharField(widget=forms.PasswordInput)
 
     inscricao_fields = (
         'deficiencia', 'alojamento', 'endereco', 'numero', 'cidade', 'uf',
@@ -34,8 +37,14 @@ class InscricaoForm(forms.ModelForm):
         self.helper = FormHelper(self)
         self.helper.form_tag = False
 
+    def clean(self, *args, **kwargs):
+        cleaned_data = super().clean(*args, **kwargs)
+        if cleaned_data.get('senha') != cleaned_data.get('confirmar_senha'):
+            raise ValidationError('A senha e a confirmção devem ser iguais')
+
     def save(self, *args, **kwargs):
         usuario = super().save(*args, **kwargs)
+        usuario.set_password(self.cleaned_data['senha'])
         inscricao_data = {
             f: self.cleaned_data[f] for f in self.inscricao_fields
         }
