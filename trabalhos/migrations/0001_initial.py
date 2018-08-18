@@ -46,7 +46,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('titulo', models.CharField(max_length=300, verbose_name='título')),
                 ('arquivo', models.FileField(upload_to='trabalhos')),
-                ('situacao', models.IntegerField(choices=[(0, 'Pendente'), (1, 'Aprovado'), (2, 'Reprovado')], default=0, editable=False)),
+                ('situacao', models.IntegerField(choices=[(0, 'Pendente'), (1, 'Aprovado'), (2, 'Reprovado')], verbose_name='situação', default=0, editable=False)),
                 ('area_tema', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='trabalhos.AreaTema', verbose_name='área/tema')),
                 ('autor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='+', to=settings.AUTH_USER_MODEL)),
                 ('coautor1', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to=settings.AUTH_USER_MODEL)),

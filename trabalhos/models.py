@@ -45,6 +45,7 @@ class Trabalho(models.Model):
                                   verbose_name='área/tema')
     arquivo = models.FileField(upload_to='trabalhos', blank=False)
     situacao = models.IntegerField(choices=Situacao.choices,
+                                   verbose_name='situação',
                                    default=0, editable=False)
 
     def __str__(self):
