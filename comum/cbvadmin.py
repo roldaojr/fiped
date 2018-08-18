@@ -25,7 +25,7 @@ class EventusDefaultAdmin(DefaultAdmin):
 class UsuarioAdmin(cbvadmin.ModelAdmin):
     list_display = ('nome_completo', 'nome_social', 'email', 'is_active')
     form_class = UsuarioForm
-    menu_weight = 2
+    menu_weight = 10
 
     def get_menu(self):
         menus = super().get_menu()
@@ -35,7 +35,7 @@ class UsuarioAdmin(cbvadmin.ModelAdmin):
 
 @cbvadmin.register(Group)
 class UsuarioGroupAdmin(GroupAdmin):
-    menu_weight = 3
+    menu_weight = 11
 
     def get_menu(self):
         menus = super().get_menu()

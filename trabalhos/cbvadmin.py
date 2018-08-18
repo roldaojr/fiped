@@ -52,7 +52,7 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
         menus.append(
             MenuItem('Submeter trabalho',
                      reverse(self.urls['add']),
-                     weight=self.menu_weight + 1, icon=self.menu_icon,
+                     weight=2, icon=self.menu_icon, submenu=False,
                      check=lambda r: r.user.has_perm('trabalhos.add_trabalho'))
         )
         return menus
