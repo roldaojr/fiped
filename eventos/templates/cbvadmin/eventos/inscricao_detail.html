@@ -1,0 +1,84 @@
+{% extends 'cbvadmin/semantic-ui/base_site.html' %}
+{% load i18n %}
+
+{% block title %}Visualizar inscrição{% endblock %}
+
+{% block content %}
+{% block actions %}
+<div class="ui mobile only fluid">
+  {% if admin.urls.edit %}
+  <a href="{% url admin.urls.edit object.pk %}" class="ui primary fluid button">
+    <i class="plus icon"></i> Alterar
+  </a>
+  {% endif %}
+</div>
+<div class="ui secondary mobile hidden menu">
+  <div class="ui right item">
+    {% if admin.urls.edit %}
+    <a href="{% url admin.urls.edit object.pk %}" class="ui primary button">
+      <i class="pencil icon"></i> Alterar
+    </a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+<table class="ui definition unstackable table">
+  <tr>
+    <td>Nome completo</td>
+    <td>{{ object.usuario.nome_completo }}</td>
+  </tr>
+  <tr>
+    <td>Nome social</td>
+    <td>{{ object.usuario.nome_social|default:'-' }}</td>
+  </tr>
+  <tr>
+    <td>CPF</td>
+    <td>{{ object.usuario.cpf }}</td>
+  </tr>
+  <tr>
+    <td>E-mail</td>
+    <td>{{ object.usuario.email }}</td>
+  </tr>
+  <tr>
+    <td>Deficiência / necessidade educacional</td>
+    <td>{{ object.alojamento }}</td>
+  </tr>
+  <tr>
+    <td>Instituição</td>
+    <td>{{ object.instituicao }}</td>
+  </tr>
+  <tr>
+    <td>Titulação</td>
+    <td>{{ object.titulacao }}</td>
+  </tr>
+  <tr>
+    <td>Endereço</td>
+    <td>{{ object.endereco }}</td>
+  </tr>
+  <tr>
+    <td>Número</td>
+    <td>{{ object.numero }}</td>
+  </tr>
+  <tr>
+    <td>Endereço</td>
+    <td>{{ object.endereco }}</td>
+  </tr>
+  <tr>
+    <td>Cidade</td>
+    <td>{{ object.cidade }}</td>
+  </tr>
+  <tr>
+    <td>UF</td>
+    <td>{{ object.uf }}</td>
+  </tr>
+  <tr>
+    <td>Tipo de inscrição</td>
+    <td>{{ object.tipo }}</td>
+  </tr>
+  <tr>
+    <td>Necessita de alojamento estudantil</td>
+    <td>{{ object.alojamento }}</td>
+  </tr>
+</table>
+{% endblock %}

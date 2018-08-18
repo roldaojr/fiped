@@ -1,4 +1,5 @@
 import cbvadmin
+from comum.views import DetailView
 from .models import Atividade, Inscricao, TipoInscricao
 
 
@@ -18,4 +19,12 @@ class TipoInscricaoAdmin(cbvadmin.ModelAdmin):
 class InscricaoAdmin(cbvadmin.ModelAdmin):
     list_display = ('usuario', 'tipo', 'alojamento', 'deficiencia')
     filter_fields = ('tipo', 'alojamento', 'deficiencia')
+    detail_view_class = DetailView
+    default_object_action = 'detail'
     menu_weight = 3
+
+    def get_actions(self):
+        actions = super().get_actions()
+        del actions['add']
+        actions.update({'detail': 'object'})
+        return actions
