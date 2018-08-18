@@ -24,7 +24,7 @@ class AtividadeAdmin(cbvadmin.ModelAdmin):
             MenuItem('Escolher atividades',
                      reverse(self.urls['escolher']),
                      weight=1, icon=self.menu_icon, submenu=False,
-                     check=lambda r: r.user.has_perm('trabalhos.add_trabalho'))
+                     check=lambda r: bool(r.user.inscricao))
         )
         return menus
 
