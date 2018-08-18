@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ValidationError
+from django.contrib.auth.models import Group
 from crispy_forms.helper import FormHelper
 from comum.models import Usuario
 from .models import Inscricao, TipoInscricao
@@ -45,6 +46,9 @@ class InscricaoForm(forms.ModelForm):
     def save(self, *args, **kwargs):
         usuario = super().save(*args, **kwargs)
         usuario.set_password(self.cleaned_data['senha'])
+        grupo, c = Group.objects.get_or_create(name='Participante')
+        usuario.groups.add(grupo)
+        usuario.save()
         inscricao_data = {
             f: self.cleaned_data[f] for f in self.inscricao_fields
         }
