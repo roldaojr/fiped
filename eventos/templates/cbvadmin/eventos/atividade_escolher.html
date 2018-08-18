@@ -1,0 +1,57 @@
+{% extends 'cbvadmin/semantic-ui/base_site.html' %}
+
+{% block title %}Escolher atividades{% endblock %}
+
+{% block content %}
+{% if form.non_field_errors %}
+<div class="ui error message">
+  {% for error in form.non_field_errors %}
+  {{ error }}
+  {% endfor %}
+</div>
+{% else %}
+<div class="ui warning message">
+  Você deve selecionar no máximo {{ global_preferences.evento__inscricao_atividade_max }} atividade(s)
+</div>
+{% endif %}
+<form method="post" class="ui form">
+  {% csrf_token %}
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Tipo</th>
+        <th>Atividade</th>
+        <th>Horarios</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for choice in form.atividades.field.queryset %}
+      <tr>
+        <td class="collapsing">
+          <div class="ui fitted toggle checkbox">
+          {% spaceless %}
+          <input name="atividades" id="id_atividades_{{ choice.pk }}"
+          value="{{ choice.pk }}" type="checkbox"
+          {% if choice.pk in form.atividades.value or choice.pk|slugify in form.atividades.value %}
+          checked="checked"
+          {% endif %}
+          >
+          <label></label>
+          {% endspaceless %}
+          </div>
+        </td>
+        <td>{{ choice.tipo }}</td>
+        <td>{{ choice.nome }}</td>
+        <td>
+          {% for horario in choice.horarios.all %}
+          {{ horario }}{% if not forloop.last %}<br>{% endif %}
+          {% endfor %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit" class="ui primary button">Salvar</button>
+</form>
+{% endblock %}

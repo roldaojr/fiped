@@ -6,7 +6,7 @@ from comum.models import Usuario
 class Atividade(models.Model):
     nome = models.CharField(max_length=255)
     local = models.CharField(max_length=255, null=True, blank=True)
-    modalidade = models.CharField(max_length=255, null=True, blank=True)
+    tipo = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         if self.tipo:
@@ -26,7 +26,7 @@ class Horario(models.Model):
         data = date_format(self.data)
         hora_i = time_format(self.hora_inicial)
         hora_f = time_format(self.hora_final)
-        return '{0}, {1} às {2}'.format(data, hora_i, hora_f)
+        return '{0}, de {1} às {2}'.format(data, hora_i, hora_f)
 
     class Meta:
         ordering = ('data', 'hora_inicial', 'hora_final')
@@ -71,6 +71,8 @@ class Inscricao(models.Model):
                              related_name='inscricoes', blank=False, null=True)
     alojamento = models.BooleanField(default=False)
     certificado = models.BooleanField(default=False, editable=False)
+    atividades = models.ManyToManyField(Atividade, related_name='inscricoes',
+                                        blank=True)
 
     class Meta:
         verbose_name = 'inscrição'

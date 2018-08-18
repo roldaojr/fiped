@@ -2,11 +2,12 @@ from django.forms.models import model_to_dict
 from django.contrib.auth.models import Group
 from django.test import TestCase
 from django.urls import reverse
-from .factories import TipoInscricaoFactory, InscricaoFactory
+from .factories import (TipoInscricaoFactory, InscricaoFactory,
+                        AtividadeFactory)
 import factory
 
 
-class InscricaoParticipanteTestCase(TestCase):
+class InscricaoTestCase(TestCase):
     def test_inscrever_se(self):
         TipoInscricaoFactory.create()
         inscricao = InscricaoFactory.build()
@@ -35,3 +36,9 @@ class InscricaoParticipanteTestCase(TestCase):
             Group.objects.get(name='Participante'),
             usuario.groups.all()
         )
+
+
+class AtividadeTestCase(TestCase):
+    def test_inscrever_atividade(self):
+        atividades = AtividadeFactory.create_batch(20, horarios=True)
+        print(list(atividades[0].horarios.all()))

@@ -1,6 +1,6 @@
 from django.utils.timezone import now
-from dynamic_preferences.types import (StringPreference, DatePreference,
-                                       FilePreference)
+from dynamic_preferences.types import (IntegerPreference, StringPreference,
+                                       DatePreference, FilePreference)
 from dynamic_preferences.preferences import Section
 from dynamic_preferences.registries import global_preferences_registry
 
@@ -44,3 +44,11 @@ class FimEvento(DatePreference):
     @property
     def default(self):
         return now().date()
+
+
+@global_preferences_registry.register
+class InscricaoAtividadeMax(IntegerPreference):
+    section = evento
+    name = 'inscricao_atividade_max'
+    verbose_name = 'Número máximo de atividades por participante'
+    default = 1

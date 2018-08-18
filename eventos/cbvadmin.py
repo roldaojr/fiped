@@ -1,14 +1,32 @@
+from django.urls import reverse
+from menu import MenuItem
 import cbvadmin
 from comum.views import DetailView
 from .models import Atividade, Inscricao, TipoInscricao
 from .filters import InscricaoFilter
-from .views import ImprimirLista
+from .views import ImprimirLista, EscolherAtividade
 
 
 @cbvadmin.register(Atividade)
 class AtividadeAdmin(cbvadmin.ModelAdmin):
+    escolher_view_class = EscolherAtividade
     list_display = ('nome', 'tipo', 'local')
     menu_weight = 2
+
+    def get_actions(self):
+        actions = super().get_actions()
+        actions.update({'escolher': 'collection'})
+        return actions
+
+    def get_menu(self):
+        menus = super().get_menu()
+        menus.append(
+            MenuItem('Escolher atividades',
+                     reverse(self.urls['escolher']),
+                     weight=1, icon=self.menu_icon, submenu=False,
+                     check=lambda r: r.user.has_perm('trabalhos.add_trabalho'))
+        )
+        return menus
 
 
 @cbvadmin.register(TipoInscricao)

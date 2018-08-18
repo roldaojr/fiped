@@ -1,6 +1,7 @@
+from random import randint
 import factory
 from comum.tests.factories import UsuarioFactory
-from ..models import Inscricao, TipoInscricao
+from ..models import Inscricao, TipoInscricao, Atividade, Horario
 
 
 class TipoInscricaoFactory(factory.django.DjangoModelFactory):
@@ -26,3 +27,28 @@ class InscricaoFactory(factory.django.DjangoModelFactory):
     uf = factory.Faker('estado_sigla', locale='pt_BR')
     tipo = factory.Iterator(TipoInscricao.objects.all())
     alojamento = factory.Faker('boolean', chance_of_getting_true=30)
+
+
+class HorarioFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Horario
+
+    data = factory.Faker('future_date', end_date="+30d")
+    hora_inicial = factory.Faker('time_object')
+    hora_final = factory.Faker('time_object')
+
+
+class AtividadeFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Atividade
+
+    nome = factory.Faker('text', max_nb_chars=100)
+    local = factory.Faker('text', max_nb_chars=50)
+    tipo = factory.Faker('text', max_nb_chars=20)
+
+    @factory.post_generation
+    def horarios(self, create, extracted, **kwargs):
+        if not create:
+            return
+
+        HorarioFactory.create_batch(randint(1, 2), atividade=self)
