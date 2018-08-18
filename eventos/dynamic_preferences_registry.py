@@ -1,5 +1,6 @@
 from django.utils.timezone import now
-from dynamic_preferences.types import StringPreference, DatePreference
+from dynamic_preferences.types import (StringPreference, DatePreference,
+                                       FilePreference)
 from dynamic_preferences.preferences import Section
 from dynamic_preferences.registries import global_preferences_registry
 
@@ -13,6 +14,14 @@ class NomeEvento(StringPreference):
     name = 'nome'
     verbose_name = 'Nome do evento'
     default = 'Eventus'
+
+
+@global_preferences_registry.register
+class LogoEvento(FilePreference):
+    section = evento
+    name = 'logo'
+    verbose_name = 'Logotipo do evento'
+    default = None
 
 
 @global_preferences_registry.register

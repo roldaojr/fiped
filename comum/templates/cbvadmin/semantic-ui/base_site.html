@@ -5,6 +5,11 @@
 {% block menu %}
 {% generate_menu %}
 <div class="ui sidebar vertical inverted menu">
+  {% if global_preferences.evento__logo %}
+  <div class="item">
+    <img src="{{ global_preferences.evento__logo.url }}"/>
+  </div>
+  {% endif %}
   <div class="item">
     {{ global_preferences.evento__nome }}
   </div>
