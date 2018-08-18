@@ -22,9 +22,9 @@ ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 INTERNAL_IPS = ['127.0.0.1']
 
 INSTALLED_APPS = [
-    'comum',
     'eventos',
     'trabalhos',
+    'comum',
     'cbvadmin',
     'cbvadmin_semantic_ui',
     'semantic_ui',
@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django_filters',
     'menu',
     'registration',
+    'sfp',
     'dynamic_preferences',
     'django_select2',
     'django.contrib.admin',
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'sfp.middleware.SfpFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'eventus.urls'
@@ -107,6 +109,9 @@ REGISTRATION_DEFAULT_FROM_EMAIL = None
 REGISTRATION_EMAIL_HTML = True
 REGISTRATION_FORM = 'eventos.forms.InscricaoForm'
 INCLUDE_AUTH_URLS = False
+
+# static file pages
+SFP_HANDLE_HOMEPAGE = True
 
 # Configure debug toolbar
 DEBUG_TOOLBAR = env('DEBUG_TOOLBAR', default=DEBUG)

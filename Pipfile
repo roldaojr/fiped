@@ -21,6 +21,7 @@ django-choices = "*"
 faker = "*"
 factory-boy = "*"
 "django-select2" = "*"
+django-sfp = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
