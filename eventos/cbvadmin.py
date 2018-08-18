@@ -1,6 +1,7 @@
 import cbvadmin
 from comum.views import DetailView
 from .models import Atividade, Inscricao, TipoInscricao
+from .filters import InscricaoFilter
 
 
 @cbvadmin.register(Atividade)
@@ -18,7 +19,7 @@ class TipoInscricaoAdmin(cbvadmin.ModelAdmin):
 @cbvadmin.register(Inscricao)
 class InscricaoAdmin(cbvadmin.ModelAdmin):
     list_display = ('usuario', 'tipo', 'alojamento', 'deficiencia')
-    filter_fields = ('tipo', 'alojamento', 'deficiencia')
+    filterset_class = InscricaoFilter
     detail_view_class = DetailView
     default_object_action = 'detail'
     menu_weight = 3
