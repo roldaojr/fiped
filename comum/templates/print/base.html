@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{% endblock %} :: {{ global_preferences.evento__nome }}</title>
+<style type="text/css">
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+.table.bordered td, .table.bordered th {
+    border: 1px solid #888;
+}
+
+.table.bordered {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+h1 {
+    font-size: 18pt;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+</style>
+{% block extrastyle %}{% endblock %}
+</head>
+<body>
+{% block outer_content %}{% endblock %}
+</body>
+</html>

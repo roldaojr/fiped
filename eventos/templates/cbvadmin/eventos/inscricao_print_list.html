@@ -1,0 +1,11 @@
+{% extends 'print/base.html' %}
+{% load render_table from django_tables2 %}
+
+{% block outer_content %}
+<div class="print-content">
+<h1>{% block title %}Inscrições{% endblock %}</h1>
+{% block content %}
+{% render_table table 'print/table.html' %}
+{% endblock %}
+</div>
+{% endblock %}

@@ -2,6 +2,7 @@ import cbvadmin
 from comum.views import DetailView
 from .models import Atividade, Inscricao, TipoInscricao
 from .filters import InscricaoFilter
+from .views import ImprimirLista
 
 
 @cbvadmin.register(Atividade)
@@ -20,6 +21,7 @@ class TipoInscricaoAdmin(cbvadmin.ModelAdmin):
 class InscricaoAdmin(cbvadmin.ModelAdmin):
     list_display = ('usuario', 'tipo', 'alojamento', 'deficiencia')
     filterset_class = InscricaoFilter
+    imprimir_view_class = ImprimirLista
     detail_view_class = DetailView
     default_object_action = 'detail'
     menu_weight = 3
@@ -27,5 +29,5 @@ class InscricaoAdmin(cbvadmin.ModelAdmin):
     def get_actions(self):
         actions = super().get_actions()
         del actions['add']
-        actions.update({'detail': 'object'})
+        actions.update({'detail': 'object', 'imprimir': 'collection'})
         return actions
