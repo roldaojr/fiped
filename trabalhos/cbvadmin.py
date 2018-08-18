@@ -24,7 +24,7 @@ class AreaTemaAdmin(cbvadmin.ModelAdmin):
 class TrabalhoAdmin(cbvadmin.ModelAdmin):
     list_display = ('titulo', 'autor', 'area_tema', 'modalidade',
                     'situacao')
-    filter_fields = ('modalidade', 'area_tema', 'situacao')
+    filter_fields = ('titulo', 'modalidade', 'area_tema', 'situacao')
     list_view_class = TrabalhoListView
     detail_view_class = TrabalhoDetalhes
     avaliar_view_class = AvaliarTrabalhoView
