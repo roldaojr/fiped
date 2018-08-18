@@ -1,3 +1,4 @@
+from random import randint
 import factory
 from comum.tests.factories import UsuarioFactory
 from ..models import Trabalho, AreaTema, Modalidade
@@ -15,6 +16,14 @@ class AreaTemaFactory(factory.django.DjangoModelFactory):
         model = AreaTema
 
     nome = factory.Faker('sentence', nb_words=5)
+
+    @factory.post_generation
+    def avaliadores(self, create, extracted, **kwargs):
+        if not create:
+            return
+
+        for usuario in UsuarioFactory.create_batch(randint(2, 10)):
+            self.avaliadores.add(usuario)
 
 
 class TrabalhoFactory(factory.django.DjangoModelFactory):

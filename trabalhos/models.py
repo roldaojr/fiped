@@ -50,10 +50,3 @@ class Trabalho(models.Model):
 
     def __str__(self):
         return self.titulo
-
-
-class Avaliador_AreaTema(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,
-                                related_name='+')
-    area_tema = models.ForeignKey(AreaTema, on_delete=models.CASCADE,
-                                  related_name='+')

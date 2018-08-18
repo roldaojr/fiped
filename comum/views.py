@@ -6,7 +6,7 @@ from cbvadmin.views.mixins import (
     FormMixin, AdminMixin, PermissionRequiredMixin, SuccessMixin)
 from cbvadmin.views.dashboard import Dashboard as DashboardView
 from eventos.models import Inscricao
-from trabalhos.models import Trabalho, Avaliador_AreaTema
+from trabalhos.models import Trabalho, AreaTema
 
 
 class BasicView(PermissionRequiredMixin, AdminMixin, SuccessMixin, View):
@@ -62,8 +62,8 @@ class Dashboard(DashboardView):
             },
             {
                 'name': 'Avaliadores',
-                'value': Avaliador_AreaTema.objects.values(
-                    'usuario').distinct().count()
+                'value': AreaTema.objects.values(
+                    'avaliadores').distinct().count()
             },
         ]
 
