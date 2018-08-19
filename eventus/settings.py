@@ -91,6 +91,7 @@ USE_L10N = True
 USE_TZ = True
 STATIC_URL = env('STATIC_URL', default='/static/')
 STATIC_ROOT = env('STATIC_ROOT', default=str(root.path('static')))
+LOGIN_REDIRECT_URL = '/admin'
 
 if not TESTIMG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -108,6 +109,7 @@ ACCOUNT_ACTIVATION_DAYS = 2
 REGISTRATION_DEFAULT_FROM_EMAIL = None
 REGISTRATION_EMAIL_HTML = True
 REGISTRATION_FORM = 'eventos.forms.InscricaoForm'
+INCLUDE_REGISTER_URL = False
 INCLUDE_AUTH_URLS = False
 
 # static file pages

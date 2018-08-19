@@ -1,7 +1,10 @@
+from datetime import date
 from django.utils.translation import ugettext_lazy as _
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 from django.views.generic import DetailView as _DetailView
 from django.views.generic import View
+from registration.backends.default.views import RegistrationView
+from dynamic_preferences.registries import global_preferences_registry
 from cbvadmin.views.mixins import (
     FormMixin, AdminMixin, PermissionRequiredMixin, SuccessMixin)
 from cbvadmin.views.dashboard import Dashboard as DashboardView
@@ -15,6 +18,15 @@ class BasicView(PermissionRequiredMixin, AdminMixin, SuccessMixin, View):
 
 class DetailView(PermissionRequiredMixin, AdminMixin, _DetailView):
     pass
+
+
+class InscreverView(RegistrationView):
+    def registration_allowed(self):
+        prefs = global_preferences_registry.manager()
+        if date.today() > prefs['evento__data_fim']:
+            return False
+        else:
+            return True
 
 
 class AddWithInlinesView(PermissionRequiredMixin, AdminMixin, FormMixin,
