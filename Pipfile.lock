@@ -22,7 +22,7 @@
         },
         "cbvadmin-semantic-ui": {
             "git": "https://github.com/roldaojr/cbvadmin-semantic-ui",
-            "ref": "73e53c111d18cb51489643200eca8cc7d4ab5c6f"
+            "ref": "ecb66c34624d0ba8a9c7f4f2807faf277048c112"
         },
         "django": {
             "hashes": [

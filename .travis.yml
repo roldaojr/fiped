@@ -1,0 +1,17 @@
+language: python
+python:
+  - 3.5
+  - 3.6
+services: mysql
+before_install:
+  - mysql -e 'CREATE DATABASE eventus;'
+install:
+  - pipenv install --system --deploy
+env:
+  - DATABASE_URL=mysql://root@localhost/eventus
+script:
+  - python manage.py test
+notifications:
+  email: false
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
