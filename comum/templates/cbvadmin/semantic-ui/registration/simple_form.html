@@ -1,0 +1,31 @@
+{% extends 'cbvadmin/semantic-ui/base.html' %}
+{% block extrahead %}
+{{ block.super }}
+<style type="text/css">
+body {
+}
+body > .grid {
+  height: 100%;
+}
+.column {
+  max-width: 450px;
+}
+</style>
+{% endblock %}
+
+{% block outer_content %}
+<div class="ui fixed inverted menu">
+  <div class="ui container">
+    <a href="#" class="header item">
+      {{ global_preferences.evento__nome }}
+    </a>
+  </div>
+</div>
+<div class="ui middle aligned centered grid">
+  <div class="row">
+    <div class="sixteen wide tablet six wide computer column">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</div>
+{% endblock %}
