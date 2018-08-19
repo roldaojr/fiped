@@ -1,0 +1,97 @@
+/*
+
+[Custom Stylesheet]
+
+Project: QuickFix - Multipurpose Servicing and Repairing HTML Template
+Version: 1.3
+Author : themelooks.com
+
+*/
+
+.header--nav-links > li > a {
+	font-size: 1.05em;
+	padding: 10px 10px 10px;
+}
+
+.un-mtb-5 {
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+}
+
+.un-mtb-10-rem {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.un-mb-5 {
+	margin-bottom: 5rem
+}
+
+
+.un-pd-5 {
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+}
+
+.un-pd-10 {
+	padding-top: 10rem;
+	padding-bottom: 10rem;
+}
+
+.un-mb-1 {
+	margin-bottom: 1rem;
+}
+
+.un-mb-2 {
+	margin-bottom: 2rem;
+}
+
+.un-mb-3 {
+	margin-bottom: 3rem;
+}
+
+.un-mb-5 {
+	margin-bottom: 5rem;
+}
+
+/* NORMAS */
+.normas h2 {
+	color: #f69323;
+	font-size: 4em;
+}
+
+/* OFICINAS */
+.oficinas h2 {
+	color: #DDD;
+	font-size: 2em;
+}
+
+.un-bg-yellow {
+	background-color: #f69323;
+	color: #FFF;
+	border: 2px solid #f69323;
+}
+
+.color-yellow {
+	color: #f69323
+}
+
+.banner--content h2 {
+	font-family: "Source Sans Pro", sans-serif;
+    margin-bottom: 16px;
+    font-weight: normal;
+}
+
+.banner--content h2 strong {
+    color: #f69323;
+    font-weight: 700;
+}
+
+
+
+/* 1.3. SMALL DEVICES, TABLETS */
+@media screen and (max-width: 767px) {
+	.normas h3, .normas p {
+		text-align: center;
+	}
+}

@@ -1,0 +1,86 @@
+{% load staticfiles %}
+ <!-- Header Navbar Start -->
+            <nav class="header--navbar navbar" data-trigger="sticky">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#headerNav">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div id="headerNav" class="navbar-collapse collapse float--left">
+                        <!-- Header Nav Links Start -->
+                        <ul class="header--nav-links nav navbar-nav font--secondary">
+                            <li class="active"><a href="/">Início</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sobre<i class="fa fa-angle-down"></i></a>
+
+                                <ul class="dropdown-menu font--primary">
+                                    <li><a href="/sobre">Sobre</a></li>
+                                    <li><a href="/sobre/historico">Histórico</a></li>
+                                    <li><a href="/sobre/cidade">A cidade</a></li>
+                                    <li><a href="/sobre/como_chegar">Como chegar</a></li>
+                                    <li><a href="/sobre/datas_importantes">Datas importantes</a></li>
+                                    <li><a href="/sobre/comissoes">Coordenação geral e comissões organizadoras</a></li>
+                                    <li><a href="/sobre/informacoes_uteis">Informações úteis</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Publicação<i class="fa fa-angle-down"></i></a>
+
+                                <ul class="dropdown-menu font--primary">
+                                    <li><a href="/publicacoes/anais">Anais/E-Books</a></li>
+                                    <li><a href="/publicacoes/anteriores">Anteriores</a></li>
+                                </ul>
+                            </li>
+                               <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Propostas<i class="fa fa-angle-down"></i></a>
+
+                                <ul class="dropdown-menu font--primary">
+                                    <li><a href="/construcao">Oficinas</a></li>
+                                    <li><a href="/construcao">Lançamento de Livro</a></li>
+                                </ul>
+                            </li>
+                             <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inscrições<i class="fa fa-angle-down"></i></a>
+
+                                <ul class="dropdown-menu font--primary">
+                                    <li><a href="/inscricoes/normas">Normas</a></li>
+                                    <li><a href="{% url 'registration_register' %}">Formulário</a></li>
+                                </ul>
+                            </li>
+                             <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Programação<i class="fa fa-angle-down"></i></a>
+
+                                <ul class="dropdown-menu font--primary">
+                                    <li><a href="/programacao">Programação Geral</a></li>
+                                    <li><a href="/programacao/mesas_redondas">Mesas Redondas</a></li>
+                                    <li><a href="/construcao">Comunicação Oral</a></li>
+                                    <li><a href="/programacao/oficinas">Oficinas</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Trabalhos<i class="fa fa-angle-down"></i></a>
+
+                                <ul class="dropdown-menu font--primary">
+                                    <li><a href="/trabalhos/datas_trabalhos_oficina">Datas de Trabalhos e Oficinas</a></li>
+                                    <li><a href="/trabalhos/comunicacao_oral">Normas para Trabalhos de Comunicação Oral</a></li>
+                                    <li><a href="/trabalhos/proposicao_oficinas_pesquisa">Normas de Proposição de Oficina e Pesquisa</a></li>
+                                    <li><a href="/trabalhos/participacao_oficinas_pesquisa">Normas de Participação nas Oficinas em Pesquisa</a></li>
+                                    <li><a href="/trabalhos/areas_tematicas">Grupos de Trabalhos</a></li>
+                                    <li><a href="/trabalhos/construcao">Comunicação Oral Trabalhos Aprovados</a></li>
+                                    <li><a href="/trabalhos/trabalhos_aprovados">Trabalhos Aprovados</a></li>
+                                    <li><a href="/trabalhos/construcao">Oficinas Aprovadas</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/construcao">Seja um Pratocinador</a></li>
+                        </ul>
+                        <!-- Header Nav Links End -->
+                    </div>
+                </div>
+            </nav>
+            <!-- Header Navbar End -->

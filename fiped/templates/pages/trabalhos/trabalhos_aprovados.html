@@ -1,0 +1,72 @@
+{% extends 'pages_includes/layout.html' %}
+{% block layout_content %}
+{% load staticfiles %}
+<!-- Page Header Section Start -->
+<div class="page-header--section text-center">
+	<div class="page--title pd--130-0 bg--img bg--overlay" data-rjs="2" style="background-image: url(&quot;http://www.ainpgp.org/fiped/x/assets/img/qf-como-chegar.jpg&quot;);">
+		<div class="container">
+			<h1 class="h1 wow jello animated" style="visibility: visible; animation-name: jello;">Trabalhos / Trabalhos Aprovados</h1>
+		</div>
+	</div>
+	<!-- Page Breadcrumb Start -->
+<!--
+<div class="page--breadcrumb font--secondary">
+	<div class="container">
+		<ul class="breadcrumb">
+			<li><a href="index.html">Quick Fix</a></li>
+			<li class="active"><span>About Us</span></li>
+		</ul>
+	</div>
+</div>
+-->
+	<!-- Page Breadcrumb End --></div>
+<!-- Page Header Section End -->
+<div class="container un-mtb-5">
+	<div class="row">
+		<div class="col-md-12">
+			<p class="lead">
+				Os trabalhos aprovados serão atualizados constantemente nessa página, após cada avaliação até a data limite de publicação de resultados.
+			</p>
+
+			<div class="alert alert-secondary rounded pb-4 pt-4">
+				<form role="form">
+					<p>Consulte o trabalho pelo nome do autor principal</p>
+					<div class="form-group">
+						<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome principal">
+					</div>
+					<button type="submit" class="btn btn-default">Verificar</button>
+				</form>
+			</div>
+
+			<div class="alert" role="alert">
+				<small>
+					* Lembramos que para apresentar o trabalho, receber o certificado e ter a publicação nos Anais, todos os autores e coautores devem estar com pagamento concluído.
+				</small>
+			</div>				
+		</div>
+	</div>
+</div>
+
+
+
+<div class="cta--section bg--color-darkgray">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<!-- Call To Action Content Start -->
+				<div class="cta--content">
+					<h2 class="h3">Faça parte do maior Fórum Internacional de Pedagogia da atualidade!</h2>
+				</div>
+				<!-- Call To Action Content Start -->
+			</div>
+
+			<div class="col-md-3">
+				<!-- Call To Action Button Start -->
+				<div class="cta--btn text-center">
+					<a href="http://www.ainpgp.org/fiped/x/inscricao/formulario" class="btn btn-default wow infinite pulse" data-wow-duration="3s" style="visibility: hidden; animation-duration: 3s; animation-name: none;">Inscreva-se agora!</a>				</div>
+				<!-- Call To Action Button Start -->
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

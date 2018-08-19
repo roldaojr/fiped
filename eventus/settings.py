@@ -22,6 +22,7 @@ ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 INTERNAL_IPS = ['127.0.0.1']
 
 INSTALLED_APPS = [
+    'fiped',
     'eventos',
     'trabalhos',
     'comum',
