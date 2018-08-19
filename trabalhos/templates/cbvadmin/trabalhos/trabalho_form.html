@@ -1,0 +1,22 @@
+{% extends 'cbvadmin/semantic-ui/change_form.html' %}
+
+{% block title %}Submeter trabalho{% endblock %}
+
+{% block content %}
+{% if pode_submeter %}
+<div class="ui warning icon message">
+  <i class="exclamation circle icon"></i>
+  <div class="content">
+    Os trabalhos podem ser enviados até {{ global_preferences.trabalhos__prazo_submissao}}
+  </div>
+</div>
+{{ block.super }}
+{% else %}
+<div class="ui warning icon message">
+  <i class="exclamation circle icon"></i>
+  <div class="content">
+    O prazo para submissão de trabalhos terminou!
+  </div>
+</div>
+{% endif %}
+{% endblock %}

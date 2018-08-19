@@ -1,6 +1,9 @@
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.views.generic.detail import SingleObjectMixin
+from django.utils.timezone import now
+from dynamic_preferences.registries import global_preferences_registry
+from cbvadmin.views.edit import AddView
 from comum.views import DetailView, BasicView
 from cbvadmin.views.list import TableListView
 
@@ -24,6 +27,16 @@ class TrabalhoListView(TableListView):
             Q(autor=user) | Q(coautor1=user) |
             Q(coautor2=user) | Q(coautor3=user)
         )
+
+
+class SubmeterTrabalhoView(AddView):
+    def get_context_data(self, **kwargs):
+        prefs = global_preferences_registry.manager()
+        context = super().get_context_data(**kwargs)
+        context.update({'pode_submeter': (
+            prefs['trabalhos__prazo_submissao'] > now()
+        )})
+        return context
 
 
 class AvaliarTrabalhoView(SingleObjectMixin, BasicView):

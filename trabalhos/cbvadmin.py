@@ -4,7 +4,7 @@ import cbvadmin
 from .forms import TrabalhoChangeForm, TrabalhoAddForm, AreaTemaForm
 from .models import Modalidade, AreaTema, Trabalho
 from .views import (TrabalhoDetalhes, TrabalhoListView,
-                    AvaliarTrabalhoView)
+                    SubmeterTrabalhoView, AvaliarTrabalhoView)
 
 
 @cbvadmin.register(Modalidade)
@@ -26,6 +26,7 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
                     'situacao')
     filter_fields = ('titulo', 'modalidade', 'area_tema', 'situacao')
     list_view_class = TrabalhoListView
+    add_view_class = SubmeterTrabalhoView
     detail_view_class = TrabalhoDetalhes
     avaliar_view_class = AvaliarTrabalhoView
     form_class = TrabalhoAddForm
