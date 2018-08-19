@@ -30,6 +30,7 @@ class ImprimirLista(TableListView):
 class EscolherAtividade(EditView):
     form_class = EscolherAtividadesForm
     default_template = 'eventos/atividade_escolher.html'
+    permission_required = []
 
     def get_object(self):
         try:

@@ -13,6 +13,11 @@ class AtividadeAdmin(cbvadmin.ModelAdmin):
     list_display = ('nome', 'tipo', 'local')
     menu_weight = 2
 
+    def has_permission(self, request, action, obj=None):
+        if action == 'escolher':
+            return True
+        return super().has_permission(request, action, obj)
+
     def get_actions(self):
         actions = super().get_actions()
         actions.update({'escolher': 'collection'})
@@ -24,7 +29,7 @@ class AtividadeAdmin(cbvadmin.ModelAdmin):
             MenuItem('Escolher atividades',
                      reverse(self.urls['escolher']),
                      weight=1, icon=self.menu_icon, submenu=False,
-                     check=lambda r: bool(r.user.inscricao))
+                     check=lambda r: bool(hasattr(r.user, 'inscricao')))
         )
         return menus
 

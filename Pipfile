@@ -27,7 +27,7 @@ django-sfp = "*"
 django-debug-toolbar = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3"
 
 [scripts]
 server = "python manage.py runserver"

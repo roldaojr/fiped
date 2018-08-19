@@ -1,4 +1,4 @@
-from random import randint
+from random import randint, choice
 import factory
 from comum.tests.factories import UsuarioFactory
 from ..models import Trabalho, AreaTema, Modalidade
@@ -30,11 +30,13 @@ class TrabalhoFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Trabalho
 
-    modalidade = factory.Iterator(Modalidade.objects.all())
+    modalidade = factory.LazyFunction(
+        lambda: choice(Modalidade.objects.all()))
     titulo = factory.Faker('sentence', nb_words=10)
     autor = factory.SubFactory(UsuarioFactory)
     coautor1 = factory.SubFactory(UsuarioFactory)
     coautor2 = factory.SubFactory(UsuarioFactory)
     coautor3 = factory.SubFactory(UsuarioFactory)
-    area_tema = factory.Iterator(AreaTema.objects.all())
+    area_tema = factory.LazyFunction(
+        lambda: choice(AreaTema.objects.all()))
     arquivo = factory.django.FileField()

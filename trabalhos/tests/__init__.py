@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 from comum.tests.factories import UsuarioFactory
 from .factories import TrabalhoFactory, AreaTemaFactory, ModalidadeFactory
-from ..models import Trabalho
+from ..models import Trabalho, AreaTema
 import factory
 
 

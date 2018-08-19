@@ -1,4 +1,4 @@
-from random import randint
+import random
 import factory
 from comum.tests.factories import UsuarioFactory
 from ..models import Inscricao, TipoInscricao, Atividade, Horario
@@ -25,7 +25,8 @@ class InscricaoFactory(factory.django.DjangoModelFactory):
     numero = factory.Faker('building_number')
     cidade = factory.Faker('city')
     uf = factory.Faker('estado_sigla', locale='pt_BR')
-    tipo = factory.Iterator(TipoInscricao.objects.all())
+    tipo = factory.LazyFunction(
+        lambda: random.choice(TipoInscricao.objects.all()))
     alojamento = factory.Faker('boolean', chance_of_getting_true=30)
 
 
@@ -51,4 +52,5 @@ class AtividadeFactory(factory.django.DjangoModelFactory):
         if not create:
             return
 
-        HorarioFactory.create_batch(randint(1, 2), atividade=self)
+        HorarioFactory.create_batch(
+            random.randint(1, 2), atividade=self)

@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c64b617b91d81bb219f6f3a091cf940ef7c82e55b6f922feb39fe5684195ee3a"
+            "sha256": "b068c8eb83bdea6a6926f65dc68022af36fd6c55b52b846111b13df5d77d9ac8"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.6"
+            "python_version": "3"
         },
         "sources": [
             {
@@ -18,7 +18,7 @@
     "default": {
         "cbvadmin": {
             "git": "https://github.com/roldaojr/cbvadmin",
-            "ref": "91efb86a8aa2187d8255903917cc668d0431358a"
+            "ref": "4503edfd417837219628fb57dfd13ceec548f0cf"
         },
         "cbvadmin-semantic-ui": {
             "git": "https://github.com/roldaojr/cbvadmin-semantic-ui",
