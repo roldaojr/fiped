@@ -23,7 +23,7 @@
                                         </address>
                                         </p>
 
-                                        <a href="/sobre/como_chegar" class="btn btn-default">Como Chegar</a>
+                                        <a href="{% url 'como_chegar' %}" class="btn btn-default">Como Chegar</a>
                                     </div>
                                     <!-- Banner Content End -->
                                 </div>
@@ -318,7 +318,7 @@
     <div class="container">
         <!-- Section Title Start -->
         <div class="section--title">
-            <h2 class="h2">X Forúm Internacinal de Pedagogia</h2>
+            <h2 class="h2">X Forúm Internacional de Pedagogia</h2>
             <p>Pau dos Ferros - RN de 27 a 30 de novembro de 2018</p>
         </div>
         <!-- Section Title End -->
@@ -326,7 +326,7 @@
         <div class="row text-center">
             <!-- Service Image Start -->
             <div class="service--img col-md-4 col-sm-8">
-                <div class="service--img-inner bg--img bg--overlay" data-rjs="2" style="background-image: url(&quot;http://www.ainpgp.org/fiped/x/assets/qf/img/services-img/service-img-bg.png&quot;);">
+                <div class="service--img-inner bg--img bg--overlay"  data-rjs="2" data-bg-img="{% static 'img/service-img-bg.png' %}">
                     <!-- Tab Content Start -->
                     <div class="tab-content">
                         <!-- Tab Pane Start -->
@@ -364,21 +364,21 @@
                 <div class="service--item active">
                     <div class="dot" data-position-top="16px" data-position-right="-129px" style="top: 16px; left: auto; right: -129px;"></div>
                     <h3 class="h3">
-                        <a href="http://www.ainpgp.org/fiped/x/#" data-toggle="tab" data-target="#serviceImg01">Carga Horária</a>
+                        <a href="#" data-toggle="tab" data-target="#serviceImg01">Carga Horária</a>
                     </h3>
-                    <p>O evento terá uma carga horária geral de 48 horas</p>
+                    <p>O evento terá uma carga horária geral de 60 horas</p>
 
-                    <a href="http://www.ainpgp.org/fiped/x/inscricao/normas" class="btn btn-default">Veja as normas</a>                </div>
+                    <a href="{% url 'normas' %}" class="btn btn-default">Veja as normas</a>                </div>
                 <!-- Service Item End -->
 
                 <!-- Service Item Start -->
                 <div class="service--item">
                     <div class="dot" data-position-top="13px" data-position-right="-54px" style="top: 13px; left: auto; right: -54px;"></div>
                     <h3 class="h3">
-                        <a href="http://www.ainpgp.org/fiped/x/#" data-toggle="tab" data-target="#serviceImg02">Programação do Evento</a>
+                        <a href="#" data-toggle="tab" data-target="#serviceImg02">Programação do Evento</a>
                     </h3>
                     <p>Confira a programação geral do evento e os convidados (palestrantes) já confirmados.</p>
-                    <a href="http://www.ainpgp.org/fiped/x/programacao/datas" class="btn btn-default">Veja as normas</a>                </div>
+                    <a href="{% url 'normas' %}" class="btn btn-default">Veja as normas</a>                </div>
                 <!-- Service Item End -->
             </div>
             <!-- Service Items End -->
@@ -390,12 +390,12 @@
                     <div class="dot" data-position-top="16px" data-position-left="-129px" style="top: 16px; left: -129px; right: auto;"></div>
 
                     <h3 class="h3">
-                        <a href="http://www.ainpgp.org/fiped/x/#" data-toggle="tab" data-target="#serviceImg03">Grupos de Trabalho</a>
+                        <a href="#" data-toggle="tab" data-target="#serviceImg03">Grupos de Trabalho</a>
                     </h3>
 
                     <p>Conheça todas os grupos de trabalhos relacionadas ao evento. Veja a que se encaixa mais a sua pesquisa e submeta sua proposta de trabalho.</p>
 
-                    <a href="http://www.ainpgp.org/fiped/x/programacao/grupos-de-trabalhos" class="btn btn-default">Veja as normas</a>                </div>
+                    <a href="{% url 'normas' %}" class="btn btn-default">Veja as normas</a>                </div>
                 <!-- Service Item End -->
 
                 <!-- Service Item Start -->
@@ -403,12 +403,12 @@
                     <div class="dot" data-position-top="13px" data-position-left="-54px" style="top: 13px; left: -54px; right: auto;"></div>
 
                     <h3 class="h3">
-                        <a href="http://www.ainpgp.org/fiped/x/#" data-toggle="tab" data-target="#serviceImg04">Publicação de Trabalhos</a>
+                        <a href="#" data-toggle="tab" data-target="#serviceImg04">Publicação de Trabalhos</a>
                     </h3>
 
                     <p>Conheça as normas e submeta seu trabalho na área do participante. Os trabalhos publicados.</p>
 
-                    <a href="http://www.ainpgp.org/fiped/x/trabalhos/normas" class="btn btn-default">Veja as normas</a>                </div>
+                    <a href="{% url 'normas' %}" class="btn btn-default">Veja as normas</a>                </div>
                 <!-- Service Item End -->
             </div>
             <!-- Service Items End -->
@@ -416,7 +416,7 @@
 
         <!-- Section Footer Start -->
         <div class="section--footer text-center">
-            <a href="http://www.ainpgp.org/fiped/x/inscricao/formulario" class="btn btn-default">Inscreva-se agora!</a>        </div>
+            <a href="#" class="btn btn-default">Inscreva-se agora!</a>        </div>
         <!-- Section Footer End -->
     </div>
 </div>
@@ -551,8 +551,7 @@
             <div class="col-md-3">
                 <!-- Call To Action Button Start -->
                 <div class="cta--btn text-center">
-                    <a href="http://www.ainpgp.org/fiped/x/inscricao/formulario" class="btn btn-default wow infinite pulse" data-wow-duration="3s" style="visibility: hidden; animation-duration: 3s; animation-name: none;">Inscreva-se agora!</a>
-                </div>
+                    <a href="http://www.ainpgp.org/fiped/x/inscricao/formulario" class="btn btn-default wow infinite pulse" data-wow-duration="3s" style="visibility: hidden; animation-duration: 3s; animation-name: none;">Inscreva-se agora!</a>             </div>
                 <!-- Call To Action Button Start -->
             </div>
         </div>
