@@ -1,6 +1,57 @@
 {% extends 'cbvadmin/semantic-ui/base_site.html' %}
 {% block title %}Painel{% endblock %}
 {% block content %}
+<div class="ui two stackable cards">
+  {% with inscricao=request.user.inscricao %}
+  <div class="card">
+    <div class="content">
+      <div class="header">Inscrição</div>
+      <table class="ui table">
+        <tr>
+          <td>{{ inscricao.tipo }}</td>
+          <td class="{{ inscricao.pagamento|yesno:'positive,negative'}}">{{ inscricao.get_pagamento_display }}</td>
+        </tr>
+      </table>
+     </div>
+     {% if inscricao.pagamento != 1 %}
+     <a class="ui bottom attached button" href="{% url 'cbvadmin:pagar' %}">
+       <i class="usd icon"></i> Pagar
+     </a>
+     {% else %}
+     <div class="center aligned extra content">
+       Inscrição paga
+     </div>
+     {% endif %}
+  </div>
+  {% endwith %}
+  <div class="card">
+    <div class="content">
+      <div class="header">Trabalhos</div>
+        <div class="ui celled big list">
+          {% for trabalho in request.user.trabalhos %}
+          <div class="item">
+            <div class="header">{{ trabalho.titulo }}</div>
+            {{ trabalho.areatema }}
+            </div>
+          {% empty %}
+          <div class="item">
+            <div class="header">Nenhum trabalho submetido</div>
+            Aperte o botão submeter trabalho para enviar seu trabalho
+          </div>
+          {% endfor %}
+        </div>
+     </div>
+     {% if not request.user.trabalhos %}
+     <a class="ui bottom attached button" href="{% url 'cbvadmin:trabalhos_trabalho_add' %}">
+       <i class="send icon"></i> Submeter trabalho
+     </a>
+     {% else %}
+     <div class="center aligned extra content">
+       Já foram submetido trabalhos
+     </div>
+     {% endif %}
+  </div>
+</div>
 {% if counters %}
 <div class="ui three stackable cards">
 {% for counter in counters %}
@@ -20,3 +71,4 @@
 </div>
 {% endif %}
 {% endblock %}
+
