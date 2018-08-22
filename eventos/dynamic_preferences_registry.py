@@ -1,11 +1,13 @@
 from django.utils.timezone import now
-from dynamic_preferences.types import (IntegerPreference, StringPreference,
-                                       DatePreference, FilePreference)
+from dynamic_preferences.types import (
+    BooleanPreference, IntegerPreference, StringPreference,
+    DatePreference, FilePreference)
 from dynamic_preferences.preferences import Section
 from dynamic_preferences.registries import global_preferences_registry
 
 
 evento = Section('evento', verbose_name='Evento')
+pagamento = Section('pagamento', verbose_name='Pagamento')
 
 
 @global_preferences_registry.register
@@ -47,8 +49,35 @@ class FimEvento(DatePreference):
 
 
 @global_preferences_registry.register
+class DataInscricaoEvento(DatePreference):
+    section = evento
+    name = 'data_inscricao'
+    verbose_name = 'Data de abertura das inscrições no evento'
+
+    @property
+    def default(self):
+        return now().date()
+
+
+@global_preferences_registry.register
 class InscricaoAtividadeMax(IntegerPreference):
     section = evento
     name = 'inscricao_atividade_max'
     verbose_name = 'Número máximo de atividades por participante'
     default = 1
+
+
+@global_preferences_registry.register
+class PaypalAtivo(BooleanPreference):
+    section = pagamento
+    name = 'paypal_ativo'
+    verbose_name = 'Receber pagamento por PayPal'
+    default = False
+
+
+@global_preferences_registry.register
+class PaypalEmail(StringPreference):
+    section = pagamento
+    name = 'paypal_email'
+    verbose_name = 'E-mail da conta Paypal'
+    default = ''

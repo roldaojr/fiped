@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b068c8eb83bdea6a6926f65dc68022af36fd6c55b52b846111b13df5d77d9ac8"
+            "sha256": "7fd606dbdcb3e50597fa5a1bc8944fc60a0f48b6ca0b5462812d50c1b078c4f5"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,6 +23,20 @@
         "cbvadmin-semantic-ui": {
             "git": "https://github.com/roldaojr/cbvadmin-semantic-ui",
             "ref": "ecb66c34624d0ba8a9c7f4f2807faf277048c112"
+        },
+        "certifi": {
+            "hashes": [
+                "sha256:4c1d68a1408dd090d2f3a869aa94c3947cc1d967821d1ed303208c9f41f0f2f4",
+                "sha256:b6e8b28b2b7e771a41ecdd12d4d43262ecab52adebbafa42c77d6b57fb6ad3a4"
+            ],
+            "version": "==2018.8.13"
+        },
+        "chardet": {
+            "hashes": [
+                "sha256:84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae",
+                "sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"
+            ],
+            "version": "==3.0.4"
         },
         "django": {
             "hashes": [
@@ -78,6 +92,14 @@
             "index": "pypi",
             "version": "==2.0"
         },
+        "django-paypal": {
+            "hashes": [
+                "sha256:03f82eafadd0edc78b59edc5985bdbd5f956c083d77d5f17ca787ead12b75618",
+                "sha256:352877bdde17a6d61d77ab233aa209789163ae50031ba8b002b80f5512ebf64d"
+            ],
+            "index": "pypi",
+            "version": "==0.5.0"
+        },
         "django-registration-redux": {
             "hashes": [
                 "sha256:3201ae4ebd7caa5edb62a2df64e25300fef5752594b6361cc0ad3835cef88048"
@@ -122,6 +144,13 @@
             ],
             "index": "pypi",
             "version": "==19.9.0"
+        },
+        "idna": {
+            "hashes": [
+                "sha256:156a6814fb5ac1fc6850fb002e0852d56c0c8d2531923a51032d1b70760e186e",
+                "sha256:684a38a6f903c1d71d6d5fac066b58d7768af4de2b832e426ec79c30daa94a16"
+            ],
+            "version": "==2.7"
         },
         "mysqlclient": {
             "hashes": [
@@ -214,6 +243,13 @@
             ],
             "version": "==3.13"
         },
+        "requests": {
+            "hashes": [
+                "sha256:63b52e3c866428a224f97cab011de738c36aec0185aa91cfacd418b5d58911d1",
+                "sha256:ec22d826a36ed72a7358ff3fe56cbd4ba69dd7a6718ffd450ff0e9df7a47ce6a"
+            ],
+            "version": "==2.19.1"
+        },
         "six": {
             "hashes": [
                 "sha256:70e8a77beed4562e7f14fe23a786b54f6296e34344c23bc42f07b15018ff98e9",
@@ -227,6 +263,14 @@
                 "sha256:801e38bd550b943563660a91de8d4b6fa5df60a542be9093f7abf819f86050cc"
             ],
             "version": "==1.2"
+        },
+        "urllib3": {
+            "hashes": [
+                "sha256:a68ac5e15e76e7e5dd2b8f94007233e01effe3e50e8daddf69acfd81cb686baf",
+                "sha256:b5725a0bd4ba422ab0e66e89e030c806576753ea3ee08554382c14e685d117b5"
+            ],
+            "markers": "python_version != '3.3.*' and python_version != '3.0.*' and python_version >= '2.6' and python_version < '4' and python_version != '3.1.*' and python_version != '3.2.*'",
+            "version": "==1.23"
         },
         "whitenoise": {
             "hashes": [

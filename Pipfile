@@ -22,6 +22,7 @@ faker = "*"
 factory-boy = "*"
 "django-select2" = "*"
 django-sfp = "*"
+django-paypal = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"

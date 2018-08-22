@@ -1,10 +1,11 @@
 from django.urls import reverse
 from menu import MenuItem
 import cbvadmin
+from cbvadmin.options import SimpleAdmin
 from comum.views import DetailView
 from .models import Atividade, Inscricao, TipoInscricao
 from .filters import InscricaoFilter
-from .views import ImprimirLista, EscolherAtividade
+from .views import ImprimirLista, EscolherAtividade, VisualizarPagamento
 
 
 @cbvadmin.register(Atividade)
@@ -54,3 +55,15 @@ class InscricaoAdmin(cbvadmin.ModelAdmin):
         del actions['add']
         actions.update({'detail': 'object', 'imprimir': 'collection'})
         return actions
+
+
+@cbvadmin.register('pagamento')
+class PagamentoAdmin(SimpleAdmin):
+    pagar_view_class = VisualizarPagamento
+    default_action = 'pagar'
+
+    def get_actions(self):
+        return {'pagar': 'collection'}
+
+    def get_menu(self):
+        return None

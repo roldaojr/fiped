@@ -1,5 +1,9 @@
 from django.db import models
 from django.utils.formats import date_format, time_format, number_format
+from djchoices import DjangoChoices, ChoiceItem
+from paypal.standard.models import ST_PP_COMPLETED
+from paypal.standard.ipn.signals import valid_ipn_received
+from dynamic_preferences.registries import global_preferences_registry
 from comum.models import Usuario
 
 
@@ -48,6 +52,11 @@ class TipoInscricao(models.Model):
 
 
 class Inscricao(models.Model):
+    class Pagamento(DjangoChoices):
+        Pendente = ChoiceItem(0)
+        Pago = ChoiceItem(1)
+        Recusado = ChoiceItem(2)
+
     usuario = models.OneToOneField(
         Usuario, on_delete=models.CASCADE, editable=False,
         related_name='inscricao')
@@ -73,7 +82,23 @@ class Inscricao(models.Model):
     certificado = models.BooleanField(default=False, editable=False)
     atividades = models.ManyToManyField(Atividade, related_name='inscricoes',
                                         blank=True)
+    pagamento = models.IntegerField(choices=Pagamento.choices,
+                                    default=Pagamento.Pendente)
 
     class Meta:
         verbose_name = 'inscrição'
         verbose_name_plural = 'inscrições'
+
+
+def atualizar_pagamento_inscricao(sender, **kwargs):
+    print('payment received', sender)
+    if sender.payment_status == ST_PP_COMPLETED:
+        prefs = global_preferences_registry.manager()
+        if sender.receiver_email != prefs['pagamento__paypal_email']:
+            return
+        inscricao = Inscricao.objects.get(pk=sender.invoice)
+        inscricao.pagamento = Inscricao.Pagamento.Pago
+        inscricao.save()
+
+
+valid_ipn_received.connect(atualizar_pagamento_inscricao)

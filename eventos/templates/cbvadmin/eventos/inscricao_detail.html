@@ -42,7 +42,7 @@
   </tr>
   <tr>
     <td>Deficiência / necessidade educacional</td>
-    <td>{{ object.alojamento }}</td>
+    <td>{{ object.deficiencia|default:'Não' }}</td>
   </tr>
   <tr>
     <td>Instituição</td>
@@ -78,7 +78,7 @@
   </tr>
   <tr>
     <td>Necessita de alojamento estudantil</td>
-    <td>{{ object.alojamento }}</td>
+    <td>{{ object.alojamento|yesno:'Sim,Não' }}</td>
   </tr>
 </table>
 {% endblock %}

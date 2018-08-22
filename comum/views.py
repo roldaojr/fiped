@@ -23,7 +23,8 @@ class DetailView(PermissionRequiredMixin, AdminMixin, _DetailView):
 class InscreverView(RegistrationView):
     def registration_allowed(self):
         prefs = global_preferences_registry.manager()
-        if date.today() > prefs['evento__data_fim']:
+        if date.today() > prefs['evento__data_fim'] or \
+                date.today() < prefs['evento__data_inscricao']:
             return False
         else:
             return True
