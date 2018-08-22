@@ -1,5 +1,6 @@
 from django.conf import settings
-from django.conf.urls import url, include
+from django.conf.urls import url
+from django.urls import include
 from django.views.static import serve
 from comum.views import InscreverView
 import cbvadmin
@@ -12,6 +13,7 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^preferences/', include('dynamic_preferences.urls')),
     url(r'^select2/', include('django_select2.urls')),
+    url(r'^paypal/', include('paypal.standard.ipn.urls')),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,40 @@
+{% extends 'cbvadmin/semantic-ui/base_site.html' %}
+
+{% block title %}Pagamento{% endblock %}
+
+{% block content %}
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Inscrição</th>
+      <th>Valor</th>
+      <th>Situação</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% with inscricao=request.user.inscricao %}
+    <tr>
+      <td>{{ inscricao.tipo.nome }}</td>
+      <td>R$ {{ inscricao.tipo.preco }}</td>
+      <td class="{{ inscricao.pagamento|yesno:'positive,negative'}}">
+        {{ inscricao.get_pagamento_display }}
+      </td>
+    </tr>
+    {% endwith %}
+  </tbody>
+</table>
+{% if request.user.inscricao.pagamento != 1 %}
+<div class="ui cards">
+{% if global_preferences.pagamento__paypal_ativo %}
+  <div class="card">
+    <div class="content center aligned">
+      <div class="header">PayPal</div>
+      <div class="description">
+        {{ form.render }}
+      </div>
+    </div>
+  </div>
+{% endif %}
+</div>
+{% endif %}
+{% endblock %}

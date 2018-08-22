@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'registration',
     'sfp',
     'dynamic_preferences',
+    'paypal.standard.ipn',
     'django_select2',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -115,6 +116,9 @@ INCLUDE_AUTH_URLS = False
 
 # static file pages
 SFP_HANDLE_HOMEPAGE = True
+
+# Paypal
+PAYPAL_TEST = env('PAYPAL_TEST', default=False)
 
 # Configure debug toolbar
 DEBUG_TOOLBAR = env('DEBUG_TOOLBAR', default=DEBUG)
