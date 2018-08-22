@@ -49,6 +49,17 @@ class FimEvento(DatePreference):
 
 
 @global_preferences_registry.register
+class DataInscricaoEvento(DatePreference):
+    section = evento
+    name = 'data_inscricao'
+    verbose_name = 'Data de abertura das inscrições no evento'
+
+    @property
+    def default(self):
+        return now().date()
+
+
+@global_preferences_registry.register
 class InscricaoAtividadeMax(IntegerPreference):
     section = evento
     name = 'inscricao_atividade_max'
