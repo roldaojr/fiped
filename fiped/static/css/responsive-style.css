@@ -49,6 +49,10 @@ WE MAY RELEASE FUTURE UPDATES SO IT WILL OVERWRITE THIS FILE. IT'S BETTER AND SA
 
 /* 1.2. MEDIUM DEVICES, DESKTOPS */
 @media screen and (max-width: 991px) {
+    .bg--img{
+        background-size: 100% 100% !important;
+    }
+
     /* HEADER SECTION */
     .header--navbar-top {
         margin-top: 30px;
@@ -331,6 +335,10 @@ WE MAY RELEASE FUTURE UPDATES SO IT WILL OVERWRITE THIS FILE. IT'S BETTER AND SA
 
 /* 1.3. SMALL DEVICES, TABLETS */
 @media screen and (max-width: 767px) {
+    .bg--img{
+        background-size: 100% 100% !important;
+    }
+
     /* HEADER SECTION */
     .header--navbar-top-info .nav > li {
         float: none;
@@ -467,6 +475,10 @@ WE MAY RELEASE FUTURE UPDATES SO IT WILL OVERWRITE THIS FILE. IT'S BETTER AND SA
 
 /* 1.4. SMALL DEVICES, SMARTPHONES */
 @media screen and (max-width: 480px) {
+    .bg--img{
+        background-size: 100% 100% !important;
+    }
+
     /* HEADER SECTION */
     .header--topbar .social {
         float: left;
@@ -530,6 +542,9 @@ WE MAY RELEASE FUTURE UPDATES SO IT WILL OVERWRITE THIS FILE. IT'S BETTER AND SA
 
 /* 1.5. CUSTOM, IPHONE RETINA */
 @media screen and (max-width: 380px) {
+    .bg--img{
+        background-size: 100% 50% !important;
+    }
     /* CART SECTION */
     .cart--coupon .input-group {
         display: block;
@@ -552,5 +567,8 @@ WE MAY RELEASE FUTURE UPDATES SO IT WILL OVERWRITE THIS FILE. IT'S BETTER AND SA
 }
 
 @media screen and (max-width: 320px) {
+    .bg--img{
+        background-size: 100% 100% !important;
+    }
     
 }
