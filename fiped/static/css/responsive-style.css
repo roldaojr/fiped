@@ -543,6 +543,15 @@ WE MAY RELEASE FUTURE UPDATES SO IT WILL OVERWRITE THIS FILE. IT'S BETTER AND SA
 /* 1.5. CUSTOM, IPHONE RETINA */
 @media screen and (max-width: 380px) {
     .banner--content{
+        padding-top: 10px;
+        padding-bottom: 100px;
+        font-size: 16px;
+        line-height: 28px;
+    }
+
+
+    }
+    .banner--content{
         font-size: 12px !important;
     }
     .banner--content h1{
