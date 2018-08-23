@@ -544,6 +544,10 @@ WE MAY RELEASE FUTURE UPDATES SO IT WILL OVERWRITE THIS FILE. IT'S BETTER AND SA
 @media screen and (max-width: 380px) {
     .banner--content{
         font-size: 12px !important;
+        padding-top: 80px;
+        padding-bottom: 10px;
+    }
+
     }
     .banner--content h1{
         font-size: 20px;
