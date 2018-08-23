@@ -1,6 +1,7 @@
 {% extends 'cbvadmin/semantic-ui/base_site.html' %}
 {% block title %}Painel{% endblock %}
 {% block content %}
+{% if request.user.inscricao %}
 <div class="ui two stackable cards">
   {% with inscricao=request.user.inscricao %}
   <div class="card">
@@ -52,6 +53,7 @@
      {% endif %}
   </div>
 </div>
+{% endif %}
 {% if counters %}
 <div class="ui three stackable cards">
 {% for counter in counters %}
