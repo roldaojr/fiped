@@ -5,7 +5,8 @@ from cbvadmin.options import SimpleAdmin
 from comum.views import DetailView
 from .models import Atividade, Inscricao, TipoInscricao
 from .filters import InscricaoFilter
-from .views import ImprimirLista, EscolherAtividade, VisualizarPagamento
+from .views import (ImprimirLista, EscolherAtividade, VisualizarPagamento,
+                    InscricaoPagarPagSeguro)
 
 
 @cbvadmin.register(Atividade)
@@ -48,12 +49,17 @@ class InscricaoAdmin(cbvadmin.ModelAdmin):
     imprimir_view_class = ImprimirLista
     detail_view_class = DetailView
     default_object_action = 'detail'
+    pagar_pagseguro_view_class = InscricaoPagarPagSeguro
     menu_weight = 3
 
     def get_actions(self):
         actions = super().get_actions()
         del actions['add']
-        actions.update({'detail': 'object', 'imprimir': 'collection'})
+        actions.update({
+            'detail': 'object',
+            'imprimir': 'collection',
+            'pagar_pagseguro': 'object'
+        })
         return actions
 
 

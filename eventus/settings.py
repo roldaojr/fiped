@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'sfp',
     'dynamic_preferences',
     'paypal.standard.ipn',
+    'pagseguro',
     'django_select2',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -119,6 +120,8 @@ SFP_HANDLE_HOMEPAGE = True
 
 # Paypal
 PAYPAL_TEST = env('PAYPAL_TEST', default=False)
+# PAgseguro
+PAGSEGURO_SANDBOX = env('PAGSEGURO_SANDBOX', default=False)
 
 # Configure debug toolbar
 DEBUG_TOOLBAR = env('DEBUG_TOOLBAR', default=DEBUG)

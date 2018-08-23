@@ -13,7 +13,8 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^preferences/', include('dynamic_preferences.urls')),
     url(r'^select2/', include('django_select2.urls')),
-    url(r'^paypal/', include('paypal.standard.ipn.urls')),
+    url(r'^pagamento/paypal/', include('paypal.standard.ipn.urls')),
+    url(r'^pagamento/pagseguro/', include('pagseguro.urls')),
 ]
 
 if settings.DEBUG:

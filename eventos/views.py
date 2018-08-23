@@ -1,8 +1,12 @@
 from django.urls import reverse
 from django.http import Http404
+from django.contrib import messages
 from django_tables2.columns import Column
+from django.views.generic.base import RedirectView
+from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.base import TemplateView
 from paypal.standard.forms import PayPalPaymentsForm
+from pagseguro.api import PagSeguroItem, PagSeguroApi
 from dynamic_preferences.registries import global_preferences_registry
 from cbvadmin.views.mixins import AdminMixin
 from cbvadmin.views.list import TableListView
@@ -70,3 +74,32 @@ class VisualizarPagamento(AdminMixin, TemplateView):
             context['form'] = PayPalPaymentsForm(initial=paypal_dict)
 
         return context
+
+
+class CheckoutException(Exception):
+    pass
+
+
+class InscricaoPagarPagSeguro(SingleObjectMixin, RedirectView):
+    def get_redirect_url(self, **kwargs):
+        self.object = self.get_object()
+        if self.object.pagamento != Inscricao.Pagamento.Pago:
+            prefs = global_preferences_registry.manager()
+            api = PagSeguroApi(
+                pagseguro_email=prefs['pagamento__pagseguro_email'],
+                pagseguro_token=prefs['pagamento__pagseguro_token'],
+                reference=str(self.object.pk)
+            )
+            api.add_item(PagSeguroItem(
+                id='1',
+                description=self.object.tipo.nome,
+                amount=self.object.tipo.preco,
+                quantity=1
+            ))
+            print(api.redirect_url)
+            data = api.checkout()
+            if data['success']:
+                return data['redirect_url']
+            messages.error(self.request,
+                           'Erro PagSeguro: %s' % data['message'])
+        return reverse('cbvadmin:pagar')

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7fd606dbdcb3e50597fa5a1bc8944fc60a0f48b6ca0b5462812d50c1b078c4f5"
+            "sha256": "d83ac965985c45c2b717019c0098cbba8df7b35108eb6fddfa5fb55d0f377380"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -92,6 +92,14 @@
             "index": "pypi",
             "version": "==2.0"
         },
+        "django-pagseguro2": {
+            "hashes": [
+                "sha256:3bfcff0debb15354659823ec290647beba3a2a4143d738c63cbe89bb0d33139b",
+                "sha256:65604dd7bb0cbe7454076c6c4a4d7b627012683d8c97757995079630d18efb3b"
+            ],
+            "index": "pypi",
+            "version": "==2.0.4"
+        },
         "django-paypal": {
             "hashes": [
                 "sha256:03f82eafadd0edc78b59edc5985bdbd5f956c083d77d5f17ca787ead12b75618",
@@ -109,10 +117,11 @@
         },
         "django-select2": {
             "hashes": [
-                "sha256:8d0c5c3e5ecdfee5103bacdfc2e267392ae0113774cf37946d12b4f34ddc2357"
+                "sha256:8591916e949ecd4ef8c8a460217b502ca1e86af0184aef1abe731a4cd19f45f9",
+                "sha256:eef217317843cd360c592142c03e8067904cfaea0e5cb3a3ba80ab18475a3c5d"
             ],
             "index": "pypi",
-            "version": "==6.2.0"
+            "version": "==6.3.0"
         },
         "django-sfp": {
             "hashes": [
@@ -269,7 +278,6 @@
                 "sha256:a68ac5e15e76e7e5dd2b8f94007233e01effe3e50e8daddf69acfd81cb686baf",
                 "sha256:b5725a0bd4ba422ab0e66e89e030c806576753ea3ee08554382c14e685d117b5"
             ],
-            "markers": "python_version != '3.3.*' and python_version != '3.0.*' and python_version >= '2.6' and python_version < '4' and python_version != '3.1.*' and python_version != '3.2.*'",
             "version": "==1.23"
         },
         "whitenoise": {
@@ -279,6 +287,13 @@
             ],
             "index": "pypi",
             "version": "==4.0"
+        },
+        "xmltodict": {
+            "hashes": [
+                "sha256:8f8d7d40aa28d83f4109a7e8aa86e67a4df202d9538be40c0cb1d70da527b0df",
+                "sha256:add07d92089ff611badec526912747cf87afd4f9447af6661aca074eeaf32615"
+            ],
+            "version": "==0.11.0"
         }
     },
     "develop": {

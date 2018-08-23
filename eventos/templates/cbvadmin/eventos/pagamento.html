@@ -24,13 +24,23 @@
   </tbody>
 </table>
 {% if request.user.inscricao.pagamento != 1 %}
-<div class="ui cards">
+<div class="ui two stackable cards">
 {% if global_preferences.pagamento__paypal_ativo %}
   <div class="card">
     <div class="content center aligned">
       <div class="header">PayPal</div>
       <div class="description">
         {{ form.render }}
+      </div>
+    </div>
+  </div>
+{% endif %}
+{% if global_preferences.pagamento__pagseguro_ativo %}
+  <div class="card">
+    <div class="content center aligned">
+      <div class="header">PagSeguro</div>
+      <div class="description">
+        <a href="{% url 'cbvadmin:eventos_inscricao_pagar_pagseguro' request.user.inscricao.pk %}"><img src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/205x30-pagar.gif" alt="Pagar com PagSeguro"/></a>
       </div>
     </div>
   </div>

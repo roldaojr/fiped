@@ -3,6 +3,7 @@ from django.utils.formats import date_format, time_format, number_format
 from djchoices import DjangoChoices, ChoiceItem
 from paypal.standard.models import ST_PP_COMPLETED
 from paypal.standard.ipn.signals import valid_ipn_received
+from pagseguro.signals import notificacao_status_pago
 from dynamic_preferences.registries import global_preferences_registry
 from comum.models import Usuario
 
@@ -90,8 +91,7 @@ class Inscricao(models.Model):
         verbose_name_plural = 'inscrições'
 
 
-def atualizar_pagamento_inscricao(sender, **kwargs):
-    print('payment received', sender)
+def atualizar_pagamento_inscricao_paypal(sender, **kwargs):
     if sender.payment_status == ST_PP_COMPLETED:
         prefs = global_preferences_registry.manager()
         if sender.receiver_email != prefs['pagamento__paypal_email']:
@@ -101,4 +101,12 @@ def atualizar_pagamento_inscricao(sender, **kwargs):
         inscricao.save()
 
 
-valid_ipn_received.connect(atualizar_pagamento_inscricao)
+def atualizar_pagamento_insscricao_pagseguro(sender, transation, **kwargs):
+    if transation.reference:
+        inscricao = Inscricao.objects.get(pk=transation.reference)
+        inscricao.pagamento = Inscricao.Pagamento.Pago
+        inscricao.save()
+
+
+valid_ipn_received.connect(atualizar_pagamento_inscricao_paypal)
+notificacao_status_pago.connect(atualizar_pagamento_insscricao_pagseguro)

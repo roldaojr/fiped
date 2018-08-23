@@ -53,6 +53,7 @@ class DataInscricaoEvento(DatePreference):
     section = evento
     name = 'data_inscricao'
     verbose_name = 'Data de abertura das inscrições no evento'
+    field_kwargs = {'required': False}
 
     @property
     def default(self):
@@ -81,3 +82,30 @@ class PaypalEmail(StringPreference):
     name = 'paypal_email'
     verbose_name = 'E-mail da conta Paypal'
     default = ''
+    field_kwargs = {'required': False}
+
+
+@global_preferences_registry.register
+class PagSeguroAtivo(BooleanPreference):
+    section = pagamento
+    name = 'pagseguro_ativo'
+    verbose_name = 'Receber pagamentos por PagSeguro'
+    default = False
+
+
+@global_preferences_registry.register
+class PagSeguroEmail(StringPreference):
+    section = pagamento
+    name = 'pagseguro_email'
+    verbose_name = 'E-mail da conta PagSeguro'
+    default = ''
+    field_kwargs = {'required': False}
+
+
+@global_preferences_registry.register
+class PagSeguroToken(StringPreference):
+    section = pagamento
+    name = 'pagseguro_token'
+    verbose_name = 'Token da conta PagSeguro'
+    default = ''
+    field_kwargs = {'required': False}
