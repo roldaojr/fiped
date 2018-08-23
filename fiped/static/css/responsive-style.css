@@ -551,6 +551,13 @@ WE MAY RELEASE FUTURE UPDATES SO IT WILL OVERWRITE THIS FILE. IT'S BETTER AND SA
     .bg--img{
         background-size: 100% 50% !important;
     }
+
+    .bg--image{
+        background-size: 100% 100% !important;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
     /* CART SECTION */
     .cart--coupon .input-group {
         display: block;

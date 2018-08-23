@@ -395,6 +395,12 @@ a:active, .btn-link:active {
     background-repeat: no-repeat;
 }
 
+.bg--image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 /* 1.9. BACKGROUND OVERLAYS */
 .bg--overlay {
     position: relative;
