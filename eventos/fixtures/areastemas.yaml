@@ -1,0 +1,106 @@
+- model: trabalhos.areatema
+  pk: 1
+  fields: {nome: "GT: PESQUISAS EM ANCESTRALIDADE, AFRICANIDADES E RELA\xC7\xD5ES
+      \xC9TNICO-RACIAIS"}
+- model: trabalhos.areatema
+  pk: 2
+  fields: {nome: "GT: PESQUISAS EM ARTE E EDUCA\xC7\xC3O (ARTES VISUAIS, DAN\xC7A,
+      M\xDASICA E TEATRO)"}
+- model: trabalhos.areatema
+  pk: 3
+  fields: {nome: "GT: PESQUISAS EM AVALIA\xC7\xC3O EDUCACIONAL"}
+- model: trabalhos.areatema
+  pk: 4
+  fields: {nome: "GT: PESQUISAS EM EDUCA\xC7\xC3O DO CAMPO, MOVIMENTOS SOCIAIS e DIREITOS
+      HUMANOS"}
+- model: trabalhos.areatema
+  pk: 5
+  fields: {nome: "GT: PESQUISAS EM EDUCA\xC7\xC3O E ESTUDOS DO DISCURSO"}
+- model: trabalhos.areatema
+  pk: 6
+  fields: {nome: "GT: PESQUISAS EM EDUCA\xC7\xC3O INCLUSIVA"}
+- model: trabalhos.areatema
+  pk: 7
+  fields: {nome: "GT: PESQUISAS EM EDUCA\xC7\xC3O INFANTIL"}
+- model: trabalhos.areatema
+  pk: 8
+  fields: {nome: "GT: PESQUISAS EM EDUCA\xC7\xC3O INTERCULTURAL E PARA A DIVERSIDADE
+      E OS DIREITOS HUMANOS"}
+- model: trabalhos.areatema
+  pk: 9
+  fields: {nome: "GT: PESQUISAS EM EDUCA\xC7\xC3O, SA\xDADE E TECNOLOGIAS"}
+- model: trabalhos.areatema
+  pk: 10
+  fields: {nome: "GT: PESQUISAS EM MEM\xD3RIA, CULTURA E IDENTIDADE"}
+- model: trabalhos.areatema
+  pk: 11
+  fields: {nome: "GT: PESQUISA EM \xC9TICA, EDUCA\xC7\xC3O E CIDADANIA"}
+- model: trabalhos.areatema
+  pk: 12
+  fields: {nome: "GT: PESQUISA EM ENSINO DE CI\xCANCIAS EXATAS E NATURAIS"}
+- model: trabalhos.areatema
+  pk: 13
+  fields: {nome: "GT: PESQUISAS EM ENSINO DE HIST\xD3RIA"}
+- model: trabalhos.areatema
+  pk: 14
+  fields: {nome: 'GT: PESQUISAS EM ENSINO DE LEITURA E LITERATURA'}
+- model: trabalhos.areatema
+  pk: 15
+  fields: {nome: "GT: PESQUISAS EM FORMA\xC7\xC3O DE PROFESSORES, DIDATICA, CURRICULO
+      PR\xC1TICAS PEDAG\xD3GICAS E TRABALHO DOCENTE"}
+- model: trabalhos.areatema
+  pk: 16
+  fields: {nome: "GT: PESQUISAS EM FUNDAMENTOS DA EDUCA\xC7\xC3O: FILOSOFIA, HIST\xD3RIA,
+      ANTROPOLIA, PSICOLOGIA DA EDUCA\xC7\xC3O E SOCIOLOGIA"}
+- model: trabalhos.areatema
+  pk: 17
+  fields: {nome: "GT: PESQUISAS EM PLANEJAMENTO, GEST\xC3O E POL\xCDTICAS P\xDABLICAS
+      EDUCACIONAIS"}
+- model: trabalhos.areatema
+  pk: 18
+  fields: {nome: "GT: PESQUISAS EM LINGUAGENS, LETRAMENTO E ALFABETIZA\xC7\xC3O"}
+- model: trabalhos.areatema
+  pk: 19
+  fields: {nome: "GT: PESQUISAS EM PEDAGOGIA DA ALTERN\xC2NCIA, PEDAGOGIA ITINERANTE,
+      PEDAGOGIA DA TERRA E PEDAGOGIA SOCIAL"}
+- model: trabalhos.areatema
+  pk: 20
+  fields: {nome: "GT: PESQUISAS EM PR\xC1TICAS FORMATIVAS, ENSINO E PESQUISA EM GEOGRAFIA
+      E CI\xCANCIAS HUMANAS"}
+- model: trabalhos.areatema
+  pk: 21
+  fields: {nome: "GT: PESQUISAS EM TECNOLOGIAS DA INFORMA\xC7\xC3O E COMUNICA\xC7\xC3O
+      E MIDIAS DIGITAIS"}
+- model: trabalhos.areatema
+  pk: 22
+  fields: {nome: "GT: PESQUISAS NA \xC1REA DOS ESTUDOS DO TEXTO E DO DISCURSO"}
+- model: trabalhos.areatema
+  pk: 23
+  fields: {nome: "GT: PESQUISAS EM L\xCDNGUAS E LITERATURAS ESTRANGEIRAS"}
+- model: trabalhos.areatema
+  pk: 24
+  fields: {nome: "PESQUISAS EM TECNOLOGIAS EDUCACIONAIS EM SA\xDADE"}
+- model: trabalhos.areatema
+  pk: 25
+  fields: {nome: "PESQUISAS EM EDUCA\xC7\xC3O DE JOVENS E ADULTOS"}
+- model: trabalhos.areatema
+  pk: 26
+  fields: {nome: "GT: PESQUISAS EM DIN\xC2MICAS TERRITORIAIS, POBREZA E DESIGUALDADE"}
+- model: trabalhos.areatema
+  pk: 27
+  fields: {nome: "PESQUISA EM ENSINO, PESQUISA E CAPACITA\xC7\xC3O DOCENTE EM ADMINISTRA\xC7\xC3O"}
+- model: trabalhos.areatema
+  pk: 28
+  fields: {nome: "GT: PESQUISA EM ENSINO DA M\xDASICA EM DIFERENTES CONTEXTOS"}
+- model: trabalhos.areatema
+  pk: 29
+  fields: {nome: "GT: PESQUISAS E EXPERI\xCANCIAS PEDAG\xD3GICAS EM EDUCA\xC7\xC3O
+      F\xCDSICA"}
+- model: trabalhos.areatema
+  pk: 30
+  fields: {nome: "GT: PESQUISAS EM CRIATIVIDADE E SUBJETIVIDADE NOS CONTEXTOS ESCOLARES
+      E N\xC3O ESCOLARES"}
+- model: trabalhos.areatema
+  pk: 31
+  fields: {nome: "GT: PESQUISAS EM PEDAGOGIAS, CURR\xCDCULOS E POL\xCDTICA DO ENSINO
+      M\xC9DIO"}

@@ -1,0 +1,6 @@
+- model: trabalhos.modalidade
+  pk: 1
+  fields: {nome: "Comunica\xE7\xE3o Oral"}
+- model: trabalhos.modalidade
+  pk: 2
+  fields: {nome: Oficina}

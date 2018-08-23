@@ -1,0 +1,24 @@
+- model: eventos.tipoinscricao
+  pk: 1
+  fields: {nome: "Aluno de Gradua\xE7\xE3o", preco: '60.00'}
+- model: eventos.tipoinscricao
+  pk: 2
+  fields: {nome: "Aluno de P\xF3s-gradua\xE7\xE3o", preco: '80.00'}
+- model: eventos.tipoinscricao
+  pk: 3
+  fields: {nome: "Professor da Educa\xE7\xE3o B\xE1sica e demais profissionais", preco: '80.00'}
+- model: eventos.tipoinscricao
+  pk: 4
+  fields: {nome: "Professores do Ensino Superior", preco: '120.00'}
+- model: eventos.tipoinscricao
+  pk: 5
+  fields: {nome: "Aluno de Gradua\xE7\xE3o (associado AINPGP)", preco: '40.00'}
+- model: eventos.tipoinscricao
+  pk: 6
+  fields: {nome: "Aluno de P\xF3s-gradua\xE7\xE3o (associado AINPGP)", preco: '30.00'}
+- model: eventos.tipoinscricao
+  pk: 7
+  fields: {nome: "Professor da Educa\xE7\xE3o B\xE1sica e demais profissionais (associado AINPGP)", preco: '30.00'}
+- model: eventos.tipoinscricao
+  pk: 8
+  fields: {nome: "Professores do Ensino Superior (associado AINPGP)", preco: '20.00'}
