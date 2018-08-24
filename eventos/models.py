@@ -41,15 +41,18 @@ class TipoInscricao(models.Model):
     nome = models.CharField('nome', max_length=200)
     preco = models.DecimalField(max_digits=10, decimal_places=2,
                                 verbose_name='preço')
+    limite = models.IntegerField(
+        default=0, help_text='0 para ilimitado')
 
     class Meta:
         verbose_name = 'tipo de inscrição'
-        verbose_name_plural = 'tipos de inscrições'
+        verbose_name_plural = 'tipos de inscrição'
 
     def __str__(self):
-        return '%s (R$ %s)' % (
-            self.nome, number_format(self.preco)
-        )
+        if self.preco > 0:
+            return '%s (R$ %s)' % (self.nome,
+                                   number_format(self.preco))
+        return self.nome
 
 
 class Inscricao(models.Model):

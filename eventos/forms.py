@@ -1,3 +1,4 @@
+from django.db.models import F, Q, Count
 from django import forms
 from django.forms import ValidationError
 from django.contrib.auth.models import Group
@@ -36,11 +37,18 @@ class InscricaoForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        tipos = TipoInscricao.objects.annotate(
+            Count('inscricoes')).filter(
+                Q(limite=0) | Q(inscricoes__count__lt=F('limite')))
+        self.fields['tipo'].queryset = tipos
         self.helper = FormHelper(self)
         self.helper.form_tag = False
 
     def clean(self, *args, **kwargs):
         cleaned_data = super().clean(*args, **kwargs)
+        tipo = cleaned_data['tipo']
+        if tipo.limite > 0 and tipo.inscricoes.count() >= tipo.limite:
+            raise ValidationError('Não há mais vagas para %s' % tipo.nome)
         if cleaned_data.get('senha') != cleaned_data.get('confirmar_senha'):
             raise ValidationError('A senha e a confirmção devem ser iguais')
 

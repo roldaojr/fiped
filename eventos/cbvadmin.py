@@ -38,7 +38,7 @@ class AtividadeAdmin(cbvadmin.ModelAdmin):
 
 @cbvadmin.register(TipoInscricao)
 class TipoInscricaoAdmin(cbvadmin.ModelAdmin):
-    list_display = ('nome', 'preco')
+    list_display = ('nome', 'preco', 'limite')
     menu_weight = 4
 
 
