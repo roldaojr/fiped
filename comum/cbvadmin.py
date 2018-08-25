@@ -17,6 +17,7 @@ class EventusDefaultAdmin(DefaultAdmin):
         return [
             MenuItem('Painel', reverse('cbvadmin:dashboard')),
             MenuItem('Configurações', reverse("dynamic_preferences:global"),
+                     check=lambda r: r.user.has_perm('dynamic_preferences.change_globalpreferencemodel'),
                      weight=100)
         ]
 

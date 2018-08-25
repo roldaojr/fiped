@@ -17,7 +17,8 @@ class TrabalhoListView(TableListView):
         user = self.request.user
         qs = super().get_queryset(*args, **kwargs)
 
-        if (user.is_authenticated and user.is_superuser):
+        if (user.is_authenticated and
+                user.has_perm('trabalhos.change_areatema')):
             return qs
 
         if user.has_perm('trabalhos.change_trabalho'):
@@ -30,6 +31,8 @@ class TrabalhoListView(TableListView):
 
 
 class SubmeterTrabalhoView(AddView):
+    default_template = 'trabalhos/trabalho_submeter.html'
+
     def get_context_data(self, **kwargs):
         prefs = global_preferences_registry.manager()
         context = super().get_context_data(**kwargs)
