@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django.utils.timezone import now
 from dynamic_preferences.types import (
     BooleanPreference, IntegerPreference, StringPreference,
@@ -57,7 +58,7 @@ class DataInscricaoEvento(DatePreference):
 
     @property
     def default(self):
-        return now().date()
+        return now().date() - timedelta(days=1)
 
 
 @global_preferences_registry.register

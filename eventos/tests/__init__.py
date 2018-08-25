@@ -24,6 +24,7 @@ class InscricaoTestCase(TestCase):
         resp = self.client.post(reverse('registration_register'),
                                 pariticpante_data)
         self.assertEqual(resp.status_code, 302)
+        self.assertEqual(resp.url, reverse('registration_complete'))
         # testar usuario
         usuario = resp.context['user']
         self.assertEqual(usuario.is_active, False)
