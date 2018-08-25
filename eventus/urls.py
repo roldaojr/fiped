@@ -3,6 +3,7 @@ from django.conf.urls import url
 from django.urls import include
 from django.views.static import serve
 from comum.views import InscreverView
+from eventos.views.pagamento import pagseguro_notification
 import cbvadmin
 
 
@@ -14,7 +15,7 @@ urlpatterns = [
     url(r'^preferences/', include('dynamic_preferences.urls')),
     url(r'^select2/', include('django_select2.urls')),
     url(r'^pagamento/paypal/', include('paypal.standard.ipn.urls')),
-    url(r'^pagamento/pagseguro/', include('pagseguro.urls')),
+    url(r'^pagamento/pagseguro/', pagseguro_notification),
 ]
 
 if settings.DEBUG:

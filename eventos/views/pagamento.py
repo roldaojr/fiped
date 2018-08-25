@@ -1,7 +1,8 @@
+from django.http import HttpResponse
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
-from django.http import Http404
 from django.contrib import messages
-from django_tables2.columns import Column
 from django.views.generic.base import RedirectView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.base import TemplateView
@@ -9,45 +10,7 @@ from paypal.standard.forms import PayPalPaymentsForm
 from pagseguro.api import PagSeguroItem, PagSeguroApi
 from dynamic_preferences.registries import global_preferences_registry
 from cbvadmin.views.mixins import AdminMixin
-from cbvadmin.views.list import TableListView
-from cbvadmin.views.edit import EditView
-from cbvadmin.tables import table_factory
-from .filters import InscricaoFilter
-from .forms import EscolherAtividadesForm
-from .models import Inscricao
-
-
-class ImprimirLista(TableListView):
-    filterset_class = InscricaoFilter
-    list_display = ('nome_completo', 'nome_social', 'cpf', 'email',
-                    'tipo', 'alojamento', 'deficiencia')
-    template_name_suffix = '_print_list'
-    paginate_by = False
-
-    def get_table_class(self):
-        extra = {
-            'nome_completo': Column(accessor='usuario.nome_completo'),
-            'nome_social': Column(accessor='usuario.nome_social'),
-            'cpf': Column(accessor='usuario.cpf'),
-            'email': Column(accessor='usuario.email')
-        }
-        return table_factory(self.model, self.list_display, action=None,
-                             extra=extra)
-
-
-class EscolherAtividade(EditView):
-    form_class = EscolherAtividadesForm
-    default_template = 'eventos/atividade_escolher.html'
-    permission_required = []
-
-    def get_object(self):
-        try:
-            return self.request.user.inscricao
-        except Inscricao.DoesNotExist:
-            raise Http404
-
-    def get_success_url(self):
-        return reverse('cbvadmin:eventos_atividade_escolher')
+from ..models import Inscricao
 
 
 class VisualizarPagamento(AdminMixin, TemplateView):
@@ -76,10 +39,6 @@ class VisualizarPagamento(AdminMixin, TemplateView):
         return context
 
 
-class CheckoutException(Exception):
-    pass
-
-
 class InscricaoPagarPagSeguro(SingleObjectMixin, RedirectView):
     def get_redirect_url(self, **kwargs):
         self.object = self.get_object()
@@ -103,3 +62,22 @@ class InscricaoPagarPagSeguro(SingleObjectMixin, RedirectView):
             messages.error(self.request,
                            'Erro PagSeguro: %s' % data['message'])
         return reverse('cbvadmin:pagar')
+
+
+@csrf_exempt
+@require_http_methods(['POST'])
+def pagseguro_notification(request):
+    notification_code = request.POST.get('notificationCode', None)
+    notification_type = request.POST.get('notificationType', None)
+
+    if notification_code and notification_type == 'transaction':
+        prefs = global_preferences_registry.manager()
+        pagseguro_api = PagSeguroApi(
+            pagseguro_email=prefs['pagamento__pagseguro_email'],
+            pagseguro_token=prefs['pagamento__pagseguro_token'])
+        response = pagseguro_api.get_notification(notification_code)
+
+        if response.status_code == 200:
+            return HttpResponse('Notificação recebida com sucesso.')
+
+    return HttpResponse('Notificação inválida.', status=400)

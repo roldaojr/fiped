@@ -5,8 +5,8 @@ from cbvadmin.options import SimpleAdmin
 from comum.views import DetailView
 from .models import Atividade, Inscricao, TipoInscricao
 from .filters import InscricaoFilter
-from .views import (ImprimirLista, EscolherAtividade, VisualizarPagamento,
-                    InscricaoPagarPagSeguro)
+from .views import ImprimirLista, EscolherAtividade
+from .views.pagamento import VisualizarPagamento, InscricaoPagarPagSeguro
 
 
 @cbvadmin.register(Atividade)

@@ -104,9 +104,9 @@ def atualizar_pagamento_inscricao_paypal(sender, **kwargs):
         inscricao.save()
 
 
-def atualizar_pagamento_insscricao_pagseguro(sender, transation, **kwargs):
-    if transation.reference:
-        inscricao = Inscricao.objects.get(pk=transation.reference)
+def atualizar_pagamento_insscricao_pagseguro(sender, transaction, **kwargs):
+    if transaction['reference']:
+        inscricao = Inscricao.objects.get(pk=transaction['reference'])
         inscricao.pagamento = Inscricao.Pagamento.Pago
         inscricao.save()
 
