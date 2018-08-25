@@ -24,6 +24,7 @@ class EventusDefaultAdmin(DefaultAdmin):
 @cbvadmin.register(Usuario)
 class UsuarioAdmin(cbvadmin.ModelAdmin):
     list_display = ('nome_completo', 'nome_social', 'email', 'is_active')
+    filter_fields = ('nome_completo', 'nome_social', 'email')
     form_class = UsuarioForm
     menu_weight = 10
 
