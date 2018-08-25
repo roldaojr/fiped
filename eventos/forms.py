@@ -67,6 +67,12 @@ class InscricaoForm(forms.ModelForm):
         return usuario
 
 
+class EditarInscricaoForm(forms.ModelForm):
+    class Meta:
+        model = Inscricao
+        exclude = ('atividades',)
+
+
 class EscolherAtividadesForm(forms.ModelForm):
     class Meta:
         model = Inscricao
