@@ -54,6 +54,11 @@ class InscricaoAdmin(cbvadmin.ModelAdmin):
     form_class = EditarInscricaoForm
     menu_weight = 3
 
+    def has_permission(self, request, action, obj=None):
+        if action == 'imprimir':
+            action = 'view'
+        return super().has_permission(request, action, obj)
+
     def get_actions(self):
         actions = super().get_actions()
         del actions['add']
