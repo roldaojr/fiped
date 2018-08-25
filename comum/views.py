@@ -1,3 +1,4 @@
+from django.db.models import Q
 from datetime import date
 from django.utils.translation import ugettext_lazy as _
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
@@ -46,7 +47,7 @@ class Dashboard(DashboardView):
     def trabalhos_counters(self, user=None):
         if user:
             trabalhos = Trabalho.objects.filter(
-                area_tematica__avaliadores__in=[user])
+                area_tema__avaliadores__in=[user])
         else:
             trabalhos = Trabalho.objects.all()
 
@@ -80,12 +81,22 @@ class Dashboard(DashboardView):
             },
         ]
 
+    def participante_trabalhos(self):
+        user = self.request.user
+        trabalhos = Trabalho.objects.filter(
+            Q(autor=user) | Q(coautor1=user) |
+            Q(coautor2=user) | Q(coautor3=user))
+        return trabalhos
+
     def get_context_data(self, *args, **kwargs):
-        context = {'counters': []}
+        context = {
+            'trabalhos': self.participante_trabalhos(),
+            'counters': []
+        }
         user = self.request.user
 
         if user.has_perm('trabalhos.change_trabalho'):
-            if user.has_perm('trabalhos.edit_area_tema'):
+            if user.has_perm('trabalhos.change_areatema'):
                 context['counters'] += self.trabalhos_counters()
             else:
                 context['counters'] += self.trabalhos_counters(user)

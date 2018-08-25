@@ -33,10 +33,10 @@
     <div class="content">
       <div class="header">Trabalhos</div>
         <div class="ui celled big list">
-          {% for trabalho in request.user.trabalhos %}
+          {% for trabalho in trabalhos %}
           <div class="item">
             <div class="header">{{ trabalho.titulo }}</div>
-            {{ trabalho.areatema }}
+            {{ trabalho.area_tema }}
             </div>
           {% empty %}
           <div class="item">
@@ -46,13 +46,13 @@
           {% endfor %}
         </div>
      </div>
-     {% if not request.user.trabalhos %}
+     {% if not trabalhos %}
      <a class="ui bottom attached button" href="{% url 'cbvadmin:trabalhos_trabalho_add' %}">
        <i class="send icon"></i> Submeter trabalho
      </a>
      {% else %}
      <div class="center aligned extra content">
-       Já foram submetido trabalhos
+       Já foi submetido trabalho
      </div>
      {% endif %}
   </div>
