@@ -50,6 +50,7 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
 
     def get_menu(self):
         menus = super().get_menu()
+        menus[0].title = 'Avaliar trabalhos'
         menus.append(
             MenuItem('Submeter trabalho',
                      reverse(self.urls['add']),

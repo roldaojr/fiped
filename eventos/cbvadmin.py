@@ -7,6 +7,7 @@ from .models import Atividade, Inscricao, TipoInscricao
 from .filters import InscricaoFilter
 from .views import ImprimirLista, EscolherAtividade
 from .views.pagamento import VisualizarPagamento, InscricaoPagarPagSeguro
+from .forms import EditarInscricaoForm
 
 
 @cbvadmin.register(Atividade)
@@ -50,7 +51,13 @@ class InscricaoAdmin(cbvadmin.ModelAdmin):
     detail_view_class = DetailView
     default_object_action = 'detail'
     pagar_pagseguro_view_class = InscricaoPagarPagSeguro
+    form_class = EditarInscricaoForm
     menu_weight = 3
+
+    def has_permission(self, request, action, obj=None):
+        if action == 'imprimir':
+            action = 'view'
+        return super().has_permission(request, action, obj)
 
     def get_actions(self):
         actions = super().get_actions()

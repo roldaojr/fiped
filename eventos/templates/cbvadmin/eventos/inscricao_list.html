@@ -28,11 +28,13 @@
       </div>
     </div>
   {% endif %}
+  {% if admin.urls.imprimir %}
     <div class="right item">
       <a href="{% url admin.urls.imprimir %}?{{ request.META.QUERY_STRING }}" target="_blank" class="ui secondary button">
           <i class="print icon"></i>Imprimir
       </a>
     </div>
+  {% endif %}
   {% if admin.urls.add %}
     <div class="right item">
       <a href="{% url admin.urls.add %}" class="ui primary button">

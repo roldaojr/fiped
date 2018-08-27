@@ -17,6 +17,7 @@ class EventusDefaultAdmin(DefaultAdmin):
         return [
             MenuItem('Painel', reverse('cbvadmin:dashboard')),
             MenuItem('Configurações', reverse("dynamic_preferences:global"),
+                     check=lambda r: r.user.has_perm('dynamic_preferences.change_globalpreferencemodel'),
                      weight=100)
         ]
 
@@ -24,6 +25,7 @@ class EventusDefaultAdmin(DefaultAdmin):
 @cbvadmin.register(Usuario)
 class UsuarioAdmin(cbvadmin.ModelAdmin):
     list_display = ('nome_completo', 'nome_social', 'email', 'is_active')
+    filter_fields = ('nome_completo', 'nome_social', 'email')
     form_class = UsuarioForm
     menu_weight = 10
 
