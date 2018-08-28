@@ -84,6 +84,7 @@ DATABASES = {
     'default': env.db(default='sqlite:///db.sqlite3')
 }
 
+DEFAULT_FROM_EMAIL = 'nao-responder@xfiped.com.br'
 EMAIL_CONFIG = env.email_url('EMAIL_URL', default='consolemail://')
 vars().update(EMAIL_CONFIG)
 
