@@ -29,7 +29,7 @@ class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ('nome_completo', 'nome_social', 'email', 'cpf',
-                  'groups')
+                  'is_active', 'groups')
         widgets = {
             'groups': GroupsSelectWidget
         }

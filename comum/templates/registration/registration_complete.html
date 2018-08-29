@@ -1,0 +1,14 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Activation email sent" %}{% endblock %}
+
+{% block content %}
+<p>
+  Enviamos um e-mail com instruções para a ativação da sua conta.
+  Verifique seu e-mail para completar o processo de registro.
+</p>
+<p>
+  Caso não tenha recebido o e-mail, <a href="{% url 'registration_resend_activation' %}">clique aqui reenviar e-mail de ativação da conta</a>
+</p>
+{% endblock %}
