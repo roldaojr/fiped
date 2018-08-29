@@ -1,5 +1,6 @@
 from django.urls import reverse
 from menu import MenuItem
+from dynamic_preferences.registries import global_preferences_registry
 import cbvadmin
 from cbvadmin.options import SimpleAdmin
 from comum.views import DetailView
@@ -27,12 +28,17 @@ class AtividadeAdmin(cbvadmin.ModelAdmin):
         return actions
 
     def get_menu(self):
+        def pode_escolher_atividades(request):
+            prefs = global_preferences_registry.manager()
+            return (prefs['evento__inscricao_atividade'] and
+                    hasattr(request.user, 'inscricao'))
+
         menus = super().get_menu()
         menus.append(
             MenuItem('Escolher atividades',
                      reverse(self.urls['escolher']),
                      weight=1, icon=self.menu_icon, submenu=False,
-                     check=lambda r: bool(hasattr(r.user, 'inscricao')))
+                     check=pode_escolher_atividades)
         )
         return menus
 
