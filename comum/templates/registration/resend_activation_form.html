@@ -1,0 +1,12 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block title %}{% trans "Resend Activation Email" %}{% endblock %}
+
+{% block content %}
+<form method="post" action="" class="ui form">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <input class="ui primary button" type="submit" value="{% trans 'Submit' %}" />
+</form>
+{% endblock %}

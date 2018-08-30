@@ -62,6 +62,14 @@ class DataInscricaoEvento(DatePreference):
 
 
 @global_preferences_registry.register
+class InscricaoAtividadeAtivo(BooleanPreference):
+    section = evento
+    name = 'inscricao_atividade'
+    verbose_name = 'Ativar inscrições em atividades'
+    default = False
+
+
+@global_preferences_registry.register
 class InscricaoAtividadeMax(IntegerPreference):
     section = evento
     name = 'inscricao_atividade_max'

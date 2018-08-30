@@ -48,6 +48,10 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
             return TrabalhoChangeForm
         return super().get_form_class(request, obj=None, **kwargs)
 
+    def get_success_url(self, view=None):
+        if not self.has_permission(view.request, self.default_action):
+            return reverse('cbvadmin:dashboard')
+
     def get_menu(self):
         menus = super().get_menu()
         menus[0].title = 'Avaliar trabalhos'

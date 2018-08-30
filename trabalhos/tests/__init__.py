@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 from comum.tests.factories import UsuarioFactory
 from .factories import TrabalhoFactory, AreaTemaFactory, ModalidadeFactory
-from ..models import Trabalho, AreaTema
+from ..models import Trabalho
 import factory
 
 
@@ -27,6 +27,9 @@ class SubmeterTrabalhoTestCase(TestCase):
 
         trabalho = Trabalho.objects.last()
         self.assertEqual(trabalho.situacao, Trabalho.Situacao.Pendente)
+
+        resp = self.client.get(resp.url)
+        self.assertEqual(resp.status_code, 200)
 
 
 class AvaliarTrabalhoTestCase(TestCase):
