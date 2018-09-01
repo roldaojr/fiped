@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'fiped',
     'eventos',
     'trabalhos',
+    'oficinas',
     'comum',
     'cbvadmin',
     'cbvadmin_semantic_ui',

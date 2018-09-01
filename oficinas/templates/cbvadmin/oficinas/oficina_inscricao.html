@@ -1,0 +1,56 @@
+{% extends 'cbvadmin/semantic-ui/base_site.html' %}
+
+{% block title %}Inscrever-se em oficinas{% endblock %}
+
+{% block content %}
+{% if form.non_field_errors %}
+<div class="ui error message">
+  {% for error in form.non_field_errors %}
+  {{ error }}
+  {% endfor %}
+</div>
+{% else %}
+<div class="ui warning message">
+  Você deve selecionar no máximo {{ global_preferences.oficinas__inscricao_max }} oficina(s)
+</div>
+{% endif %}
+<form method="post" class="ui form">
+  {% csrf_token %}
+  <button type="submit" class="ui primary button">Salvar</button>
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Oficina</th>
+        <th>Ministrante</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for choice in form.oficinas.field.queryset %}
+      <tr>
+        <td class="collapsing">
+          <div class="ui fitted toggle checkbox">
+          {% spaceless %}
+          <input name="oficinas" id="id_oficinas_{{ choice.pk }}"
+          value="{{ choice.pk }}" type="checkbox"
+          {% if choice.pk in form.oficinas.value or choice.pk|slugify in form.oficinas.value %}
+          checked="checked"
+          {% endif %}
+          >
+          <label></label>
+          {% endspaceless %}
+          </div>
+        </td>
+        <td>{{ choice.nome }}</td>
+        <td>{{ choice.ministrante }}</td>
+      </tr>
+    {% empty %}
+    <tr>
+      <td colspan="3">Nenhuma oficina disponível</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit" class="ui primary button">Salvar</button>
+</form>
+{% endblock %}
