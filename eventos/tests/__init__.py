@@ -1,10 +1,8 @@
-import random
 from django.forms.models import model_to_dict
 from django.contrib.auth.models import Group
 from django.test import TestCase
 from django.urls import reverse
-from .factories import (TipoInscricaoFactory, InscricaoFactory,
-                        AtividadeFactory)
+from .factories import TipoInscricaoFactory, InscricaoFactory
 import factory
 
 
@@ -38,17 +36,3 @@ class InscricaoTestCase(TestCase):
             Group.objects.get(name='Participante'),
             usuario.groups.all()
         )
-
-
-class AtividadeTestCase(TestCase):
-    def setUp(self):
-        TipoInscricaoFactory.create()
-        inscricao = InscricaoFactory.create()
-        self.client.force_login(inscricao.usuario)
-        self.atividades = AtividadeFactory.create_batch(20, horarios=True)
-
-    def test_inscrever_atividade(self):
-        atividade = random.choice(self.atividades)
-        resp = self.client.post(reverse('cbvadmin:eventos_atividade_escolher'),
-                                {'atividades': [atividade.pk]})
-        self.assertEqual(resp.status_code, 302)

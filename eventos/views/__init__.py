@@ -1,12 +1,7 @@
-from django.urls import reverse
-from django.http import Http404
 from django_tables2.columns import Column
 from cbvadmin.views.list import TableListView
-from cbvadmin.views.edit import EditView
 from cbvadmin.tables import table_factory
 from ..filters import InscricaoFilter
-from ..forms import EscolherAtividadesForm
-from ..models import Inscricao
 
 
 class ImprimirLista(TableListView):
@@ -25,18 +20,3 @@ class ImprimirLista(TableListView):
         }
         return table_factory(self.model, self.list_display, action=None,
                              extra=extra)
-
-
-class EscolherAtividade(EditView):
-    form_class = EscolherAtividadesForm
-    default_template = 'eventos/atividade_escolher.html'
-    permission_required = []
-
-    def get_object(self):
-        try:
-            return self.request.user.inscricao
-        except Inscricao.DoesNotExist:
-            raise Http404
-
-    def get_success_url(self):
-        return reverse('cbvadmin:eventos_atividade_escolher')
