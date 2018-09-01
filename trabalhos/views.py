@@ -4,12 +4,8 @@ from django.views.generic.detail import SingleObjectMixin
 from django.utils.timezone import now
 from dynamic_preferences.registries import global_preferences_registry
 from cbvadmin.views.edit import AddView
-from comum.views import DetailView, BasicView
+from comum.views import BasicView
 from cbvadmin.views.list import TableListView
-
-
-class TrabalhoDetalhes(DetailView):
-    pass
 
 
 class TrabalhoListView(TableListView):
@@ -42,7 +38,7 @@ class SubmeterTrabalhoView(AddView):
         return context
 
 
-class AvaliarTrabalhoView(SingleObjectMixin, BasicView):
+class AvaliarView(SingleObjectMixin, BasicView):
     def get(self, request, *args, **kwargs):
         success_url = self.get_success_url()
         return HttpResponseRedirect(success_url)

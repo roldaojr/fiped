@@ -1,10 +1,10 @@
 from django.urls import reverse
 from menu import MenuItem
 import cbvadmin
+from comum.views import DetailView
 from .forms import TrabalhoChangeForm, TrabalhoAddForm, AreaTemaForm
 from .models import Modalidade, AreaTema, Trabalho
-from .views import (TrabalhoDetalhes, TrabalhoListView,
-                    SubmeterTrabalhoView, AvaliarTrabalhoView)
+from .views import TrabalhoListView, SubmeterTrabalhoView, AvaliarView
 
 
 @cbvadmin.register(Modalidade)
@@ -27,8 +27,8 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
     filter_fields = ('titulo', 'modalidade', 'area_tema', 'situacao')
     list_view_class = TrabalhoListView
     add_view_class = SubmeterTrabalhoView
-    detail_view_class = TrabalhoDetalhes
-    avaliar_view_class = AvaliarTrabalhoView
+    detail_view_class = DetailView
+    avaliar_view_class = AvaliarView
     form_class = TrabalhoAddForm
     default_object_action = 'detail'
     menu_weight = 2
@@ -51,6 +51,7 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
     def get_success_url(self, view=None):
         if not self.has_permission(view.request, self.default_action):
             return reverse('cbvadmin:dashboard')
+        return super().get_success_url(view)
 
     def get_menu(self):
         menus = super().get_menu()
@@ -58,7 +59,7 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
         menus.append(
             MenuItem('Submeter trabalho',
                      reverse(self.urls['add']),
-                     weight=2, icon=self.menu_icon, submenu=False,
+                     weight=3, icon=self.menu_icon, submenu=False,
                      check=lambda r: r.user.has_perm('trabalhos.add_trabalho'))
         )
         return menus
