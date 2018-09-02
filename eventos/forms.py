@@ -3,6 +3,7 @@ from django import forms
 from django.forms import ValidationError
 from django.contrib.auth.models import Group
 from crispy_forms.helper import FormHelper
+from localflavor.br.forms import BRStateChoiceField
 from comum.models import Usuario
 from .models import Inscricao, TipoInscricao
 
@@ -18,7 +19,7 @@ class InscricaoForm(forms.ModelForm):
     endereco = forms.CharField(label='Endereço')
     numero = forms.CharField()
     cidade = forms.CharField()
-    uf = forms.CharField(label='UF')
+    uf = BRStateChoiceField(label='UF')
     titulacao = forms.CharField(label='Titulação')
     instituicao = forms.CharField(label='Filiação institucional')
     tipo = forms.ModelChoiceField(queryset=TipoInscricao.objects.all(),
