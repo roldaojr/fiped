@@ -37,20 +37,3 @@ class HorarioFactory(factory.django.DjangoModelFactory):
     data = factory.Faker('future_date', end_date="+30d")
     hora_inicial = factory.Faker('time_object')
     hora_final = factory.Faker('time_object')
-
-
-class AtividadeFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Atividade
-
-    nome = factory.Faker('text', max_nb_chars=100)
-    local = factory.Faker('text', max_nb_chars=50)
-    tipo = factory.Faker('text', max_nb_chars=20)
-
-    @factory.post_generation
-    def horarios(self, create, extracted, **kwargs):
-        if not create:
-            return
-
-        HorarioFactory.create_batch(
-            random.randint(1, 2), atividade=self)

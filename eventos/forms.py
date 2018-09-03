@@ -3,7 +3,7 @@ from django import forms
 from django.forms import ValidationError
 from django.contrib.auth.models import Group
 from crispy_forms.helper import FormHelper
-from dynamic_preferences.registries import global_preferences_registry
+from localflavor.br.forms import BRStateChoiceField
 from comum.models import Usuario
 from .models import Inscricao, TipoInscricao
 
@@ -19,7 +19,7 @@ class InscricaoForm(forms.ModelForm):
     endereco = forms.CharField(label='Endereço')
     numero = forms.CharField()
     cidade = forms.CharField()
-    uf = forms.CharField(label='UF')
+    uf = BRStateChoiceField(label='UF')
     titulacao = forms.CharField(label='Titulação')
     instituicao = forms.CharField(label='Filiação institucional')
     tipo = forms.ModelChoiceField(queryset=TipoInscricao.objects.all(),
@@ -71,20 +71,3 @@ class EditarInscricaoForm(forms.ModelForm):
     class Meta:
         model = Inscricao
         exclude = ('atividades',)
-
-
-class EscolherAtividadesForm(forms.ModelForm):
-    class Meta:
-        model = Inscricao
-        fields = ('atividades',)
-
-    def clean(self):
-        cleaned_data = super().clean()
-        prefs = global_preferences_registry.manager()
-
-        if (len(cleaned_data['atividades']) >
-                prefs['evento__inscricao_atividade_max']):
-            raise ValidationError(
-                'Você deve selecionar no máximo %d atividade(s)' %
-                prefs['evento__inscricao_atividade_max'])
-        return cleaned_data
