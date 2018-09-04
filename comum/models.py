@@ -42,7 +42,7 @@ class Usuario(PermissionsMixin, AbstractBaseUser):
 
     @property
     def is_staff(self):
-        return self.is_superuser
+        return True
 
     def __str__(self):
         if self.nome_completo:

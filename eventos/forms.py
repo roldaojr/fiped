@@ -12,16 +12,18 @@ class InscricaoForm(forms.ModelForm):
     possui_deficiencia = forms.BooleanField(
         label='Possui deficiência ou outra necessidade educacional',
         required=False)
-    deficiencia = forms.CharField(label='Especifique', required=False)
+    deficiencia = forms.CharField(
+        label='Especifique', required=False, max_length=300)
     alojamento = forms.BooleanField(
         label='Durante o evento irá necessitar de alojamento estudantil',
         required=False)
-    endereco = forms.CharField(label='Endereço')
-    numero = forms.CharField()
-    cidade = forms.CharField()
+    endereco = forms.CharField(label='Endereço', max_length=300)
+    numero = forms.CharField(max_length=10)
+    cidade = forms.CharField(max_length=50)
     uf = BRStateChoiceField(label='UF')
-    titulacao = forms.CharField(label='Titulação')
-    instituicao = forms.CharField(label='Filiação institucional')
+    titulacao = forms.CharField(label='Titulação', max_length=50)
+    instituicao = forms.CharField(label='Filiação institucional',
+                                  max_length=100)
     tipo = forms.ModelChoiceField(queryset=TipoInscricao.objects.all(),
                                   label='Categoria')
     senha = forms.CharField(widget=forms.PasswordInput)
