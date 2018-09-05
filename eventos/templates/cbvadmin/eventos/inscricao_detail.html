@@ -80,5 +80,11 @@
     <td>Necessita de alojamento estudantil</td>
     <td>{{ object.alojamento|yesno:'Sim,Não' }}</td>
   </tr>
+  <tr>
+    <td>Pagamento</td>
+    <td class="{{ inscricao.pagamento|yesno:'positive,negative'}}">
+      {{ inscricao.get_pagamento_display }}
+    </td>
+  </tr>
 </table>
 {% endblock %}
