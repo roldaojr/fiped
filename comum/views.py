@@ -1,3 +1,4 @@
+from django.shortcuts import Http404
 from django.db.models import Q
 from datetime import date
 from django.utils.translation import ugettext_lazy as _
@@ -41,6 +42,16 @@ class EditWithInlinesView(PermissionRequiredMixin, AdminMixin, FormMixin,
                           UpdateWithInlinesView):
     default_template = 'change_form.html'
     success_message = _('The {name} \"{obj}\" was changed successfully.')
+
+
+class MinhaInscricao(DetailView):
+    model = Inscricao
+
+    def get_object(self):
+        if hasattr(self.request.user, 'inscricao'):
+            return self.request.user.inscricao
+        else:
+            raise Http404
 
 
 class Dashboard(DashboardView):
