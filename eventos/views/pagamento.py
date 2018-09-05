@@ -25,7 +25,7 @@ class VisualizarPagamento(AdminMixin, TemplateView):
                 'currency_code': 'BRL',
                 'business': prefs['pagamento__paypal_email'],
                 'amount': inscricao.tipo.preco,
-                'item_name': inscricao.tipo.nome,
+                'item_name': inscricao.valor,
                 'invoice': inscricao.id,
                 'notify_url': self.request.build_absolute_uri(
                     reverse('paypal-ipn')),
@@ -52,10 +52,9 @@ class InscricaoPagarPagSeguro(SingleObjectMixin, RedirectView):
             api.add_item(PagSeguroItem(
                 id='1',
                 description=self.object.tipo.nome,
-                amount=self.object.tipo.preco,
+                amount=self.object.valor,
                 quantity=1
             ))
-            print(api.redirect_url)
             data = api.checkout()
             if data['success']:
                 return data['redirect_url']
