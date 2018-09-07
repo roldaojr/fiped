@@ -1,6 +1,13 @@
+from django.shortcuts import redirect
+from django.forms import modelform_factory
+from django.shortcuts import Http404, reverse
 from django_tables2.columns import Column
+from extra_views.generic import GenericInlineFormSet
+from attachments.models import Attachment
 from cbvadmin.views.list import TableListView
 from cbvadmin.tables import table_factory
+from comum.views import EditWithInlinesView
+from ..models import Inscricao
 from ..filters import InscricaoFilter
 
 
@@ -20,3 +27,37 @@ class ImprimirLista(TableListView):
         }
         return table_factory(self.model, self.list_display, action=None,
                              extra=extra)
+
+
+class AnexoInline(GenericInlineFormSet):
+    model = Attachment
+    fields = ['attachment_file']
+    factory_kwargs = {'ct_field': 'content_type',
+                      'fk_field': 'object_id', 'extra': 3}
+
+
+class AnexarArquivoView(EditWithInlinesView):
+    default_template = 'anexar_arquivos.html'
+    model = Inscricao
+    inlines = [AnexoInline]
+
+    def get_object(self):
+        if hasattr(self.request.user, 'inscricao'):
+            return self.request.user.inscricao
+        else:
+            raise Http404
+
+    def get_form_class(self, *args, **kwargs):
+        return modelform_factory(Inscricao, fields=[])
+
+    def get_success_url(self):
+        return reverse('cbvadmin:minha_inscricao')
+
+    def forms_valid(self, form, inlines):
+        self.object = form.save()
+        for formset in inlines:
+            object_list = formset.save(commit=False)
+            for obj in object_list:
+                obj.creator = self.request.user
+                obj.save()
+        return redirect(self.get_success_url())

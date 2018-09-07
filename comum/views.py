@@ -45,6 +45,7 @@ class EditWithInlinesView(PermissionRequiredMixin, AdminMixin, FormMixin,
 
 
 class MinhaInscricao(DetailView):
+    template_name = 'comum/minha_inscricao.html'
     model = Inscricao
 
     def get_object(self):
