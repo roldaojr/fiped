@@ -1,4 +1,4 @@
-from decimal import Decimal, Context as DecimalContext
+from decimal import Decimal
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.formats import date_format, time_format, number_format
@@ -41,8 +41,10 @@ class Horario(models.Model):
 
 class TipoInscricao(models.Model):
     nome = models.CharField('nome', max_length=200)
-    preco = models.DecimalField(max_digits=10, decimal_places=2,
-                                verbose_name='preço')
+    preco = models.DecimalField(
+        max_digits=10, decimal_places=2, verbose_name='preço')
+    validar = models.BooleanField(
+        default=False, help_text='Validar inscrição desse tipo')
     limite = models.IntegerField(
         default=0, help_text='0 para ilimitado')
 
@@ -88,6 +90,7 @@ class Inscricao(models.Model):
     certificado = models.BooleanField(default=False, editable=False)
     atividades = models.ManyToManyField(Atividade, related_name='inscricoes',
                                         blank=True)
+    validado = models.BooleanField(default=True)
     pagamento = models.IntegerField(choices=Pagamento.choices,
                                     default=Pagamento.Pendente)
     desconto = models.IntegerField(

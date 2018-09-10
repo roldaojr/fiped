@@ -1,12 +1,13 @@
 from django.shortcuts import redirect
 from django.forms import modelform_factory
 from django.shortcuts import Http404, reverse
+from django.views.generic.detail import SingleObjectMixin
 from django_tables2.columns import Column
 from extra_views.generic import GenericInlineFormSet
 from attachments.models import Attachment
 from cbvadmin.views.list import TableListView
 from cbvadmin.tables import table_factory
-from comum.views import EditWithInlinesView
+from comum.views import EditWithInlinesView, BasicView
 from ..models import Inscricao
 from ..filters import InscricaoFilter
 
@@ -61,3 +62,17 @@ class AnexarArquivoView(EditWithInlinesView):
                 obj.creator = self.request.user
                 obj.save()
         return redirect(self.get_success_url())
+
+
+class ValidarInscricaoView(SingleObjectMixin, BasicView):
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.validado = bool(request.GET.get('validado'))
+        self.object.save()
+        return redirect(self.get_success_url())
+
+    def post(self, request, *args, **kwargs):
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse(self.admin.urls['detail'], args=[self.kwargs['pk']])

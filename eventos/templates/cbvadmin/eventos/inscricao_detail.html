@@ -15,14 +15,37 @@
 <div class="ui secondary mobile hidden menu">
   <div class="ui right item">
     {% if admin.urls.edit %}
-    <a href="{% url admin.urls.edit object.pk %}" class="ui primary button">
-      <i class="pencil icon"></i> Alterar
-    </a>
+      {% if object.tipo.validar %}
+      {% if object.validado %}
+      <a href="{% url admin.urls.validar object.pk %}?validado=0" class="ui basic negative button">
+        <i class="thumbs up outline icon"></i> Não validar
+      </a>
+      {% else %}
+      <a href="{% url admin.urls.validar object.pk %}?validado=1" class="ui green button">
+        <i class="thumbs up icon"></i> Validar
+      </a>
+      {% endif %}
+      {% endif %}
+      <a href="{% url admin.urls.edit object.pk %}" class="ui primary button">
+        <i class="pencil icon"></i> Alterar
+      </a>
     {% endif %}
   </div>
 </div>
 {% endblock %}
 <table class="ui definition table">
+  <tr>
+    <td>Validado</td>
+    <td class="{{ inscricao.validado|yesno:'positive,negative'}}">
+      {{ object.validado|yesno:'Sim,Não' }}
+    </td>
+  </tr>
+  <tr>
+    <td>Pagamento</td>
+    <td class="{{ inscricao.pagamento|yesno:'positive,negative'}}">
+      {{ inscricao.get_pagamento_display }}
+    </td>
+  </tr>
   <tr>
     <td>Nome completo</td>
     <td>{{ object.usuario.nome_completo }}</td>
@@ -78,12 +101,6 @@
   <tr>
     <td>Necessita de alojamento estudantil</td>
     <td>{{ object.alojamento|yesno:'Sim,Não' }}</td>
-  </tr>
-  <tr>
-    <td>Pagamento</td>
-    <td class="{{ inscricao.pagamento|yesno:'positive,negative'}}">
-      {{ inscricao.get_pagamento_display }}
-    </td>
   </tr>
   <tr>
     <td>Anexos</td>

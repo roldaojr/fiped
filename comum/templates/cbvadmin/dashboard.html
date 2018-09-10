@@ -10,14 +10,20 @@
       <table class="ui table">
         <tr>
           <td>{{ inscricao.tipo }}</td>
+
+          {% if inscricao.validado %}
           {% if inscricao.tipo.preco > 0 %}
           <td class="{{ inscricao.pagamento|yesno:'positive,negative'}}">{{ inscricao.get_pagamento_display }}</td>
           {% else %}
           <td class="positive">Isento</td>
           {% endif %}
+          {% else %}
+          <td class="negative">Não validada</td>
+          {% endif %}
         </tr>
       </table>
      </div>
+     {% if inscricao.validado %}
      {% if inscricao.pagamento != 1 and inscricao.tipo.preco > 0 %}
      <a class="ui bottom attached button" href="{% url 'cbvadmin:pagar' %}">
        <i class="usd icon"></i> Pagar
@@ -25,6 +31,11 @@
      {% else %}
      <div class="center aligned extra content">
        Inscrição paga
+     </div>
+     {% endif %}
+     {% else %}
+     <div class="center aligned extra content">
+       Inscrição não validada
      </div>
      {% endif %}
   </div>

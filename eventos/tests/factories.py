@@ -1,7 +1,7 @@
 import random
 import factory
 from comum.tests.factories import UsuarioFactory
-from ..models import Inscricao, TipoInscricao, Atividade, Horario
+from ..models import Inscricao, TipoInscricao, Horario
 
 
 class TipoInscricaoFactory(factory.django.DjangoModelFactory):
