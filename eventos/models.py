@@ -1,4 +1,6 @@
+from decimal import Decimal, Context as DecimalContext
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.formats import date_format, time_format, number_format
 from djchoices import DjangoChoices, ChoiceItem
 from paypal.standard.models import ST_PP_COMPLETED
@@ -88,10 +90,20 @@ class Inscricao(models.Model):
                                         blank=True)
     pagamento = models.IntegerField(choices=Pagamento.choices,
                                     default=Pagamento.Pendente)
+    desconto = models.IntegerField(
+        default=0, validators=[
+            MaxValueValidator(100),
+            MinValueValidator(0)
+        ])
 
     class Meta:
         verbose_name = 'inscrição'
         verbose_name_plural = 'inscrições'
+
+    @property
+    def valor(self):
+        valor = (1 - self.desconto / 100) * float(self.tipo.preco)
+        return Decimal(valor).quantize(Decimal('.01'))
 
 
 def atualizar_pagamento_inscricao_paypal(sender, **kwargs):

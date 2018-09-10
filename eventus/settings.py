@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'registration',
     'sfp',
     'dynamic_preferences',
+    'attachments',
     'paypal.standard.ipn',
     'pagseguro',
     'django_select2',
@@ -116,9 +117,11 @@ REGISTRATION_EMAIL_HTML = True
 REGISTRATION_FORM = 'eventos.forms.InscricaoForm'
 INCLUDE_REGISTER_URL = False
 INCLUDE_AUTH_URLS = False
-
 # static file pages
 SFP_HANDLE_HOMEPAGE = True
+# attachments
+DELETE_ATTACHMENTS_FROM_DISK = True
+FILE_UPLOAD_MAX_SIZE = 5 * 1024 * 1024
 
 # Paypal
 PAYPAL_TEST = env('PAYPAL_TEST', default=False)

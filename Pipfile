@@ -24,6 +24,7 @@ factory-boy = "*"
 django-sfp = "*"
 django-paypal = "*"
 "django-pagseguro2" = "*"
+django-attachments = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"

@@ -14,6 +14,8 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^preferences/', include('dynamic_preferences.urls')),
     url(r'^select2/', include('django_select2.urls')),
+    url(r'^attachments/', include('attachments.urls',
+                                  namespace='attachments')),
     url(r'^pagamento/paypal/', include('paypal.standard.ipn.urls')),
     url(r'^pagamento/pagseguro/', pagseguro_notification),
 ]

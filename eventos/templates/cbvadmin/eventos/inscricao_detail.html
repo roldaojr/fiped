@@ -1,5 +1,5 @@
 {% extends 'cbvadmin/semantic-ui/base_site.html' %}
-{% load i18n %}
+{% load i18n attachments_tags %}
 
 {% block title %}Visualizar inscrição{% endblock %}
 
@@ -22,8 +22,7 @@
   </div>
 </div>
 {% endblock %}
-
-<table class="ui definition unstackable table">
+<table class="ui definition table">
   <tr>
     <td>Nome completo</td>
     <td>{{ object.usuario.nome_completo }}</td>
@@ -79,6 +78,25 @@
   <tr>
     <td>Necessita de alojamento estudantil</td>
     <td>{{ object.alojamento|yesno:'Sim,Não' }}</td>
+  </tr>
+  <tr>
+    <td>Pagamento</td>
+    <td class="{{ inscricao.pagamento|yesno:'positive,negative'}}">
+      {{ inscricao.get_pagamento_display }}
+    </td>
+  </tr>
+  <tr>
+    <td>Anexos</td>
+    <td>
+      {% get_attachments_for object as attachments %}
+      {% for attachment in attachments %}
+      <div>
+        <a href="{{ attachment.attachment_file.url }}">{{ attachment.filename }}</a>
+      </div>
+      {% empty %}
+      -
+      {% endfor %}
+    </td>
   </tr>
 </table>
 {% endblock %}

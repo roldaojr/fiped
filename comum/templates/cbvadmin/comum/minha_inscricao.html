@@ -1,0 +1,16 @@
+{% extends 'cbvadmin/eventos/inscricao_detail.html' %}
+{% block title %}Minha inscrição{% endblock %}
+{% block actions %}
+<div class="ui mobile only fluid">
+  <a href="{% url 'cbvadmin:eventos_inscricao_anexar' %}" class="ui primary fluid button">
+    <i class="paperclip icon"></i> Anexar arquivos
+  </a>
+</div>
+<div class="ui secondary mobile hidden menu">
+  <div class="ui right item">
+    <a href="{% url 'cbvadmin:eventos_inscricao_anexar' %}" class="ui primary button">
+      <i class="paperclip icon"></i> Anexar arquivos
+    </a>
+  </div>
+</div>
+{% endblock %}

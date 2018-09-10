@@ -3,7 +3,7 @@ from cbvadmin.options import SimpleAdmin
 from comum.views import DetailView
 from .models import Inscricao, TipoInscricao
 from .filters import InscricaoFilter
-from .views import ImprimirLista
+from .views import ImprimirLista, AnexarArquivoView
 from .views.pagamento import VisualizarPagamento, InscricaoPagarPagSeguro
 from .forms import EditarInscricaoForm
 
@@ -20,6 +20,7 @@ class InscricaoAdmin(cbvadmin.ModelAdmin):
     filterset_class = InscricaoFilter
     imprimir_view_class = ImprimirLista
     detail_view_class = DetailView
+    anexar_view_class = AnexarArquivoView
     default_object_action = 'detail'
     pagar_pagseguro_view_class = InscricaoPagarPagSeguro
     form_class = EditarInscricaoForm
@@ -36,6 +37,7 @@ class InscricaoAdmin(cbvadmin.ModelAdmin):
         actions.update({
             'detail': 'object',
             'imprimir': 'collection',
+            'anexar': 'collection',
             'pagar_pagseguro': 'object'
         })
         return actions

@@ -1,0 +1,39 @@
+{% extends 'cbvadmin/semantic-ui/change_form.html' %}
+{% load i18n crispy_forms_tags %}
+
+{% block title %}Anexar arquivos{% endblock %}
+
+{% block content %}
+{{ form.is_multipart }}dddddd
+<form class="ui form" method="post" id="change-form" enctype="multipart/form-data">
+{% csrf_token %}
+{% for inline in inlines %}
+{{ inline.management_form }}
+{% for inline_form in inline %}
+{{ inline_form.errors }}
+{{ inline_form|crispy }}
+{% if not forloop.last %}<div class="ui divider"></div>{% endif %}
+{% endfor %}
+{% endfor %}
+{% block actions %}
+<div class="actions">
+  <div class="ui mobile only fluid">
+    <button type="submit" class="ui fluid green save button">
+      <i class="save icon"></i>
+      {% trans 'Save' %}
+    </button>
+  </div>
+  <div class="ui secondary mobile hidden menu">
+    <div class="right item">
+      <button type="submit" class="ui green save button">
+        <i class="save icon"></i>
+        {% trans 'Save' %}
+      </button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+</form>
+
+{% endblock %}

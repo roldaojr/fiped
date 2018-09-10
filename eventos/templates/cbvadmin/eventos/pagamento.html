@@ -15,7 +15,7 @@
     {% with inscricao=request.user.inscricao %}
     <tr>
       <td>{{ inscricao.tipo.nome }}</td>
-      <td>R$ {{ inscricao.tipo.preco }}</td>
+      <td>R$ {{ inscricao.valor }}</td>
       <td class="{{ inscricao.pagamento|yesno:'positive,negative'}}">
         {{ inscricao.get_pagamento_display }}
       </td>
