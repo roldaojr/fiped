@@ -28,6 +28,8 @@ class InscricaoAdmin(cbvadmin.ModelAdmin):
     menu_weight = 3
 
     def has_permission(self, request, action, obj=None):
+        if action == 'anexar':
+            return True
         if action == 'imprimir':
             action = 'view'
         if action == 'validar':
