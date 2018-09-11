@@ -36,6 +36,9 @@ class Usuario(PermissionsMixin, AbstractBaseUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nome_completo']
 
+    class Meta:
+        ordering = ('nome_completo',)
+
     @property
     def username(self):
         return self.get_short_name()

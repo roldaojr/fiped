@@ -65,6 +65,10 @@ class InscricaoForm(forms.ModelForm):
         }
         inscricao = Inscricao(**inscricao_data)
         inscricao.usuario = usuario
+        if self.cleaned_data['tipo'].validar:
+            inscricao.validado = False
+        else:
+            inscricao.validado = True
         inscricao.save()
         return usuario
 
