@@ -20,5 +20,8 @@ class Oficina(models.Model):
     inscricoes = models.ManyToManyField(Inscricao, related_name='oficinas',
                                         blank=True)
 
+    class Meta:
+        ordering = ('nome',)
+
     def __str__(self):
         return self.nome

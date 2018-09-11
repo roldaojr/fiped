@@ -51,6 +51,7 @@ class TipoInscricao(models.Model):
     class Meta:
         verbose_name = 'tipo de inscrição'
         verbose_name_plural = 'tipos de inscrição'
+        ordering = ('nome',)
 
     def __str__(self):
         if self.preco > 0:
@@ -102,6 +103,7 @@ class Inscricao(models.Model):
     class Meta:
         verbose_name = 'inscrição'
         verbose_name_plural = 'inscrições'
+        ordering = ('usuario__nome_completo',)
 
     @property
     def valor(self):
