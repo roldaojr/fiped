@@ -1403,7 +1403,7 @@ a:active, .btn-link:active {
 
 .banner--slider .banner--item:before {
     background-color: #000;
-    opacity: 0.7;
+    opacity: 0.2;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
 }
 
