@@ -24,8 +24,8 @@ class EventusDefaultAdmin(DefaultAdmin):
     def get_menu(self):
         return [
             MenuItem('Painel', reverse('cbvadmin:dashboard'), weight=1),
-            # MenuItem('Minha inscrição', reverse('cbvadmin:minha_inscricao'),
-            #          weight=1),
+            MenuItem('Minha inscrição', reverse('cbvadmin:minha_inscricao'),
+                     weight=1),
             MenuItem('Configurações', reverse("dynamic_preferences:global"),
                      check=lambda r: r.user.has_perm('dynamic_preferences.change_globalpreferencemodel'),
                      weight=100)
