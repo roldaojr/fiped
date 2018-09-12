@@ -6,6 +6,7 @@ services: mysql
 before_install:
   - mysql -e 'CREATE DATABASE eventus;'
 install:
+  - pip install pipenv
   - pipenv install --system --deploy
 env:
   - DATABASE_URL=mysql://root@localhost/eventus
