@@ -113,7 +113,7 @@ class Dashboard(DashboardView):
             else:
                 context['counters'] += self.trabalhos_counters(user)
 
-        if user.has_perm('trabalhos.view_inscricao'):
+        if user.has_perm('eventos.view_inscricao'):
                 context['counters'] += self.organizador_counters()
 
         return context
