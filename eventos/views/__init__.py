@@ -66,6 +66,8 @@ class AnexarArquivoView(EditWithInlinesView):
             for obj in object_list:
                 obj.creator = self.request.user
                 obj.save()
+            for form in formset.deleted_forms:
+                form.instance.delete()
         return redirect(self.get_success_url())
 
 
