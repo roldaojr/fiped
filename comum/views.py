@@ -12,6 +12,7 @@ from cbvadmin.views.mixins import (
 from cbvadmin.views.dashboard import Dashboard as DashboardView
 from eventos.models import Inscricao
 from trabalhos.models import Trabalho, AreaTema
+from oficinas.models import Oficina
 
 
 class BasicView(PermissionRequiredMixin, AdminMixin, SuccessMixin, View):
@@ -93,6 +94,19 @@ class Dashboard(DashboardView):
             },
         ]
 
+    def oficinas_counters(self):
+        return [
+            {
+                'name': 'Oficinas submetidas',
+                'value': Oficina.objects.count()
+            },
+            {
+                'name': 'Oficinas aprovadas',
+                'value': Oficina.objects.filter(
+                    situacao=Oficina.Situacao.Aprovado).count()
+            },
+        ]
+
     def participante_trabalhos(self):
         user = self.request.user
         trabalhos = Trabalho.objects.filter(
@@ -113,7 +127,10 @@ class Dashboard(DashboardView):
             else:
                 context['counters'] += self.trabalhos_counters(user)
 
+        if user.has_perm('oficinas.view_oficina'):
+            context['counters'] += self.oficinas_counters()
+
         if user.has_perm('eventos.view_inscricao'):
-                context['counters'] += self.organizador_counters()
+            context['counters'] += self.organizador_counters()
 
         return context
