@@ -36,6 +36,11 @@ class AnexoInline(GenericInlineFormSet):
     factory_kwargs = {'ct_field': 'content_type',
                       'fk_field': 'object_id', 'extra': 3}
 
+    def get_form_class(self):
+        form_class = modelform_factory(Attachment, exclude=[])
+        form_class.Meta.labels = {'attachment_file': 'Anexo'}
+        return form_class
+
 
 class AnexarArquivoView(EditWithInlinesView):
     default_template = 'anexar_arquivos.html'
