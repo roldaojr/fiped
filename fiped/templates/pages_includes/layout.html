@@ -61,6 +61,29 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+
+
+.alert {
+    background-color: #ff9800;;
+    color: white;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+</style>
 </head>
 <body>
     
@@ -72,6 +95,11 @@
     <div class="wrapper">
         <!-- Header Section Start -->
         <header class="header--section">
+
+         <div class="alert">
+              <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+              <strong>Atenção!</strong> O número de inscritos em monitoria chegou ao limite. Em breve será divulgado os selecionados. 
+        </div>
             <!-- Header Topbar Start -->
             <div class="header--topbar bg--color-dark">
                 <div class="container">
