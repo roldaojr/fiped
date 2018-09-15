@@ -4,7 +4,6 @@
 {% block title %}Anexar arquivos{% endblock %}
 
 {% block content %}
-{{ form.is_multipart }}dddddd
 <form class="ui form" method="post" id="change-form" enctype="multipart/form-data">
 {% csrf_token %}
 {% for inline in inlines %}

@@ -36,6 +36,11 @@ class AnexoInline(GenericInlineFormSet):
     factory_kwargs = {'ct_field': 'content_type',
                       'fk_field': 'object_id', 'extra': 3}
 
+    def get_form_class(self):
+        form_class = modelform_factory(Attachment, exclude=[])
+        form_class.Meta.labels = {'attachment_file': 'Anexo'}
+        return form_class
+
 
 class AnexarArquivoView(EditWithInlinesView):
     default_template = 'anexar_arquivos.html'
@@ -61,6 +66,8 @@ class AnexarArquivoView(EditWithInlinesView):
             for obj in object_list:
                 obj.creator = self.request.user
                 obj.save()
+            for form in formset.deleted_forms:
+                form.instance.delete()
         return redirect(self.get_success_url())
 
 

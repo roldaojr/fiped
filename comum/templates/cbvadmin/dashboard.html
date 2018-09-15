@@ -1,6 +1,25 @@
 {% extends 'cbvadmin/semantic-ui/base_site.html' %}
 {% block title %}Painel{% endblock %}
 {% block content %}
+{% if counters %}
+<div class="ui three stackable cards">
+{% for counter in counters %}
+  <div class="card">
+    <div class="content center aligned">
+      <div class="ui statistic">
+        <div class="value">
+          {{ counter.value }}
+        </div>
+        <div class="label">
+          {{ counter.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% endif %}
+
 {% if request.user.inscricao %}
 <div class="ui two stackable cards">
   {% with inscricao=request.user.inscricao %}
@@ -69,23 +88,4 @@
   </div>
 </div>
 {% endif %}
-{% if counters %}
-<div class="ui three stackable cards">
-{% for counter in counters %}
-  <div class="card">
-    <div class="content center aligned">
-      <div class="ui statistic">
-        <div class="value">
-          {{ counter.value }}
-        </div>
-        <div class="label">
-          {{ counter.name }}
-        </div>
-      </div>
-    </div>
-  </div>
-{% endfor %}
-</div>
-{% endif %}
 {% endblock %}
-
