@@ -1,11 +1,12 @@
 from django.shortcuts import Http404
+from django.urls import reverse
 from django.db.models import Q
 from datetime import date
 from django.utils.translation import ugettext_lazy as _
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 from django.views.generic import DetailView as _DetailView
 from django.views.generic import View
-from registration.backends.default.views import RegistrationView
+from registration.backends.simple.views import RegistrationView
 from dynamic_preferences.registries import global_preferences_registry
 from cbvadmin.views.mixins import (
     FormMixin, AdminMixin, PermissionRequiredMixin, SuccessMixin)
@@ -31,6 +32,9 @@ class InscreverView(RegistrationView):
             return False
         else:
             return True
+
+    def get_success_url(self, *args, **kwargs):
+        return reverse('cbvadmin:dashboard')
 
 
 class AddWithInlinesView(PermissionRequiredMixin, AdminMixin, FormMixin,
