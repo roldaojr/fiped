@@ -26,8 +26,9 @@ class InscricaoForm(forms.ModelForm):
                                   max_length=100)
     tipo = forms.ModelChoiceField(queryset=TipoInscricao.objects.all(),
                                   label='Categoria')
-    senha = forms.CharField(widget=forms.PasswordInput)
-    confirmar_senha = forms.CharField(widget=forms.PasswordInput)
+    password1 = forms.CharField(widget=forms.PasswordInput, label='Senha')
+    password2 = forms.CharField(widget=forms.PasswordInput,
+                                label='Confirmar senha')
 
     inscricao_fields = (
         'deficiencia', 'alojamento', 'endereco', 'numero', 'cidade', 'uf',
@@ -51,12 +52,12 @@ class InscricaoForm(forms.ModelForm):
         tipo = cleaned_data['tipo']
         if tipo.limite > 0 and tipo.inscricoes.count() >= tipo.limite:
             raise ValidationError('Não há mais vagas para %s' % tipo.nome)
-        if cleaned_data.get('senha') != cleaned_data.get('confirmar_senha'):
+        if cleaned_data.get('password1') != cleaned_data.get('password2'):
             raise ValidationError('A senha e a confirmção devem ser iguais')
 
     def save(self, *args, **kwargs):
         usuario = super().save(*args, **kwargs)
-        usuario.set_password(self.cleaned_data['senha'])
+        usuario.set_password(self.cleaned_data['password1'])
         grupo, c = Group.objects.get_or_create(name='Participante')
         usuario.groups.add(grupo)
         usuario.save()
