@@ -434,6 +434,7 @@ a:active, .btn-link:active {
 
 .font--secondary {
     font-family: "Montserrat", sans-serif;
+    font-size: 12px;
 }
 
 /* 2.2. FLOAT */
@@ -1193,6 +1194,7 @@ a:active, .btn-link:active {
 }
 
 .header--navbar > .container {
+    width: 1400px !important;
     position: relative;
 }
 
