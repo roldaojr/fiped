@@ -33,6 +33,7 @@
         {{ form.render }}
       </div>
     </div>
+    * Pagamento somente via cartão de crédito podendo ser parcelado.
   </div>
 {% endif %}
 {% if global_preferences.pagamento__pagseguro_ativo %}
@@ -43,6 +44,7 @@
         <a href="{% url 'cbvadmin:eventos_inscricao_pagar_pagseguro' request.user.inscricao.pk %}"><img src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/205x30-pagar.gif" alt="Pagar com PagSeguro"/></a>
       </div>
     </div>
+    * Pagamento via boleto, débito online, depósito em conta ou cartão de crédito.
   </div>
 {% endif %}
 </div>
