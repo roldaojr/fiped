@@ -65,9 +65,24 @@
         <div class="ui celled big list">
           {% for trabalho in trabalhos %}
           <div class="item">
-            <div class="header">{{ trabalho.titulo }}</div>
-            {{ trabalho.area_tema }}
+            <div class="header"><a href="{% url 'cbvadmin:trabalhos_trabalho_detail' trabalho.pk %}">{{ trabalho.titulo }}</a></div>
+            <div>{{ trabalho.area_tema }}</div>
+            <div>
+              <div class="ui {% spaceless %}
+              {% if object.situacao == 1 %}
+                green
+              {% elif object.situacao == 2 %}
+                red
+              {% elif object.situacao == 3 %}
+                orange
+              {% else %}
+                grey
+              {% endif %}
+              {% endspaceless %} label">
+                {{ trabalho.get_situacao_display }}
+              </div>
             </div>
+          </div>
           {% empty %}
           <div class="item">
             <div class="header">Nenhum trabalho submetido</div>
