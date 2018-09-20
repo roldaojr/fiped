@@ -40,3 +40,9 @@ class TrabalhoAddForm(forms.ModelForm):
             'coautor2': UsuarioSelectWidget,
             'coautor3': UsuarioSelectWidget
         }
+
+
+class TrabalhoReenviarForm(forms.ModelForm):
+    class Meta:
+        model = Trabalho
+        fields = ('arquivo',)

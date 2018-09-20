@@ -1,11 +1,15 @@
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.views.generic.detail import SingleObjectMixin
 from django.utils.timezone import now
+from django.contrib import messages
 from dynamic_preferences.registries import global_preferences_registry
-from cbvadmin.views.edit import AddView
+from cbvadmin.views.edit import AddView, EditView
 from comum.views import BasicView
 from cbvadmin.views.list import TableListView
+from .forms import TrabalhoReenviarForm
+from .models import Trabalho
 
 
 class TrabalhoListView(TableListView):
@@ -49,4 +53,18 @@ class AvaliarView(SingleObjectMixin, BasicView):
         avaliacao = request.POST.get('situacao')
         self.object.situacao = avaliacao
         self.object.save()
+        messages.success(request, 'Trabalho "%s" alterado avaliado' %
+                         self.object.titulo)
         return HttpResponseRedirect(success_url)
+
+
+class TrabalhoReenviarView(EditView):
+    def get_form_class(self):
+        return TrabalhoReenviarForm
+
+    def form_valid(self, *args, **kwargs):
+        self.object.situacao = Trabalho.Situacao.Reenviado
+        return super().form_valid(*args, **kwargs)
+
+    def get_success_url(self):
+        return reverse(self.admin.urls['detail'], args=[self.object.pk])
