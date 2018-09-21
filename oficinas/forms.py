@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ValidationError
 from dynamic_preferences.registries import global_preferences_registry
 from eventos.models import Inscricao
-from .models import Oficina
+from .models import Oficina, MesaRedonda
 
 
 class OficinaSubmeterForm(forms.ModelForm):
@@ -59,3 +59,23 @@ class OficinaInscricaoForm(forms.ModelForm):
         instance.oficinas.clear()
         for o in Oficina.objects.filter(pk__in=self.cleaned_data['oficinas']):
             o.inscricoes.add(instance)
+
+
+class SubmeterMesaRedondaForm(forms.ModelForm):
+    class Meta:
+        model = MesaRedonda
+        exclude = ('local', 'tipo', 'ministrante', 'inscricoes')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['nome'].label = 'Nome da mesa redonda'
+
+
+class ChangeMesaRedondaForm(forms.ModelForm):
+    class Meta:
+        model = MesaRedonda
+        exclude = ('tipo', 'ministrante', 'arquivo', 'inscricoes')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['nome'].label = 'Nome da mesa redonda'

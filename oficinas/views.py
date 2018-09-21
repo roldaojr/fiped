@@ -1,25 +1,37 @@
+from django.shortcuts import redirect, Http404
 from django.urls import reverse
-from django.http import Http404, HttpResponseRedirect
+from django.views.generic.detail import SingleObjectMixin
+from django.contrib import messages
 from cbvadmin.views.edit import AddView, EditView
+from comum.views import BasicView
 from eventos.models import Inscricao
-from .models import Oficina
-from .forms import (OficinaSubmeterForm, OficinaChangeForm,
-                    OficinaInscricaoForm)
+from .forms import OficinaInscricaoForm
 
 
-class SubmeterOficinaView(AddView):
-    form_class = OficinaSubmeterForm
-    default_template = 'oficinas/oficina_submeter.html'
+class SubmeterAtividadeView(AddView):
+    default_template = 'oficinas/atividade_submeter.html'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.ministrante = self.request.user
         self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        return redirect(self.get_success_url())
 
 
-class AlterarOficinaView(EditView):
-    form_class = OficinaChangeForm
+class AvaliarAtividadeView(SingleObjectMixin, BasicView):
+    def get(self, request, *args, **kwargs):
+        success_url = self.get_success_url()
+        return redirect(success_url)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        avaliacao = request.POST.get('situacao')
+        self.object.situacao = avaliacao
+        self.object.save()
+        messages.success(request, 'Atividade "%s" avaliada' %
+                         self.object.nome)
+        return redirect(success_url)
 
 
 class InscricaoOficinaView(EditView):

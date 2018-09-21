@@ -5,6 +5,9 @@
 
 {% block content %}
 {% block actions %}
+<form method="post" id="aprovar_form" action="{% url admin.urls.avaliar object.pk %}">
+<input type="hidden" name="situacao">
+{% csrf_token %}
 <div class="ui mobile only fluid">
   {% if admin.urls.edit %}
   <div class="ui two fluid buttons">
@@ -12,21 +15,18 @@
     button">
       <i class="thumbs up icon"></i>
       Aprovar
-      <form class="menu" method="post" action="{% url admin.urls.avaliar object.pk %}">
-        {% csrf_token %}
-        <input type="hidden" name="situacao" value="1">
-        <div class="item"><button class="ui small button">Confirmar</button></div>
-      </form>
+      <div class="avaliar menu">
+        <div data-value="1" class="item">Sem correções</div>
+        <div data-value="3" class="item">Com correções</div>
+      </div>
     </div>
     <div class="ui labeled icon top right floating pointing dropdown negative avaliar 
     button">
       <i class="thumbs down icon"></i>
       Reprovar
-      <form class="menu" method="post" action="{% url admin.urls.avaliar object.pk %}">
-        {% csrf_token %}
-        <input type="hidden" name="situacao" value="2">
-        <div class="item"><button class="ui small button">Confirmar</button></div>
-      </form>
+      <div class="avaliar menu">
+        <div data-value="2" class="item">Confirmar</div>
+      </div>
     </div>
   </div>
   <a href="{% url admin.urls.edit object.pk %}" class="ui primary fluid button">
@@ -42,29 +42,33 @@
       button">
         <i class="thumbs up icon"></i>
         Aprovar
-        <form class="menu" method="post" action="{% url admin.urls.avaliar object.pk %}">
-          {% csrf_token %}
-          <input type="hidden" name="situacao" value="1">
-          <div class="item"><button class="ui small button">Confirmar</button></div>
-        </form>
+        <div class="avaliar menu">
+          <div data-value="1" class="item">Sem correções</div>
+          <div data-value="3" class="item">Com correções</div>
+        </div>
       </div>
       <div class="ui labeled icon floating pointing dropdown negative avaliar 
       button">
         <i class="thumbs down icon"></i>
         Reprovar
-        <form class="menu" method="post" action="{% url admin.urls.avaliar object.pk %}">
+        <div class="avaliar menu">
           {% csrf_token %}
-          <input type="hidden" name="situacao" value="2">
-          <div class="item"><button class="ui small button">Confirmar</button></div>
-        </form>
+          <div data-value="2" class="item">Confirmar</div>
+        </div>
       </div>
     </div>
     <a href="{% url admin.urls.edit object.pk %}" class="ui primary button">
       <i class="pencil icon"></i> Alterar
     </a>
     {% endif %}
+    {% if admin.urls.add and object.situacao == 3 %}
+    <a href="{% url admin.urls.reenviar object.pk %}" class="ui secondary button">
+      <i class="send icon"></i> Reenviar arquivo
+    </a>
+    {% endif %}
   </div>
 </div>
+</form>
 {% endblock %}
 
 <table class="ui definition unstackable table">
@@ -95,21 +99,21 @@
     <td>Arquivo</td><td><a href="{{ object.arquivo.url }}">{{ object.arquivo }}</a></td>
   </tr>
   <tr>
-    <td>Aprovado</td>
+    <td>Situação</td>
     <td>
+      <div class="ui {% spaceless %}
       {% if object.situacao == 1 %}
-      <div class="ui green label">
-        {{ object.get_situacao_display }}
-      </div>
+        green
       {% elif object.situacao == 2 %}
-      <div class="ui orange label">
-        {{ object.get_situacao_display }}
-      </div>
+        red
+      {% elif object.situacao == 3 %}
+        orange
       {% else %}
-      <div class="ui grey label">
+        grey
+      {% endif %}
+      {% endspaceless %} label">
         {{ object.get_situacao_display }}
       </div>
-      {% endif %}
     </td>
   </tr>
 </table>
@@ -119,6 +123,10 @@
 {{ block.super }}
 {{ form.media.js }}
 <script type="text/javascript">
-$('.avaliar.button').dropdown()
+$(".avaliar.button").dropdown()
+$("#aprovar_form .avaliar.menu .item").click(function(e){
+  $("#aprovar_form input[name=situacao]").val($(this).data('value'))
+  $("#aprovar_form").submit()
+})
 </script>
 {% endblock %}
