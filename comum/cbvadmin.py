@@ -2,6 +2,7 @@ from django.urls import reverse
 from menu import MenuItem
 from django.contrib.auth.models import Group
 import cbvadmin
+from cbvadmin.views.user import PasswordReset
 from cbvadmin.cbvadmin import DefaultAdmin
 from cbvadmin.options import GroupAdmin
 from .models import Usuario
@@ -34,10 +35,16 @@ class EventusDefaultAdmin(DefaultAdmin):
 
 @cbvadmin.register(Usuario)
 class UsuarioAdmin(cbvadmin.ModelAdmin):
+    passwordreset_view_class = PasswordReset
     list_display = ('nome_completo', 'nome_social', 'email', 'is_active')
     filter_fields = ('nome_completo', 'nome_social', 'email')
     form_class = UsuarioForm
     menu_weight = 10
+
+    def get_actions(self):
+        actions = super().get_actions()
+        actions['passwordreset'] = 'object'
+        return actions
 
     def get_menu(self):
         menus = super().get_menu()
