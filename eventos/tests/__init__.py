@@ -18,16 +18,17 @@ class InscricaoTestCase(TestCase):
             'nome_completo': inscricao.usuario.nome_completo,
             'cpf': inscricao.usuario.cpf,
             'email': inscricao.usuario.email,
-            'senha': senha,
-            'confirmar_senha': senha
+            'password1': senha,
+            'password2': senha
         })
         resp = self.client.post(reverse('registration_register'),
                                 pariticpante_data)
         self.assertEqual(resp.status_code, 302)
-        self.assertEqual(resp.url, reverse('registration_complete'))
+        self.assertEqual(resp.url, reverse('cbvadmin:dashboard'))
         # testar usuario
+        resp = self.client.get(reverse('cbvadmin:dashboard'))
         usuario = resp.context['user']
-        self.assertEqual(usuario.is_active, False)
+        self.assertTrue(usuario.is_active)
         # testar inscricao
         inscricao_data = model_to_dict(usuario.inscricao)
         for k, v in inscricao_data.items():
@@ -48,11 +49,12 @@ class InscricaoTestCase(TestCase):
             'nome_completo': inscricao.usuario.nome_completo,
             'cpf': inscricao.usuario.cpf,
             'email': inscricao.usuario.email,
-            'senha': senha,
-            'confirmar_senha': senha
+            'password1': senha,
+            'password2': senha
         })
         resp = self.client.post(reverse('registration_register'),
                                 pariticpante_data)
+        resp = self.client.get(reverse('cbvadmin:dashboard'))
         # testar se inscrição não está validada
         usuario = resp.context['user']
         self.assertFalse(usuario.inscricao.validado)
