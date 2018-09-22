@@ -10,6 +10,7 @@ from .forms import OficinaInscricaoForm
 
 class SubmeterAtividadeView(AddView):
     default_template = 'oficinas/atividade_submeter.html'
+    raise_exception = False
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
