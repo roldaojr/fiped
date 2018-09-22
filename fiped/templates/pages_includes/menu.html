@@ -38,13 +38,13 @@
                                 </ul>
                             </li>
                                <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mesas-Redondas/Lançamento de livros<i class="fa fa-angle-down"></i></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mesas-redondas/Lançamento de livros<i class="fa fa-angle-down"></i></a>
 
                                 <ul class="dropdown-menu font--primary">
-                                    <li><a href="/construcao">Lançamento de Livro</a></li>
+                                    <li><a href="/construcao">Lançamento de livro</a></li>
                                     <li><a href="/trabalhos/normas_mesas">Normas de mesas-redondas</a></li> 
-                                    <li><a href="/trabalhos/mesas_aprovadas">Mesas Aprovadas</a></li>
-                                
+                                    <li><a href="/trabalhos/mesas_aprovadas">Mesas aprovadas</a></li>
+                                    <li><a href="{% url 'cbvadmin:oficinas_mesaredonda_add' %}">Submeter mesa-redonda</a></li>
                                 </ul>
                             </li>
                              <li class="dropdown">
@@ -74,7 +74,7 @@
                                     <li><a href="/trabalhos/comunicacao_oral">Normas para Trabalhos de Comunicação Oral</a></li>
                                       <li><a href="/trabalhos/areas_tematicas">Grupos de Trabalhos</a></li>
                                       <li><a href="/propostas/comunicacao">Comunicação Oral</a></li>
-                                      <!-- <li><a href="{% url 'cbvadmin:trabalhos_trabalho_add' %}">Submeter Trabalho</a></li>  -->                                  
+                                      <li><a href="{% url 'cbvadmin:trabalhos_trabalho_add' %}">Submeter Trabalho</a></li>                                 
                                     <li><a href="/trabalhos/trabalhos_aprovados">Trabalhos Aprovados</a></li>
 
                                 </ul>
@@ -87,7 +87,7 @@
                                     <li><a href="/propostas/oficinas">Oficinas</a></li> 
                                     <li><a href="/trabalhos/proposicao_oficinas_pesquisa">Normas de Proposição de Oficina de Pesquisa</a></li>
                                     <li><a href="/trabalhos/participacao_oficina_pesquisa">Normas de Participação nas Oficinas de Pesquisa</a></li>
-                                    <!-- <li><a href="{% url 'cbvadmin:oficinas_oficina_add' %}">Submeter Oficina</a></li> -->
+                                    <li><a href="{% url 'cbvadmin:oficinas_oficina_add' %}">Submeter Oficina</a></li>
                                     <li><a href="/trabalhos/oficinas_aprovadas">Oficinas Aprovadas</a></li>
                             
                                 </ul>
