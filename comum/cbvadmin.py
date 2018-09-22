@@ -46,6 +46,11 @@ class UsuarioAdmin(cbvadmin.ModelAdmin):
         actions['passwordreset'] = 'object'
         return actions
 
+    def has_permission(self, request, action, obj=None):
+        if action == 'passwordreset':
+            action = 'change'
+        return super().has_permission(request, action, obj)
+
     def get_menu(self):
         menus = super().get_menu()
         menus[0].submenu = False
