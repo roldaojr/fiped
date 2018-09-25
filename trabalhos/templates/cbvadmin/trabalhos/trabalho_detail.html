@@ -5,9 +5,6 @@
 
 {% block content %}
 {% block actions %}
-<form method="post" id="aprovar_form" action="{% url admin.urls.avaliar object.pk %}">
-<input type="hidden" name="situacao">
-{% csrf_token %}
 <div class="ui mobile only fluid">
   {% if admin.urls.edit %}
   <div class="ui two fluid buttons">
@@ -68,7 +65,6 @@
     {% endif %}
   </div>
 </div>
-</form>
 {% endblock %}
 
 <table class="ui definition unstackable table">
@@ -116,16 +112,43 @@
       </div>
     </td>
   </tr>
+  <tr>
+    <td>Observações</td><td>{{ object.observacoes|default:'-'|linebreaksbr }}</td>
+  </tr>
 </table>
 {% endblock %}
 
 {% block extrascript %}
+<div class="ui modal" id="corrgir_modal">
+  <div class="header">Aprovar com correções</div>
+  <div class="content ui form">
+    <form method="post" id="aprovar_form" action="{% url admin.urls.avaliar object.pk %}">
+      {% csrf_token %}
+      <input type="hidden" name="situacao">
+      <div class="field">
+        <textarea name="observacoes"></textarea>
+      </div>
+    </form>
+  </div>
+  <div class="actions">
+    <button type="submit" class="ui green corrgir button">Aprovar</button>
+  </div>
+</div>
 {{ block.super }}
 {{ form.media.js }}
 <script type="text/javascript">
 $(".avaliar.button").dropdown()
-$("#aprovar_form .avaliar.menu .item").click(function(e){
-  $("#aprovar_form input[name=situacao]").val($(this).data('value'))
+$(".avaliar.menu .item").click(function(e){
+  val = $(this).data('value')
+  $("#aprovar_form input[name=situacao]").val(val)
+  if(val == 3) {
+    $("#corrgir_modal").modal('show')
+  } else {
+    $("#aprovar_form textarea").text("")
+    $("#aprovar_form").submit()
+  }
+})
+$(".corrgir.button").click(function(e) {
   $("#aprovar_form").submit()
 })
 </script>
