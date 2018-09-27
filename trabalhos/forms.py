@@ -30,23 +30,28 @@ class TrabalhoChangeForm(UploadMaxSizeMixin, forms.ModelForm):
             'area_tema': AreaTemaSelectWidget,
         }
         help_texts = {
-            'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
+            'arquivo': 'Tamanho maximo de %s' % humanbytes(
+                settings.FILE_UPLOAD_MAX_SIZE)
         }
 
 
 class TrabalhoAddForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Trabalho
-        fields = '__all__'
+        exclude = ('observacoes',)
         widgets = {
             'area_tema': AreaTemaSelectWidget,
-            'autor': UsuarioSelectWidget,
+            'autor': UsuarioSelectWidget(attrs={'disabled': 'disabled'}),
             'coautor1': UsuarioSelectWidget,
             'coautor2': UsuarioSelectWidget,
             'coautor3': UsuarioSelectWidget
         }
         help_texts = {
-            'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
+            'coautor1': 'Necessário estar inscrito no evento',
+            'coautor2': 'Necessário estar inscrito no evento',
+            'coautor3': 'Necessário estar inscrito no evento',
+            'arquivo': 'Tamanho maximo de %s' % humanbytes(
+                settings.FILE_UPLOAD_MAX_SIZE)
         }
 
 
@@ -55,5 +60,6 @@ class TrabalhoReenviarForm(UploadMaxSizeMixin, forms.ModelForm):
         model = Trabalho
         fields = ('arquivo',)
         help_texts = {
-            'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
+            'arquivo': 'Tamanho maximo de %s' % humanbytes(
+                settings.FILE_UPLOAD_MAX_SIZE)
         }

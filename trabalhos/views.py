@@ -33,6 +33,9 @@ class TrabalhoListView(TableListView):
 class SubmeterTrabalhoView(AddView):
     default_template = 'trabalhos/trabalho_submeter.html'
 
+    def get_initial(self):
+        return {'autor': self.request.user}
+
     def get_context_data(self, **kwargs):
         prefs = global_preferences_registry.manager()
         context = super().get_context_data(**kwargs)
