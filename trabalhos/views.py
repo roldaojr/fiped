@@ -51,7 +51,9 @@ class AvaliarView(SingleObjectMixin, BasicView):
         self.object = self.get_object()
         success_url = self.get_success_url()
         avaliacao = request.POST.get('situacao')
+        observacoes = request.POST.get('observacoes')
         self.object.situacao = avaliacao
+        self.object.observacoes = observacoes
         self.object.save()
         messages.success(request, 'Trabalho "%s" alterado avaliado' %
                          self.object.titulo)

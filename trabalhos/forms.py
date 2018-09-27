@@ -1,5 +1,7 @@
 from django import forms
+from django.conf import settings
 from django_select2.forms import ModelSelect2Widget
+from comum.utils.file_upload import UploadMaxSizeMixin, humanbytes
 from comum.forms import UsuarioSelectWidget, UsuariosSelectWidget
 from .models import Trabalho, AreaTema
 
@@ -20,16 +22,19 @@ class AreaTemaForm(forms.ModelForm):
         }
 
 
-class TrabalhoChangeForm(forms.ModelForm):
+class TrabalhoChangeForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Trabalho
         fields = ('area_tema',)
         widgets = {
             'area_tema': AreaTemaSelectWidget,
         }
+        help_texts = {
+            'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
+        }
 
 
-class TrabalhoAddForm(forms.ModelForm):
+class TrabalhoAddForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Trabalho
         fields = '__all__'
@@ -40,9 +45,15 @@ class TrabalhoAddForm(forms.ModelForm):
             'coautor2': UsuarioSelectWidget,
             'coautor3': UsuarioSelectWidget
         }
+        help_texts = {
+            'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
+        }
 
 
-class TrabalhoReenviarForm(forms.ModelForm):
+class TrabalhoReenviarForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Trabalho
         fields = ('arquivo',)
+        help_texts = {
+            'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
+        }

@@ -53,6 +53,8 @@ class Trabalho(models.Model):
     situacao = models.IntegerField(
         choices=Situacao.choices, verbose_name='situação', default=0,
         editable=False)
+    observacoes = models.TextField(blank=True, null=True,
+                                   verbose_name='observações')
 
     class Meta:
         ordering = ('titulo',)

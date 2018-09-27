@@ -1,24 +1,32 @@
 from django import forms
+from django.conf import settings
 from django.forms import ValidationError
+from comum.utils.file_upload import UploadMaxSizeMixin, humanbytes
 from dynamic_preferences.registries import global_preferences_registry
 from eventos.models import Inscricao
 from .models import Oficina, MesaRedonda
 
 
-class OficinaSubmeterForm(forms.ModelForm):
+class OficinaSubmeterForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Oficina
         exclude = ('local', 'tipo', 'ministrante', 'inscricoes')
+        help_texts = {
+            'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['nome'].label = 'Nome da oficina'
 
 
-class OficinaChangeForm(forms.ModelForm):
+class OficinaChangeForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Oficina
         exclude = ('tipo', 'ministrante', 'arquivo', 'inscricoes')
+        help_texts = {
+            'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -61,20 +69,26 @@ class OficinaInscricaoForm(forms.ModelForm):
             o.inscricoes.add(instance)
 
 
-class SubmeterMesaRedondaForm(forms.ModelForm):
+class SubmeterMesaRedondaForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = MesaRedonda
         exclude = ('local', 'tipo', 'ministrante', 'inscricoes')
+        help_texts = {
+            'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['nome'].label = 'Nome da mesa redonda'
 
 
-class ChangeMesaRedondaForm(forms.ModelForm):
+class ChangeMesaRedondaForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = MesaRedonda
         exclude = ('tipo', 'ministrante', 'arquivo', 'inscricoes')
+        help_texts = {
+            'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

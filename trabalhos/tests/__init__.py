@@ -1,6 +1,7 @@
 from django.forms.models import model_to_dict
 from django.test import TestCase
 from django.urls import reverse
+from django.conf import settings
 from comum.tests.factories import UsuarioFactory
 from .factories import TrabalhoFactory, AreaTemaFactory, ModalidadeFactory
 from ..models import Trabalho
@@ -18,7 +19,8 @@ class SubmeterTrabalhoTestCase(TestCase):
         trabalho = TrabalhoFactory.build(
             autor=self.usuario, coautor1=None,
             coautor2=None, coautor3=None,
-            arquivo__data=factory.Faker('binary', length=1024))
+            arquivo__data=factory.Faker(
+                'binary', length=settings.FILE_UPLOAD_MAX_SIZE))
         trabalho_dict = model_to_dict(
             trabalho, exclude=('coautor1', 'coautor2', 'coautor3'))
         resp = self.client.post(reverse('cbvadmin:trabalhos_trabalho_add'),
@@ -30,6 +32,18 @@ class SubmeterTrabalhoTestCase(TestCase):
 
         resp = self.client.get(resp.url)
         self.assertEqual(resp.status_code, 200)
+
+    def test_submeter_muito_grande(self):
+        trabalho = TrabalhoFactory.build(
+            autor=self.usuario, coautor1=None,
+            coautor2=None, coautor3=None,
+            arquivo__data=factory.Faker(
+                'binary', length=settings.FILE_UPLOAD_MAX_SIZE + 1))
+        trabalho_dict = model_to_dict(
+            trabalho, exclude=('coautor1', 'coautor2', 'coautor3'))
+        resp = self.client.post(reverse('cbvadmin:trabalhos_trabalho_add'),
+                                trabalho_dict)
+        self.assertTrue(resp.context['form'].has_error('arquivo'))
 
 
 class AvaliarTrabalhoTestCase(TestCase):

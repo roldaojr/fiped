@@ -1,6 +1,7 @@
 from django.forms.models import model_to_dict
 from django.test import TestCase
 from django.urls import reverse
+from django.conf import settings
 from dynamic_preferences.registries import global_preferences_registry
 from comum.tests.factories import UsuarioFactory
 from eventos.tests.factories import InscricaoFactory, TipoInscricaoFactory
@@ -17,7 +18,8 @@ class SubmeterOficinaTestCase(TestCase):
     def test_submeter(self):
         oficina = OficinaFactory.build(
             ministrante=self.usuario,
-            arquivo__data=factory.Faker('binary', length=1024))
+            arquivo__data=factory.Faker(
+                'binary', length=settings.FILE_UPLOAD_MAX_SIZE))
         oficina_dict = model_to_dict(oficina)
         resp = self.client.post(reverse('cbvadmin:oficinas_oficina_add'),
                                 oficina_dict)
