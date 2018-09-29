@@ -65,7 +65,15 @@
         <div class="ui celled big list">
           {% for trabalho in trabalhos %}
           <div class="item">
-            <div class="header"><a href="{% url 'cbvadmin:trabalhos_trabalho_detail' trabalho.pk %}">{{ trabalho.titulo }}</a></div>
+            <div class="header">
+              {% if perms.trabalhos_trabalho_view %}
+              <a href="{% url 'cbvadmin:trabalhos_trabalho_detail' trabalho.pk %}">
+                {{ trabalho.titulo }}
+              </a>
+              {% else %}
+              {{ trabalho.titulo }}
+              {% endif %}
+            </div>
             <div>{{ trabalho.area_tema }}</div>
             <div>
               <div class="ui {% spaceless %}
