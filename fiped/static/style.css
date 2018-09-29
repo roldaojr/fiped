@@ -384,9 +384,14 @@ a:active, .btn-link:active {
     background-color: #f9f9f9;
 }
 
-.bg--color-darkgray {
+.bg--color-cartaconvite{
     background-image: url('/static/img/bg_patrocinio.jpg');
 }
+.bg--color-darkgray {
+    background-color: #f2f2f2;
+    
+}
+
 
 .bg--color-blue {
     background-image: url('/static/img/plano de fundo.jpg');
