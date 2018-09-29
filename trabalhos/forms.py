@@ -41,7 +41,7 @@ class TrabalhoAddForm(UploadMaxSizeMixin, forms.ModelForm):
         exclude = ('observacoes',)
         widgets = {
             'area_tema': AreaTemaSelectWidget,
-            'autor': UsuarioSelectWidget(attrs={'disabled': 'disabled'}),
+            'autor': UsuarioSelectWidget(attrs={'readonly': 'readonly'}),
             'coautor1': UsuarioSelectWidget,
             'coautor2': UsuarioSelectWidget,
             'coautor3': UsuarioSelectWidget
