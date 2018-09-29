@@ -2014,7 +2014,10 @@ a:active, .btn-link:active {
 }
 
 .counter--item:hover .image {
-  opacity: 0.5;
+  opacity: 3;
+  -webkit-box-shadow: 10px 9px 9px rgba(0.77, 0.77, 0.77, 0.77);
+  -moz-box-shadow:    10px 9px 9px rgba(0.77, 0.77, 0.77, 0.77);
+  box-shadow:         10px 9px 9px rgba(0.77, 0.77, 0.77, 0.77);
 }
 
 
