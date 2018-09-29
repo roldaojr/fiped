@@ -278,7 +278,7 @@ h6:first-child, .h6:first-child {
 }
 
 .pd--100-0-40 {
-    padding: 100px 0 40px;
+    padding: 550px 0 40px;
 }
 .pd--100-0-70 {
     padding: 100px 0 70px;
@@ -385,7 +385,11 @@ a:active, .btn-link:active {
 }
 
 .bg--color-darkgray {
-    background-color: #f2f2f2;
+    background-image: url('/static/img/bg_patrocinio.jpg');
+}
+
+.bg--color-blue {
+    background-image: url('/static/img/plano de fundo.jpg');
 }
 
 /* 1.8. BACKGROUND IMAGES */
@@ -2002,6 +2006,20 @@ a:active, .btn-link:active {
 /* 14.1. COUNTER ITEM */
 .counter--item {
     margin-bottom: 60px;
+}
+
+.counter--item:hover .image {
+  opacity: 0.5;
+}
+
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
 }
 
 .counter--item .icon {
