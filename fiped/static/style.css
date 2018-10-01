@@ -392,6 +392,24 @@ a:active, .btn-link:active {
     
 }
 
+.bg--img-patrocinador_bronze{
+    background-image: url('/static/img/bronze_pt.jpg');   
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.bg--img-patrocinador_prata{
+    background-image: url('/static/img/prata_pt.jpg');   
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.bg--img-patrocinador_ouro{
+    background-image: url('/static/img/ouro_pt.jpg');   
+    background-repeat: no-repeat;
+    position: relative;
+}
+
 
 .bg--color-blue {
     background-image: url('/static/img/plano de fundo.jpg');
