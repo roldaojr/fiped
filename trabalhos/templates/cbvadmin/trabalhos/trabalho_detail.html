@@ -119,6 +119,7 @@
 {% endblock %}
 
 {% block extrascript %}
+{% if admin.urls.avaliar %}
 <div class="ui modal" id="corrgir_modal">
   <div class="header">Aprovar com correções</div>
   <div class="content ui form">
@@ -152,4 +153,5 @@ $(".corrgir.button").click(function(e) {
   $("#aprovar_form").submit()
 })
 </script>
+{% endif %}
 {% endblock %}
