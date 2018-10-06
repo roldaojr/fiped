@@ -47,8 +47,7 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
     def has_permission(self, request, action, obj=None):
         if action == 'avaliar':
             action = 'edit'
-        if (obj is not None and action == 'reenviar' and
-                obj.situacao == Trabalho.Situacao.Corrigir):
+        if action == 'reenviar':
             return True
         return super().has_permission(request, action, obj)
 
