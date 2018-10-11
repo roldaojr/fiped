@@ -14,7 +14,8 @@ from ..filters import InscricaoFilter
 
 class ImprimirLista(TableListView):
     filterset_class = InscricaoFilter
-    list_display = ('nome_completo', 'nome_social', 'email')
+    list_display = ('nome_completo', 'nome_social', 'cpf', 'email',
+                    'tipo', 'alojamento', 'deficiencia')
     template_name_suffix = '_print_list'
     paginate_by = False
 
