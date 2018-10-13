@@ -14,7 +14,7 @@ Criando o banco de dados
 
 Criar uma usuário inicial
 
-    pipenv run createsuperuser
+    pipenv run manage createsuperuser
 
 Executar em modo de desenvolvimento
 
