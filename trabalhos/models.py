@@ -1,4 +1,5 @@
 from django.db import models
+from django.dispatch import receiver
 from djchoices import DjangoChoices, ChoiceItem
 from comum.models import Usuario
 
@@ -53,6 +54,9 @@ class Trabalho(models.Model):
     situacao = models.IntegerField(
         choices=Situacao.choices, verbose_name='situação', default=0,
         editable=False)
+    avaliador = models.ForeignKey(Usuario, on_delete=models.SET_NULL,
+                                  editable=False, blank=True, null=True,
+                                  related_name='trabalhos')
     observacoes = models.TextField(blank=True, null=True,
                                    verbose_name='observações')
 
@@ -61,3 +65,12 @@ class Trabalho(models.Model):
 
     def __str__(self):
         return self.titulo
+
+
+@receiver(models.signals.pre_save, sender=Trabalho)
+def distribuir_trabalho(sender, instance, **kwargs):
+    if instance.avaliador is None:
+        avaliadores = instance.area_tema.avaliadores.annotate(
+            total_trabalhos=models.Count('trabalhos')).order_by(
+            'total_trabalhos')
+        instance.avaliador = avaliadores.first()

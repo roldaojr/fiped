@@ -1,10 +1,11 @@
 from django.forms.models import model_to_dict
+from django.db.models import Count
 from django.test import TestCase
 from django.urls import reverse
 from django.conf import settings
 from comum.tests.factories import UsuarioFactory
 from .factories import TrabalhoFactory, AreaTemaFactory, ModalidadeFactory
-from ..models import Trabalho
+from ..models import Trabalho, AreaTema
 import factory
 
 
@@ -44,6 +45,23 @@ class SubmeterTrabalhoTestCase(TestCase):
         resp = self.client.post(reverse('cbvadmin:trabalhos_trabalho_add'),
                                 trabalho_dict)
         self.assertTrue(resp.context['form'].has_error('arquivo'))
+
+
+class DistribuirTrabalhosTestCase(TestCase):
+    def setUp(self):
+        AreaTemaFactory.create_batch(5)
+        ModalidadeFactory.create()
+        UsuarioFactory.create_batch(5)
+        TrabalhoFactory.create_batch(30)
+
+    def test_submeter_e_distribuir_trabalho(self):
+        avalliadores = {area: area.avaliadores.annotate(
+            total_trabalhos=Count('trabalhos')).order_by(
+            'total_trabalhos').first()
+            for area in AreaTema.objects.all()}
+        trabalho = TrabalhoFactory.create()
+        avaliador = avalliadores[trabalho.area_tema]
+        self.assertEqual(avaliador, trabalho.avaliador)
 
 
 class AvaliarTrabalhoTestCase(TestCase):
