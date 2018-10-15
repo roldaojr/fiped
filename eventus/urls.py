@@ -9,8 +9,8 @@ import cbvadmin
 
 urlpatterns = [
     url(r'^admin/', cbvadmin.site.urls),
-    # url(r'^accounts/register/$', InscreverView.as_view(),
-    #     name='registration_register'),
+    url(r'^accounts/register/$', InscreverView.as_view(),
+        name='registration_register'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^preferences/', include('dynamic_preferences.urls')),
     url(r'^select2/', include('django_select2.urls')),
