@@ -95,6 +95,22 @@
     <div class="wrapper">
         <!-- Header Section Start -->
         <header class="header--section">
+         <div id="myModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    
+                  </div>
+                  <div class="modal-body">
+                    <img src="{% static 'img/aviso.jpeg' %}">
+                  </div>
+                  
+                </div>
+
+              </div>
+            </div>
 
          <!-- <div class="alert">
               <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
@@ -415,6 +431,7 @@ $(document).ready(function(){
     e.stopPropagation();
     e.preventDefault();
   });
+  $('#myModal').modal('show');
 });
 </script>
 </body>
