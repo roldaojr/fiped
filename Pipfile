@@ -35,5 +35,5 @@ python_version = "3"
 [scripts]
 server = "python manage.py runserver"
 test = "python manage.py test"
+manage = "python manage.py"
 migrate = "python manage.py migrate"
-createsuperuser = "python manage.py createsuperuser"

@@ -22,7 +22,7 @@ class TrabalhoListView(TableListView):
             return qs
 
         if user.has_perm('trabalhos.change_trabalho'):
-            return qs.filter(area_tema__avaliadores__id=user.pk)
+            return qs.filter(avaliador_id=user.pk)
 
         return qs.filter(
             Q(autor=user) | Q(coautor1=user) |
