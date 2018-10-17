@@ -83,6 +83,25 @@
 .closebtn:hover {
     color: black;
 }
+
+.icon-bar {
+    position: fixed;
+    bottom: 10px;
+    left: -8px;
+    width: 150px;
+    transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    cursor: pointer;
+    display: block;
+}
+
+
+.facebook {
+  background: none;
+  color: white;
+}
 </style>
 </head>
 <body>
@@ -95,9 +114,9 @@
     <div class="wrapper">
         <!-- Header Section Start -->
         <header class="header--section">
-         <div id="myModal" class="modal fade" role="dialog">
+       <!--  <div id="myModal" class="modal fade" role="dialog">
               <div class="modal-dialog">
-                <!-- Modal content-->
+                 Modal content
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -110,7 +129,7 @@
                 </div>
 
               </div>
-            </div>
+        </div> -->
 
          <!-- <div class="alert">
               <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
@@ -431,7 +450,7 @@ $(document).ready(function(){
     e.stopPropagation();
     e.preventDefault();
   });
-  $('#myModal').modal('show');
+  // $('#myModal').modal('show');
 });
 </script>
 </body>
