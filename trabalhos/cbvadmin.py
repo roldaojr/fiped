@@ -2,7 +2,8 @@ from django.urls import reverse
 from menu import MenuItem
 import cbvadmin
 from comum.views import DetailView
-from .forms import TrabalhoChangeForm, TrabalhoAddForm, AreaTemaForm
+from .forms import (TrabalhoChangeForm, TrabalhoChangeFormAdmin,
+                    TrabalhoAddForm, AreaTemaForm)
 from .models import Modalidade, AreaTema, Trabalho
 from .views import (TrabalhoListView, SubmeterTrabalhoView, AvaliarView,
                     TrabalhoReenviarView)
@@ -54,6 +55,8 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
     def get_form_class(self, request, obj=None, **kwargs):
         if obj and not request.user.is_superuser:
             return TrabalhoChangeForm
+        else:
+            return TrabalhoChangeFormAdmin
         return super().get_form_class(request, obj=None, **kwargs)
 
     def get_success_url(self, view=None):

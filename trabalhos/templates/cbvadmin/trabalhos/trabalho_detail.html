@@ -115,6 +115,16 @@
   <tr>
     <td>Observações</td><td>{{ object.observacoes|default:'-'|linebreaksbr }}</td>
   </tr>
+  <tr>
+    <td>Carta de aceite</td>
+    <td>
+      {% if object.carta_aceite %}
+      <a href="{{ object.carta_aceite.url }}">Download</a>
+      {% else %}
+      Não disponível
+      {% endif %}
+    </td>
+  </tr>
 </table>
 {% endblock %}
 
