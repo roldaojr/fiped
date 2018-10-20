@@ -1,0 +1,41 @@
+{% extends 'cbvadmin/oficinas/oficina_detail.html' %}
+
+{% block details %}
+<table class="ui definition unstackable table">
+  <tr>
+    <td>Situação</td>
+    <td>
+      {% if object.situacao == 1 %}
+      <div class="ui green label">
+        {{ object.get_situacao_display }}
+      </div>
+      {% elif object.situacao == 2 %}
+      <div class="ui orange label">
+        {{ object.get_situacao_display }}
+      </div>
+      {% else %}
+      <div class="ui grey label">
+        {{ object.get_situacao_display }}
+      </div>
+      {% endif %}
+    </td>
+  </tr>
+  <tr><td>Título</td><td>{{ object.titulo }}</td></tr>
+  <tr><td>Editora</td><td>{{ object.editora }}</td></tr>
+  <tr><td>ISBN</td><td>{{ object.isbn }}</td></tr>
+  <tr><td>Ano</td><td>{{ object.ano }}</td></tr>
+  <tr><td>Autores</td><td>{{ object.autores }}</td></tr>
+  <tr><td>Biografia</td><td>{{ object.biografia }}</td></tr>
+  <tr><td>Resumo</td><td>{{ object.resumo }}</td></tr>
+  <tr><td>Palavras chave</td><td>{{ object.palavras_chave }}</td></tr>
+  <tr><td>Páginas</td><td>{{ object.paginas }}</td></tr>
+  <tr><td>Preço</td><td>{{ object.preco }}</td></tr>
+  <tr><td>Nome</td><td>{{ object.nome }}</td></tr>
+  <tr><td>Telefone</td><td>{{ object.telefone }}</td></tr>
+  <tr><td>E-mail</td><td>{{ object.email }}</td></tr>
+  <tr>
+    <td>Capa</td>
+    <td><img class="ui small image" src="{{ object.capa.url }}" alt="Capa do livro"/></a></td>
+  </tr>
+</table>
+{% endblock %}

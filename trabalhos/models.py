@@ -51,6 +51,8 @@ class Trabalho(models.Model):
     area_tema = models.ForeignKey(
         AreaTema, on_delete=models.CASCADE, verbose_name='área/tema')
     arquivo = models.FileField(upload_to='trabalhos', blank=False)
+    carta_aceite = models.FileField(upload_to='cartas-de-aceite', blank=False,
+                                    null=True, verbose_name='Carta de aceite')
     situacao = models.IntegerField(
         choices=Situacao.choices, verbose_name='situação', default=0,
         editable=False)

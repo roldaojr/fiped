@@ -48,3 +48,32 @@ class MesaRedonda(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+class Livro(models.Model):
+    class Situacao(DjangoChoices):
+        Pendente = ChoiceItem(0)
+        Aprovado = ChoiceItem(1)
+        Reprovado = ChoiceItem(2)
+
+    titulo = models.CharField(max_length=100)
+    editora = models.CharField(max_length=100)
+    isbn = models.CharField(max_length=100, verbose_name='ISBN')
+    ano = models.IntegerField()
+    autores = models.CharField(max_length=100)
+    biografia = models.TextField()
+    resumo = models.TextField()
+    palavras_chave = models.CharField(max_length=100)
+    paginas = models.IntegerField()
+    preco = models.DecimalField(max_digits=8, decimal_places=2,
+                                verbose_name='preço')
+    nome = models.CharField(max_length=100)
+    telefone = models.CharField(max_length=100)
+    email = models.CharField(max_length=100, verbose_name='e-mail')
+    capa = models.FileField(upload_to='livros', blank=False, null=False)
+    situacao = models.IntegerField(choices=Situacao.choices,
+                                   verbose_name='situação',
+                                   default=0, editable=False)
+
+    def __str__(self):
+        return self.titulo

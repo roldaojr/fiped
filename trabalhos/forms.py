@@ -22,10 +22,23 @@ class AreaTemaForm(forms.ModelForm):
         }
 
 
+class TrabalhoChangeFormAdmin(UploadMaxSizeMixin, forms.ModelForm):
+    class Meta:
+        model = Trabalho
+        fields = '__all__'
+        widgets = {
+            'area_tema': AreaTemaSelectWidget,
+        }
+        help_texts = {
+            'arquivo': 'Tamanho maximo de %s' % humanbytes(
+                settings.FILE_UPLOAD_MAX_SIZE)
+        }
+
+
 class TrabalhoChangeForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Trabalho
-        fields = ('area_tema',)
+        fields = ('area_tema', 'carta_aceite')
         widgets = {
             'area_tema': AreaTemaSelectWidget,
         }
@@ -38,7 +51,7 @@ class TrabalhoChangeForm(UploadMaxSizeMixin, forms.ModelForm):
 class TrabalhoAddForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Trabalho
-        exclude = ('observacoes',)
+        exclude = ('observacoes', 'carta_aceite')
         widgets = {
             'area_tema': AreaTemaSelectWidget,
             'autor': UsuarioSelectWidget(attrs={'readonly': 'readonly'}),
