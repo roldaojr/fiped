@@ -57,7 +57,7 @@ class Trabalho(models.Model):
         choices=Situacao.choices, verbose_name='situação', default=0,
         editable=False)
     avaliador = models.ForeignKey(Usuario, on_delete=models.SET_NULL,
-                                  editable=False, blank=True, null=True,
+                                  blank=True, null=True,
                                   related_name='trabalhos')
     observacoes = models.TextField(blank=True, null=True,
                                    verbose_name='observações')
