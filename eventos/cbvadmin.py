@@ -16,7 +16,7 @@ class TipoInscricaoAdmin(cbvadmin.ModelAdmin):
 
 @cbvadmin.register(Inscricao)
 class InscricaoAdmin(cbvadmin.ModelAdmin):
-    list_display = ('usuario', 'tipo', 'validado', 'alojamento','pagamento')
+    list_display = ('usuario', 'tipo', 'validado', 'uf', 'alojamento','pagamento','deficiencia')
     filterset_class = InscricaoFilter
     imprimir_view_class = ImprimirLista
     detail_view_class = DetailView
