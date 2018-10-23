@@ -5,7 +5,7 @@ from .models import Inscricao
 class InscricaoFilter(FilterSet):
     class Meta:
         model = Inscricao
-        fields = ('nome', 'tipo', 'validado', 'alojamento','pagamento')
+        fields = ('nome', 'tipo', 'validado', 'alojamento','pagamento','cidade','uf')
 
     nome = CharFilter(
         field_name='usuario',
