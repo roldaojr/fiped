@@ -7,7 +7,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         trabalhos = Trabalho.objects.filter(avaliador__isnull=True)
-        self.stdout.write('Distribuindo %d trabalhos' % trabalhos.count())
+        self.stdout.write('Distribuindo %d trabalhos sem avaliador' % trabalhos.count())
         for trabalho in trabalhos:
-            #distribuir_trabalho(Trabalho, trabalho)
+            distribuir_trabalho(Trabalho, trabalho)
             trabalho.save()

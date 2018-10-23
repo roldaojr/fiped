@@ -3,6 +3,7 @@ from django.conf import settings
 from django_select2.forms import ModelSelect2Widget
 from comum.utils.file_upload import UploadMaxSizeMixin, humanbytes
 from comum.forms import UsuarioSelectWidget, UsuariosSelectWidget
+from comum.models import Usuario
 from .models import Trabalho, AreaTema
 
 
@@ -28,6 +29,7 @@ class TrabalhoChangeFormAdmin(UploadMaxSizeMixin, forms.ModelForm):
         fields = '__all__'
         widgets = {
             'area_tema': AreaTemaSelectWidget,
+            'avaliador': UsuarioSelectWidget
         }
         help_texts = {
             'arquivo': 'Tamanho maximo de %s' % humanbytes(
