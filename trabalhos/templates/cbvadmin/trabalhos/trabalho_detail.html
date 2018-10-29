@@ -58,7 +58,7 @@
       <i class="pencil icon"></i> Alterar
     </a>
     {% endif %}
-    {% if admin.urls.add and object.situacao == 3 %}
+    {% if admin.urls.reenviar and object.situacao == 3 %}
     <a href="{% url admin.urls.reenviar object.pk %}" class="ui secondary button">
       <i class="send icon"></i> Reenviar arquivo
     </a>
