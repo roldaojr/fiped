@@ -1,0 +1,106 @@
+{% extends 'pages_includes/layout.html' %}
+{% block layout_content %}
+{% load staticfiles %}
+
+<!-- Page Header Section Start -->
+<div class="page-header--section text-center">
+	<!-- Page Title Start -->
+	<div class="page--title pd--130-0 bg--image bg--overlay" data-rjs="2" data-bg-img="{% static 'img/BACK.jpg' %}">
+		<div class="container">
+			<h1 class="h1 wow jello" style="visibility: visible; animation-name: jello;">Livros Aprovados</h1>
+		</div>
+	</div>
+	<!-- Page Title End -->
+
+	<!-- Page Breadcrumb Start -->
+<!--
+<div class="page--breadcrumb font--secondary">
+	<div class="container">
+		<ul class="breadcrumb">
+			<li><a href="index.html">Quick Fix</a></li>
+			<li class="active"><span>About Us</span></li>
+		</ul>
+	</div>
+</div>
+-->
+	<!-- Page Breadcrumb End --></div>
+<!-- Page Header Section End -->
+
+
+
+<div class="container mt--60">
+	<section class="section--title">
+		<h2 class="h2">Livros</h2>
+	</section>
+	<!-- 
+	<div class="row">
+		<div class="col-md-12">			
+			
+			<ul>
+							</ul>
+		</div> -->
+		<div class="col-md-3 col-sm-6 text-center un-mb-5 wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
+				<a href="/static/ebooks/capa_labios_vermelhos-ORIGINAL6A_1.png" target="_blank"><img src="{% static '/static/ebooks/capa_labios_vermelhos-ORIGINAL6A_1.png' %}" class="img-rounded"></a>
+				<h4 class="h4"> Lábios Vermelhos</h4>
+							</div>
+
+		<!-- <div class="col-md-3 col-sm-6 text-center un-mb-5 wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
+				<a href="/static/ebooks/2008-ebook-fiped-i.pdf" target="_blank"><img src="{% static '/img/qf-anais-ii.jpg' %}" class="img-rounded"></a>
+				<h4 class="h4"> II Edição</h4>
+				<a href="/static/ebooks/2008-ebook-fiped-i.pdf" class="btn btn-default" target="_blank">Baixar</a>			</div> -->
+
+
+	<div class="col-md-3 col-sm-6 text-center un-mb-5 wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
+				<a href="/static/ebooks/Nadia_Farias_Santos_capa_14x21-01.jpg" target="_blank"><img src="{% static '/static/ebooks/Nadia_Farias_Santos_capa_14x21-01.jpg' %}" class="img-rounded"></a>
+				<h4 class="h4">ENTRE SABERES E FAZERES DOCENTES: O ENSINO DAS RELAÇÕES ÉTNICO-RACIAIS NO COTIDIANO ESCOLAR</h4>
+							</div>
+
+
+	<div class="col-md-3 col-sm-6 text-center un-mb-5 wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
+				<a href="/static/ebooks/ETICA_E_EDUCAAO.jpg" target="_blank"><img src="{% static '/static/ebooks/ETICA_E_EDUCAAO.jpg' %}" class="img-rounded"></a>
+				<h4 class="h4">A ética, a ética profissional e a educação</h4>
+	</div>
+
+
+	<div class="col-md-3 col-sm-6 text-center un-mb-5 wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
+				<a href="/static/ebooks/IMG_20181024_132250_600.jpg" target="_blank"><img src="{% static '/static/ebooks/IMG_20181024_132250_600.jpg' %}" class="img-rounded"></a>
+				<h4 class="h4">Quem roubou as crianças da Rua? É outras prosas poeticas</h4>
+	</div>
+
+
+	<div class="col-md-3 col-sm-6 text-center un-mb-5 wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
+				<a href="/static/ebooks/CAPA_PEDAGOGIA_SOCIAL_02_AGO__2018.pdf" target="_blank"><img src="{% static '/static/ebooks/CAPA_PEDAGOGIA_SOCIAL_02_AGO__2018.pdf' %}" class="img-rounded"></a>
+				<h4 class="h4">PEDAGOGIA SOCIAL: UM HORIZONTE EDUCATIVO PARA CONTEXTOS DIVERSOS</h4>
+	</div>
+	
+	<div class="col-md-3 col-sm-6 text-center un-mb-5 wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
+				<a href="#" target="_blank"><img src="{% static '/img/qf.jpg' %}" class="img-rounded"></a>
+				<h4 class="h4">PAULO FREIRE: culturas, ética e subjetividades no ensinar e aprender</h4>
+							</div>
+
+			
+</div>
+
+
+
+<div class="cta--section bg--color-darkgray">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<!-- Call To Action Content Start -->
+				<div class="cta--content">
+					<h2 class="h3">Faça parte do grande Fórum Internacional de Pedagogia da atualidade!</h2>
+				</div>
+				<!-- Call To Action Content Start -->
+			</div>
+
+			<div class="col-md-3">
+				<!-- Call To Action Button Start -->
+				<div class="cta--btn text-center">
+					<a href="http://www.ainpgp.org/fiped/x/inscricao/formulario" class="btn btn-default wow infinite pulse animated" data-wow-duration="3s" style="visibility: visible; animation-duration: 3s; animation-name: pulse;">Inscreva-se agora!</a>				</div>
+				<!-- Call To Action Button Start -->
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -12,3 +12,4 @@ class InscricaoFilter(FilterSet):
         lookup_expr='nome_completo__icontains',
         label='Nome completo'
     )
+    
