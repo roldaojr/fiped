@@ -1,100 +1,239 @@
 {% extends 'pages_includes/layout.html' %}
 {% block layout_content %}
 {% load staticfiles %}
-
 <!-- Page Header Section Start -->
 <div class="page-header--section text-center">
-	<!-- Page Title Start -->
-	<div class="page--title pd--130-0 bg--image bg--overlay" data-rjs="2" data-bg-img="{% static 'img/BACK.jpg' %}">
-		<div class="container">
-			<h1 class="h1 wow jello" style="visibility: visible; animation-name: jello;">Livros Aprovados</h1>
-		</div>
-	</div>
-	<!-- Page Title End -->
-
-	<!-- Page Breadcrumb Start -->
+    <div class="page--title pd--130-0 bg--image bg--overlay" data-rjs="2" data-bg-img="{% static 'img/BACK.jpg' %}">
+        <div class="container">
+            <h1 class="h1 wow jello" style="visibility: visible; animation-name: jello;">Livros aprovados</h1>
+        </div>
+    </div>
+    <!-- Page Breadcrumb Start -->
 <!--
 <div class="page--breadcrumb font--secondary">
-	<div class="container">
-		<ul class="breadcrumb">
-			<li><a href="index.html">Quick Fix</a></li>
-			<li class="active"><span>About Us</span></li>
-		</ul>
-	</div>
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="index.html">Quick Fix</a></li>
+            <li class="active"><span>About Us</span></li>
+        </ul>
+    </div>
 </div>
 -->
-	<!-- Page Breadcrumb End --></div>
+    <!-- Page Breadcrumb End --></div>
 <!-- Page Header Section End -->
 
 
+            <div class="row un-mtb-5 oficinas wow slideInRight" style="visibility: visible; animation-name: slideInRight;">
+            <div class="col-md-3 text-right">
+                <h2>01</h2>
+            </div>
+            <div class="col-md-9">
+                <h3>LÁBIOS VERMELHOS</h3>
+                <div class="row">
+                    <div class="col-md-7 un-mb-3">
+                        <p style="text-align: justify;"><strong>Capa:</strong> 
+                            <img src="{% static '/ebooks/capa_labios_vermelhos-ORIGINAL6A_1.png' %}">
+                        </p>
+                        <p style="text-align: justify;"><strong>Resumo:</strong> O livro Lábios Vermelhos é uma coletânea de contos, vinte contos, que abordam temáticas voltadas para o machismo, feminismo, vazio existencial, solidão e medo. São histórias ficcionais, mas que não fogem a realidade de várias mulheres. Quem também guarda uma relação bastante imbricada com as problemáticas ligadas a mulher é o espaço que se constrói nas narrativas. Muitas das vezes, sugerem uma espécie de prisão transparente. Esses espaços, por vezes, são físicos, mas outras são psicológicos e sociais. </p>
+                        <p style="text-align: justify;"><strong>Editora:</strong> Offset</p>
+                        <p style="text-align: justify;"><strong>ISBN:</strong> 978-85-5508-175-0</p>
+                        <p style="text-align: justify;"><strong>Páginas:</strong> 84</p>
+                        <p style="text-align: justify;"><strong>Preço:</strong>25,00</p>
+                    </div>
 
-<div class="container mt--60">
-	<section class="section--title">
-		<h2 class="h2">Livros</h2>
-	</section>
-	<!-- 
-	<div class="row">
-		<div class="col-md-12">			
-			
-			<ul>
-							</ul>
-		</div> -->
-	
+                    <div class="col-md-5">
+                        <div style="border-left: 2px solid #f69323; padding-left: 1rem">
+                        <strong>Autores:</strong> 
+                            <p>
+                                Sidileide Batalha do Rêgo<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+           
+               <div class="row un-mtb-5 oficinas wow slideInRight" style="visibility: visible; animation-name: slideInRight;">
+            <div class="col-md-3 text-right">
+                <h2>02</h2>
+            </div>
+            <div class="col-md-9">
+                <h3>PAULO FREIRE: culturas, ética e subjetividades no ensinar e aprender</h3>
+                <div class="row">
+                    <div class="col-md-7 un-mb-3">
+                        <p style="text-align: justify;"><strong>Capa:</strong> 
+                            <img src="{% static '/ebooks/' %}">
+                        </p>
+                        <p style="text-align: justify;"><strong>Resumo:</strong> A organização desta produção, PAULO FREIRE: culturas, ética e subjetividades no ensinar e aprender, nasceu de desafios concretos surgidos no cotidiano das salas de aulas e das pesquisas realizadas por professores-pesquisadores. A obra reúne artigos de professores de graduação e pós-graduação, alguns em autora com ex-orientandos de cinco universidades do nordeste brasileiro (Universidade Federal da Paraíba; Universidade Federal de Alagoas; Universidade Federal de Pernambuco; Universidade Federal do Rio Grande do Norte; e Universidade do Estado do Rio Grande do Norte) e a Universidade de Granada/ Espanha. São artigos que versam sobre a história e a contribuição de Paulo Freire para a educação brasileira e internacional.</p>
+                        <p style="text-align: justify;"><strong>Editora:</strong> CCTA</p>
+                        <p style="text-align: justify;"><strong>ISBN:</strong> 978-85-9559-036-6</p>
+                        <p style="text-align: justify;"><strong>Páginas:</strong>286</p>
+                        <p style="text-align: justify;"><strong>Preço:</strong>30,00</p>
+                    </div>
 
-		<!-- <div class="col-md-3 col-sm-6 text-center un-mb-5 wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
-				<a href="/static/ebooks/2008-ebook-fiped-i.pdf" target="_blank"><img src="{% static '/img/qf-anais-ii.jpg' %}" class="img-rounded"></a>
-				<h4 class="h4"> II Edição</h4>
-				<a href="/static/ebooks/2008-ebook-fiped-i.pdf" class="btn btn-default" target="_blank">Baixar</a>			</div> -->
-
-
-    <div class="col-md-3 col-sm-6 text-center un-mb-5 wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
-        <a href="/static/ebooks/capa_labios_vermelhos-ORIGINAL6A_1.png" target="_blank"><img src="{% static '/ebooks/capa_labios_vermelhos-ORIGINAL6A_1.png' %}" class="img-rounded"></a>
-        <h4 class="h4"> Lábios Vermelhos</h4>
-              </div>
-
-
-
-	<div class="col-md-3 col-sm-6 text-center un-mb-5 wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
-				<a href="/static/ebooks/ETICA_E_EDUCAAO.jpg" target="_blank"><img src="{% static 'ebooks/ETICA_E_EDUCAAO.jpg' %}" class="img-rounded"></a>
-				<h4 class="h4">A ética, a ética profissional e a educação</h4>
-	</div>
-
-
-	<div class="col-md-3 col-sm-6 text-center un-mb-5 wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
-				<a href="/static/ebooks/IMG_20181024_132250_600.jpg" target="_blank"><img src="{% static '/ebooks/IMG_20181024_132250_600.jpg' %}" class="img-rounded"></a>
-				<h4 class="h4">Quem roubou as crianças da Rua? É outras prosas poeticas</h4>
-	</div>
-
-
-
-      <div class="col-md-3 col-sm-6 text-center un-mb-5 wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
-        <a href="/static/ebooks/Nadia_Farias_Santos_capa_14x21-01.jpg" target="_blank"><img src="{% static '/ebooks/Nadia_Farias_Santos_capa_14x21-01.jpg' %}" class="img-rounded"></a>
-        <h4 class="h4">ENTRE SABERES E FAZERES DOCENTES: O ENSINO DAS RELAÇÕES ÉTNICO-RACIAIS NO COTIDIANO ESCOLAR</h4>
-              </div>
-
-			
-</div>
+                    <div class="col-md-5">
+                        <div style="border-left: 2px solid #f69323; padding-left: 1rem">
+                        <strong>Autores:</strong> 
+                            <p>
+                                 Eduardo Jorge Lopes da Silva<br>
+                                  Roseane Maria de Amorim
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
+                <div class="row un-mtb-5 oficinas wow slideInRight" style="visibility: visible; animation-name: slideInRight;">
+            <div class="col-md-3 text-right">
+                <h2>03</h2>
+            </div>
+            <div class="col-md-9">
+                <h3>ENTRE SABERES E FAZERES DOCENTES: O ENSINO DAS RELAÇÕES ÉTNICO-RACIAIS NO COTIDIANO ESCOLAR</h3>
+                <div class="row">
+                    <div class="col-md-7 un-mb-3">
+                      <p style="text-align: justify;"><strong>Capa:</strong> 
+                            <img src="{% static '/ebooks/Nadia_Farias_Santos_capa_14x21-01.jpg' %}">
+                        </p>
+                        <p style="text-align: justify;"><strong>Resumo:</strong> O livro Entre saberes e fazeres docente busca comp¬¬reender como os professores se posic¬ionam frente ao ensino das relações étnico-raciais em sala de aula e as implicações que suas escolhas relativas à presença ou omissão de conteúdos e metodologias que podem favorecer ou dificultar relações étnico-raciais saudáveis, essa é a mola propulsora desta obra. A sociedade ainda carece da análise e da discussão a partir de dados concretos sobre as relações étnico-raciais dentro da escola, posturas e atitudes assumidas pelos docentes na sua prática educativa. É nesse contexto que Nadia Farias dos Santos adentra no universo escolar trazendo à tona a realidade da sala de aula e das práticas docentes. É possível nesta obra compreender a invisibilidade da população escolar negra e entender o peso que as instituições educacionais tem na reprodução e perpetuação do racismo ou a sua ruptura por meio de processos educacionais que valorize as matrizes africanas e afro-brasileiras em todos os seus aspectos. A forma como os professores percebem as relações étnico-raciais incidem diretamente na adoção ou não de conteúdos e metodologias que aproximem os alunos negros e não negros dos saberes essenciais a uma formação pluriétnica e multicultural que extrapole e supere a realidade monocultural, colonizadora e hegemônica que ainda domina o fazer pedagógico das escolas brasileiras. Oferecer uma forma de compreensão desse cenário e instigar aos leitores a reavaliar suas posturas e atitudes com vistas ao rompimento e superação do silêncio secular ou de seus ecos é uma das formas de combate ao racismo estrutural e secular, reconhecendo a importante participação dos negros e negras na formação do povo brasileiro, de sua história e sua cultura.</p>
+                      
+                        <p style="text-align: justify;"><strong>Editora:</strong> Appris</p>
+                        <p style="text-align: justify;"><strong>ISBN:</strong> 978-85-473-1678-5</p>
+                        <p style="text-align: justify;"><strong>Páginas:</strong>157</p>
+                        <p style="text-align: justify;"><strong>Preço:</strong>46,00</p>
+                    </div>
 
+                    <div class="col-md-5">
+                        <div style="border-left: 2px solid #f69323; padding-left: 1rem">
+                        <strong>Autores:</strong> 
+                            <p>
+                                 Nadia Farias dos Santos<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+             
+    
+             <div class="row un-mtb-5 oficinas wow slideInRight" style="visibility: visible; animation-name: slideInRight;">
+            <div class="col-md-3 text-right">
+                <h2>04</h2>
+            </div>
+            <div class="col-md-9">
+                <h3>A ética, a ética profissional e a educação </h3>
+                <div class="row">
+                    <div class="col-md-7 un-mb-3">
+                       <p style="text-align: justify;"><strong>Capa:</strong> 
+                            <img src="{% static '/ebooks/ETICA_E_EDUCAAO.jpg' %}">
+                        </p>
+                        <p style="text-align: justify;"><strong>Resumo:</strong> Nesse primeiro trabalho inauguramos o campo da pedagogia com um debate pertinente sobre as tessituras que envolvem a ética, a ética profissional e a educação. É um volume introdutório para uma coleção que possui como meta apresentar uma das pedras fundamentais da Pedagogia Humanista, e que põe em evidência um de seus protagonistas, o pedagogo. A ética profissional vem se configurando como uma das instâncias necessárias e estruturais para à formação pedagógica do profissional da educação. Dessa forma, o livro se propõe a rebuscar o ‘sótão’ da ética profissional no campo da educação para que o leitor possa partir ao encontro de si na experiência encantadora de ser um (a) educador (a).</p>
+                      
+                        <p style="text-align: justify;"><strong>Editora:</strong> CRV</p>
+                        <p style="text-align: justify;"><strong>ISBN:</strong> 855-67-8634-015-4</p>
+                        <p style="text-align: justify;"><strong>Páginas:</strong>90</p>
+                        <p style="text-align: justify;"><strong>Preço:</strong>25,00</p>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div style="border-left: 2px solid #f69323; padding-left: 1rem">
+                        <strong>Autores:</strong> 
+                            <p>
+                                 Sheyla Maria Fontenele Macedo<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+             <div class="row un-mtb-5 oficinas wow slideInRight" style="visibility: visible; animation-name: slideInRight;">
+            <div class="col-md-3 text-right">
+                <h2>05</h2>
+            </div>
+            <div class="col-md-9">
+                <h3>Quem roubou as crianças da Rua? É outras prosas poeticas </h3>
+                <div class="row">
+                    <div class="col-md-7 un-mb-3">
+                       <p style="text-align: justify;"><strong>Capa:</strong> 
+                            <img src="{% static '/ebooks/IMG_20181024_132250_600.jpg' %}">
+                        </p>
+                        <p style="text-align: justify;"><strong>Resumo:</strong> Quem roubou as crianças da Rua reúne crônicas de diferentes tons. É dividido em 5 Cap. O primeiro traz crônicas reflexivas, um olhar para dentro de nós. O segundo de memórias, o terceiro retrada as cenas diárias sem, contudo deixar a reflexão e o lirismo pulsante. O quarto denominada de prosa poética pela semelhança com a poesia. É o última é intitulado " As histórias que a vida escreveu. É Um livro pra agradar a gregos e troianos.</p>
+                      
+                        <p style="text-align: justify;"><strong>Editora:</strong> Ideia</p>
+                        <p style="text-align: justify;"><strong>ISBN:</strong> 9788546301857</p>
+                        <p style="text-align: justify;"><strong>Páginas:</strong>137</p>
+                        <p style="text-align: justify;"><strong>Preço:</strong>20,00</p>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div style="border-left: 2px solid #f69323; padding-left: 1rem">
+                        <strong>Autores:</strong> 
+                            <p>
+                               Carlos Alves Vieira<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+              
+         <div class="row un-mtb-5 oficinas wow slideInRight" style="visibility: visible; animation-name: slideInRight;">
+            <div class="col-md-3 text-right">
+                <h2>06</h2>
+            </div>
+            <div class="col-md-9">
+                <h3>PEDAGOGIA SOCIAL: UM HORIZONTE EDUCATIVO PARA CONTEXTOS DIVERSOS</h3>
+                <div class="row">
+                    <div class="col-md-7 un-mb-3">
+                       <p style="text-align: justify;"><strong>Capa:</strong> 
+                            <img src="{% static '/ebooks/capa_labios_vermelhos-ORIGINAL6A_1.png' %}">
+                        </p>
+                        <p style="text-align: justify;"><strong>Resumo:</strong>A atuação do pedagogo em espaços não escolares se configura como uma resposta da Pedagogia às múltiplas demandas sociais inerentes ao tempo presente. Empiricamente é possível constatar que práticas socioeducativas se efetivam em espaços diversos que estão para além dos muros da escola. Assentamentos, sindicatos, presídios, igrejas, casas de acolhimento de crianças e adolescentes, CRAS, CRAMs, ONGs, Centros comunitários, estes são alguns exemplos de demandas nas quais são requeridas ações pedagógicas. No que se refere à Pedagogia Social, esta se constitui como a dimensão da Pedagogia que está incumbida da tarefa de pensar as práticas educativas em contextos diversos que supere o assistencialismo e, acima de tudo, assuma caráter emancipatório e libertador capaz de transformar as pessoas por ela assistida e fazê-las sentir-se sujeito de direitos da sua história, da sua cultura e do seu meio social. A atuação do pedagogo nestes espaços torna-se imprescindível em função de sua profissionalidade. O graduado em Pedagogia é o profissional que dispõe da formação capaz de promover o desenvolvimento da pessoa humana em diferentes contextos e nas diferentes fases da vida. Assim, produzir e socializar conhecimentos no âmbito da Pedagogia Social configura-se como meio concreto de contribuir para o aprimoramento do itinerário formativo dos estudantes de Pedagogia. O livro está organizado em duas partes. A primeira traz um referencial teórico acerca da Pedagogia Social, abordando os fundamentos epistemológicos, os aspectos históricos e legais. A segunda parte é composta por relatos de práticas socioeducativas em contextos diversos. Boa Leitura!</p>
+                      
+                        <p style="text-align: justify;"><strong>Editora:</strong> IMPRECE</p>
+                        <p style="text-align: justify;"><strong>ISBN:</strong> 9 788581 261751</p>
+                        <p style="text-align: justify;"><strong>Páginas:</strong>378</p>
+                        <p style="text-align: justify;"><strong>Preço:</strong>35,00</p>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div style="border-left: 2px solid #f69323; padding-left: 1rem">
+                        <strong>Autores:</strong> 
+                            <p>
+                               Maria Gerlaine Belchior Amaral<br>
+                                José Amiraldo Alves da Silva<br>
+                                 Maria Thaís de Oliveira Batista.<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
 <div class="cta--section bg--color-darkgray">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-9">
-				<!-- Call To Action Content Start -->
-				<div class="cta--content">
-					<h2 class="h3">Faça parte do grande Fórum Internacional de Pedagogia da atualidade!</h2>
-				</div>
-				<!-- Call To Action Content Start -->
-			</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <!-- Call To Action Content Start -->
+                <div class="cta--content">
+                    <h2 class="h3">Faça parte do grande Fórum Internacional de Pedagogia da atualidade!</h2>
+                </div>
+                <!-- Call To Action Content Start -->
+            </div>
 
-			<div class="col-md-3">
-				<!-- Call To Action Button Start -->
-				<div class="cta--btn text-center">
-					<a href="http://www.ainpgp.org/fiped/x/inscricao/formulario" class="btn btn-default wow infinite pulse animated" data-wow-duration="3s" style="visibility: visible; animation-duration: 3s; animation-name: pulse;">Inscreva-se agora!</a>				</div>
-				<!-- Call To Action Button Start -->
-			</div>
-		</div>
-	</div>
+            <div class="col-md-3">
+                <!-- Call To Action Button Start -->
+                <div class="cta--btn text-center">
+                    <a href="http://www.ainpgp.org/fiped/x/inscricao/formulario" class="btn btn-default wow infinite pulse" data-wow-duration="3s" style="visibility: hidden; animation-duration: 3s; animation-name: none;">Inscreva-se agora!</a>             </div>
+                <!-- Call To Action Button Start -->
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
