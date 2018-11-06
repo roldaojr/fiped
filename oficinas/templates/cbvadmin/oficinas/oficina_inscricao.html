@@ -23,26 +23,32 @@
         <th></th>
         <th>Oficina</th>
         <th>Ministrante</th>
+        <th>Vagas</th>
       </tr>
     </thead>
     <tbody>
     {% for choice in form.oficinas.field.queryset %}
       <tr>
         <td class="collapsing">
-          <div class="ui fitted toggle checkbox">
           {% spaceless %}
-          <input name="oficinas" id="id_oficinas_{{ choice.pk }}"
-          value="{{ choice.pk }}" type="checkbox"
           {% if choice.pk in form.oficinas.value or choice.pk|slugify in form.oficinas.value %}
-          checked="checked"
-          {% endif %}
-          >
-          <label></label>
-          {% endspaceless %}
+          <div class="ui fitted toggle checkbox">
+            <input name="oficinas" id="id_oficinas_{{ choice.pk }}" value="{{ choice.pk }}" type="checkbox" checked="checked">
+            <label></label>
           </div>
+          {% else %}
+          {% if choice.vagas_restantes > 0 %}
+          <div class="ui fitted toggle checkbox">
+            <input name="oficinas" id="id_oficinas_{{ choice.pk }}" value="{{ choice.pk }}" type="checkbox">
+            <label></label>
+          </div>
+          {% endif %}
+          {% endif %}
+          {% endspaceless %}
         </td>
         <td>{{ choice.nome }}</td>
         <td>{{ choice.ministrante }}</td>
+        <td {% if choice.vagas_restantes == 0%} class="negative"{% endif %}>{{ choice.vagas_restantes }}</td>
       </tr>
     {% empty %}
     <tr>

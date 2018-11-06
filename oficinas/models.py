@@ -14,17 +14,22 @@ class Oficina(models.Model):
     ministrante = models.ForeignKey(Usuario, on_delete=models.CASCADE,
                                     related_name='oficinas')
     arquivo = models.FileField(upload_to='oficinas', blank=False)
+    vagas = models.IntegerField(default=0)
     situacao = models.IntegerField(choices=Situacao.choices,
                                    verbose_name='situação',
                                    default=0, editable=False)
     inscricoes = models.ManyToManyField(Inscricao, related_name='oficinas',
-                                        blank=True)
+                                        blank=True, editable=False)
 
     class Meta:
         ordering = ('nome',)
 
     def __str__(self):
         return self.nome
+
+    def vagas_restantes(self):
+        return self.vagas - self.inscricoes.count()
+
 
 
 class MesaRedonda(models.Model):
