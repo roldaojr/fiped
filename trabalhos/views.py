@@ -30,6 +30,15 @@ class TrabalhoListView(TableListView):
         )
 
 
+class TrabalhosAprovadosPrintView(TableListView):
+    default_template = 'trabalhos/trabalho_imprimir_lista.html'
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        return qs.filter(
+            situacao=Trabalho.Situacao.Aprovado).order_by('area_tema__nome')
+
+
 class SubmeterTrabalhoView(AddView):
     default_template = 'trabalhos/trabalho_submeter.html'
 

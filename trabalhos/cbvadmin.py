@@ -6,7 +6,7 @@ from .forms import (TrabalhoChangeForm, TrabalhoChangeFormAdmin,
                     TrabalhoAddForm, AreaTemaForm)
 from .models import Modalidade, AreaTema, Trabalho
 from .views import (TrabalhoListView, SubmeterTrabalhoView, AvaliarView,
-                    TrabalhoReenviarView)
+                    TrabalhoReenviarView, TrabalhosAprovadosPrintView)
 
 
 @cbvadmin.register(Modalidade)
@@ -32,6 +32,7 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
     detail_view_class = DetailView
     avaliar_view_class = AvaliarView
     reenviar_view_class = TrabalhoReenviarView
+    aprovados_view_class = TrabalhosAprovadosPrintView
     form_class = TrabalhoAddForm
     default_object_action = 'detail'
     menu_weight = 2
@@ -41,7 +42,8 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
         actions.update({
             'detail': 'object',
             'avaliar': 'object',
-            'reenviar': 'object'
+            'reenviar': 'object',
+            'aprovados': 'collection'
         })
         return actions
 
