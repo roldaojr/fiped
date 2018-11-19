@@ -6,7 +6,7 @@ from .forms import (TrabalhoChangeForm, TrabalhoChangeFormAdmin,
                     TrabalhoAddForm, AreaTemaForm)
 from .models import Modalidade, AreaTema, Trabalho
 from .views import (TrabalhoListView, SubmeterTrabalhoView, AvaliarView,
-                    TrabalhoReenviarView)
+                    TrabalhoReenviarView, TrabalhosImprimirView)
 
 
 @cbvadmin.register(Modalidade)
@@ -32,6 +32,7 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
     detail_view_class = DetailView
     avaliar_view_class = AvaliarView
     reenviar_view_class = TrabalhoReenviarView
+    imprimir_view_class = TrabalhosImprimirView
     form_class = TrabalhoAddForm
     default_object_action = 'detail'
     menu_weight = 2
@@ -41,12 +42,13 @@ class TrabalhoAdmin(cbvadmin.ModelAdmin):
         actions.update({
             'detail': 'object',
             'avaliar': 'object',
-            'reenviar': 'object'
+            'reenviar': 'object',
+            'imprimir': 'collection'
         })
         return actions
 
     def has_permission(self, request, action, obj=None):
-        if action == 'avaliar':
+        if action == 'avaliar' or action == 'imprimir':
             action = 'edit'
         if action == 'reenviar':
             return True

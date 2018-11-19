@@ -1,0 +1,42 @@
+{% extends 'print/base.html' %}
+{% load django_tables2 i18n %}
+{% block extrastyle %}
+<style type="text/css">
+h2:nth-child(n+2) {page-break-before: always}
+</style>
+{% endblock %}
+
+{% block title %}Trabalhos{% endblock %}
+
+{% block outer_content %}
+<div class="print-content">
+{% block content %}
+{% block table %}
+{% regroup object_list by area_tema as areas_list %}
+{% for area_tema in areas_list %}
+<h2>TRABALHOS {{ area_tema.grouper }}</h2>
+<table class="table bordered">
+    <thead>
+        <tr>
+        	<th>Titulo</th>
+        	<th>Autores</th>
+        	<th>Modalidade</th>
+        </tr>
+    </thead>
+    <tbody>
+    	{% for trabalho in area_tema.list %}
+        <tr>
+            <td>{{ trabalho.titulo }}</td>
+            <td>{% spaceless %}
+            	{{ trabalho.autor }}{% if trabalho.coautor1 %},<br>{{ trabalho.coautor1 }}{% endif %}{% if trabalho.coautor2 %},<br>{{ trabalho.coautor2 }}{% endif %}{% if trabalho.coautor3 %},<br>{{ trabalho.coautor3 }}{% endif %}
+            {% endspaceless %}</td>
+            <td>{{ trabalho.modalidade }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endfor %}
+{% endblock table %}
+{% endblock %}
+</div>
+{% endblock %}

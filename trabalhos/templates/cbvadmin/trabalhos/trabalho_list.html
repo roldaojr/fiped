@@ -1,0 +1,52 @@
+{% extends 'cbvadmin/semantic-ui/list.html' %}
+{% load i18n %}
+
+{% block actions %}
+<div class="ui mobile only fluid buttons">
+{% if view.has_filters and filter.form %}
+  <div class="ui secondary basic filter button">
+    <i class="filter icon"></i>
+    {% trans 'Filter' %}
+  </div>
+{% endif %}
+{% if view.has_filters and filter.form and admin.urls.add %}
+  <div class="or" data-text="{% trans 'or' %}"></div>
+{% endif %}
+{% if admin.urls.add %}
+  <a href="{% url admin.urls.add %}" class="ui primary button">
+    <i class="plus icon"></i>
+    {% trans 'Add' %}
+  </a>
+{% endif %}
+</div>
+<div class="ui secondary mobile hidden menu">
+{% if view.has_filters and filter.form %}
+  <div class="item">
+    <div class="ui secondary basic filter button">
+      <i class="filter icon"></i>
+      {% trans 'Filter' %}
+    </div>
+  </div>
+{% endif %}
+  <div class="right item">
+    {% if admin.urls.imprimir %}
+    <div class="ui labeled icon floating pointing dropdown secondary print button">
+        <i class="print icon"></i>Imprimir
+        <div class="menu">
+            <a href="{% url admin.urls.imprimir %}?situacao=0" target="_blank" class="item">Pendentes</a>
+            <a href="{% url admin.urls.imprimir %}?situacao=1" target="_blank" class="item">Aprovados</a>
+            <a href="{% url admin.urls.imprimir %}?situacao=2" target="_blank" class="item">Reprovados</a>
+            <a href="{% url admin.urls.imprimir %}?situacao=3" target="_blank" class="item">Neceeita Correção</a>
+            <a href="{% url admin.urls.imprimir %}?situacao=4" target="_blank" class="item">Reenviado</a>
+        </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+{% block extrascript %}
+{{ block.super }}
+<script type="text/javascript">
+$(".print.button").dropdown()
+</script>
+{% endblock %}

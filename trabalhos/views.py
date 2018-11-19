@@ -30,6 +30,15 @@ class TrabalhoListView(TableListView):
         )
 
 
+class TrabalhosImprimirView(TableListView):
+    default_template = 'trabalhos/trabalho_imprimir_lista.html'
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        situacao = self.request.GET.get('situacao')
+        return qs.filter(situacao=situacao).order_by('area_tema__nome')
+
+
 class SubmeterTrabalhoView(AddView):
     default_template = 'trabalhos/trabalho_submeter.html'
 
