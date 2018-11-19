@@ -29,11 +29,24 @@
   </div>
 {% endif %}
   <div class="right item">
-    {% if admin.urls.aprovados %}
-    <a href="{% url admin.urls.aprovados %}" target="_blank" class="ui secondary button">
-        <i class="print icon"></i>Imprimir trabalhos aprovados
-    </a>
+    {% if admin.urls.imprimir %}
+    <div class="ui labeled icon floating pointing dropdown secondary print button">
+        <i class="print icon"></i>Imprimir
+        <div class="menu">
+            <a href="{% url admin.urls.imprimir %}?situacao=0" target="_blank" class="item">Pendentes</a>
+            <a href="{% url admin.urls.imprimir %}?situacao=1" target="_blank" class="item">Aprovados</a>
+            <a href="{% url admin.urls.imprimir %}?situacao=2" target="_blank" class="item">Reprovados</a>
+            <a href="{% url admin.urls.imprimir %}?situacao=3" target="_blank" class="item">Neceeita Correção</a>
+            <a href="{% url admin.urls.imprimir %}?situacao=4" target="_blank" class="item">Reenviado</a>
+        </div>
+    </div>
     {% endif %}
   </div>
 </div>
+{% endblock %}
+{% block extrascript %}
+{{ block.super }}
+<script type="text/javascript">
+$(".print.button").dropdown()
+</script>
 {% endblock %}
