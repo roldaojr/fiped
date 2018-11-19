@@ -1,6 +1,6 @@
 {% extends 'cbvadmin/semantic-ui/base_site.html' %}
 
-{% block title %}Inscrever-se em oficinas{% endblock %}
+{% block title %}Inscrever-se em {{ view.admin.model_opts.verbose_name_plural }}{% endblock %}
 
 {% block content %}
 {% if form.non_field_errors %}
@@ -10,9 +10,11 @@
   {% endfor %}
 </div>
 {% else %}
+{% if view.admin.max_inscriccoes %}
 <div class="ui warning message">
-  Você deve selecionar no máximo {{ global_preferences.oficinas__inscricao_max }} oficina(s)
+  Você deve selecionar no máximo {{ view.admin.max_inscriccoes }} oficina(s)
 </div>
+{% endif %}
 {% endif %}
 <form method="post" class="ui form">
   {% csrf_token %}
@@ -23,23 +25,25 @@
         <th></th>
         <th>Oficina</th>
         <th>Ministrante</th>
+        {% if view.admin.limitar_vagas %}
         <th>Vagas</th>
+        {% endif %}
       </tr>
     </thead>
     <tbody>
-    {% for choice in form.oficinas.field.queryset %}
+    {% for choice in form.atividades.field.queryset %}
       <tr>
         <td class="collapsing">
           {% spaceless %}
-          {% if choice.pk in form.oficinas.value or choice.pk|slugify in form.oficinas.value %}
+          {% if choice.pk in form.atividades.value or choice.pk|slugify in form.atividades.value %}
           <div class="ui fitted toggle checkbox">
-            <input name="oficinas" id="id_oficinas_{{ choice.pk }}" value="{{ choice.pk }}" type="checkbox" checked="checked">
+            <input name="atividades" id="id_oficinas_{{ choice.pk }}" value="{{ choice.pk }}" type="checkbox" checked="checked">
             <label></label>
           </div>
           {% else %}
-          {% if choice.vagas_restantes > 0 %}
+          {% if choice.vagas_restantes > 0 or not view.admin.limitar_vagas %}
           <div class="ui fitted toggle checkbox">
-            <input name="oficinas" id="id_oficinas_{{ choice.pk }}" value="{{ choice.pk }}" type="checkbox">
+            <input name="atividades" id="id_oficinas_{{ choice.pk }}" value="{{ choice.pk }}" type="checkbox">
             <label></label>
           </div>
           {% endif %}
@@ -48,7 +52,9 @@
         </td>
         <td>{{ choice.nome }}</td>
         <td>{{ choice.ministrante }}</td>
+        {% if view.admin.limitar_vagas %}
         <td {% if choice.vagas_restantes == 0%} class="negative"{% endif %}>{{ choice.vagas_restantes }}</td>
+        {% endif %}
       </tr>
     {% empty %}
     <tr>

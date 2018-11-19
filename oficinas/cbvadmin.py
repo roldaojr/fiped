@@ -3,21 +3,21 @@ from menu import MenuItem
 from dynamic_preferences.registries import global_preferences_registry
 import cbvadmin
 from comum.views import DetailView
-from .forms import (OficinaSubmeterForm, OficinaChangeForm,
-                    SubmeterMesaRedondaForm, ChangeMesaRedondaForm)
+from .forms import (
+    OficinaSubmeterForm, OficinaChangeForm, OficinaInscricaoForm,
+    SubmeterMesaRedondaForm, ChangeMesaRedondaForm, MesaRedondaInscricaoForm)
 from .models import Oficina, MesaRedonda, Livro
 from .views import (SubmeterAtividadeView, AvaliarAtividadeView,
-                    InscricaoOficinaView)
+                    InscricaoAtividadeView)
 
 
-@cbvadmin.register(Oficina)
-class OficinaAdmin(cbvadmin.ModelAdmin):
+class AtividadeAdmin(cbvadmin.ModelAdmin):
     list_display = ('nome', 'situacao')
     filter_fields = ('nome', 'situacao')
     add_view_class = SubmeterAtividadeView
     detail_view_class = DetailView
     avaliar_view_class = AvaliarAtividadeView
-    inscricao_view_class = InscricaoOficinaView
+    inscricao_view_class = InscricaoAtividadeView
     default_object_action = 'detail'
 
     def get_actions(self):
@@ -39,61 +39,58 @@ class OficinaAdmin(cbvadmin.ModelAdmin):
             return reverse('cbvadmin:dashboard')
         return super().get_success_url(view)
 
-    def get_view_kwargs(self, action):
-        view_kwargs = super().get_view_kwargs(action)
-        if action == 'add':
-            view_kwargs['form_class'] = OficinaSubmeterForm
-        elif action == 'change':
-            view_kwargs['form_class'] = OficinaChangeForm
-        return view_kwargs
+    def pode_inscrever_se(self, request):
+        return True
 
     def get_menu(self):
-        def pode_inscrever_se(request):
-            prefs = global_preferences_registry.manager()
-            return (prefs['oficinas__inscricao'] and
-                    hasattr(request.user, 'inscricao'))
-
+        submenu_label = self.model_class._meta.verbose_name_plural.title()
+        perm_code = '%s.add_%s' % (self.model_class._meta.app_label,
+                                   self.model_class._meta.model_name)
         menus = super().get_menu()
         menus[0].title = 'Avaliar'
+        menus[0].submenu = submenu_label
         menus += [
             MenuItem('Submeter',
                      reverse(self.urls['add']),
-                     weight=60, icon=self.menu_icon, submenu='Oficinas',
-                     check=lambda r: r.user.has_perm('oficinas.add_oficina')),
+                     weight=60, icon=self.menu_icon, submenu=submenu_label,
+                     check=lambda r: r.user.has_perm(perm_code)),
             MenuItem('Inscrever-se',
                      reverse(self.urls['inscricao']),
-                     weight=70, icon=self.menu_icon, submenu='Oficinas',
-                     check=lambda r: pode_inscrever_se(r))
+                     weight=70, icon=self.menu_icon, submenu=submenu_label,
+                     check=lambda r: self.pode_inscrever_se(r))
         ]
         return menus
 
+    def max_inscricoes(self, request):
+        return 0
+
+
+@cbvadmin.register(Oficina)
+class OficinaAdmin(AtividadeAdmin):
+    inscricao_form_class = OficinaInscricaoForm
+    limitar_vagas = True
+
+    def get_form_class(self, request, obj=None):
+        if obj:
+            return OficinaChangeForm
+        else:
+            return OficinaSubmeterForm
+
+    def max_inscriccoes(self):
+        prefs = global_preferences_registry.manager()
+        return prefs['oficinas__inscricao_max']
+
 
 @cbvadmin.register(MesaRedonda)
-class MesaRedondaAdmin(cbvadmin.ModelAdmin):
-    list_display = ('nome', 'situacao')
-    filter_fields = ('nome', 'situacao')
-    add_view_class = SubmeterAtividadeView
-    detail_view_class = DetailView
-    avaliar_view_class = AvaliarAtividadeView
-    default_object_action = 'detail'
+class MesaRedondaAdmin(AtividadeAdmin):
+    add_form_class = SubmeterMesaRedondaForm
+    edit_form_class = ChangeMesaRedondaForm
+    inscricao_form_class = MesaRedondaInscricaoForm
 
-    def get_actions(self):
-        actions = super().get_actions()
-        actions.update({'detail': 'object',
-                        'avaliar': 'object'})
-        return actions
-
-    def has_permission(self, request, action, obj=None):
-        if action == 'inscricao':
-            return True
-        if action == 'avaliar':
-            action = 'edit'
-        return super().has_permission(request, action, obj)
-
-    def get_success_url(self, view=None):
-        if not self.has_permission(view.request, self.default_action):
-            return reverse('cbvadmin:dashboard')
-        return super().get_success_url(view)
+    def pode_inscrever_se(self, request):
+        prefs = global_preferences_registry.manager()
+        return (prefs['mesasredondas__inscricao'] and
+                hasattr(request.user, 'inscricao'))
 
     def get_form_class(self, request, obj=None):
         if obj:
@@ -101,17 +98,9 @@ class MesaRedondaAdmin(cbvadmin.ModelAdmin):
         else:
             return SubmeterMesaRedondaForm
 
-    def get_menu(self):
-        menus = super().get_menu()
-        menus[0].title = 'Avaliar'
-        menus[0].submenu = 'Mesas-redondas'
-        menus += [
-            MenuItem('Submeter',
-                     reverse(self.urls['add']),
-                     weight=60, icon=self.menu_icon, submenu='Mesas-redondas',
-                     check=lambda r: r.user.has_perm('oficinas.add_mesaredonda')),
-        ]
-        return menus
+    def max_inscriccoes(self):
+        prefs = global_preferences_registry.manager()
+        return prefs['mesasredondas__inscricao_max']
 
 
 @cbvadmin.register(Livro)
