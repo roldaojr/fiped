@@ -13,7 +13,7 @@ from cbvadmin.views.mixins import (
 from cbvadmin.views.dashboard import Dashboard as DashboardView
 from eventos.models import Inscricao
 from trabalhos.models import Trabalho, AreaTema
-from oficinas.models import Oficina
+from oficinas.models import Oficina, MesaRedonda, Seminario
 
 
 class BasicView(PermissionRequiredMixin, AdminMixin, SuccessMixin, View):
@@ -109,6 +109,24 @@ class Dashboard(DashboardView):
                 'value': Oficina.objects.filter(
                     situacao=Oficina.Situacao.Aprovado).count()
             },
+            {
+                'name': 'Mesas redondas submetidas',
+                'value': MesaRedonda.objects.count()
+            },
+            {
+                'name': 'MMesa redondas aprovadas',
+                'value': MesaRedonda.objects.filter(
+                    situacao=MesaRedonda.Situacao.Aprovado).count()
+            },
+            {
+                'name': 'Seminarios submetidos',
+                'value': Seminario.objects.count()
+            },
+            {
+                'name': 'Seminarios aprovados',
+                'value': Seminario.objects.filter(
+                    situacao=Seminario.Situacao.Aprovado).count()
+            },
         ]
 
     def participante_trabalhos(self):
@@ -121,15 +139,16 @@ class Dashboard(DashboardView):
     def get_context_data(self, *args, **kwargs):
         context = {
             'trabalhos': self.participante_trabalhos(),
-            'counters': []
+            'counters': [],
+            'trabalhos_counters': []
         }
         user = self.request.user
 
         if user.has_perm('trabalhos.change_trabalho'):
             if user.has_perm('trabalhos.change_areatema'):
-                context['counters'] += self.trabalhos_counters()
+                context['trabalhos_counters'] += self.trabalhos_counters()
             else:
-                context['counters'] += self.trabalhos_counters(user)
+                context['trabalhos_counters'] += self.trabalhos_counters(user)
 
         if user.has_perm('oficinas.view_oficina'):
             context['counters'] += self.oficinas_counters()
