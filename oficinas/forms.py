@@ -34,19 +34,19 @@ class OficinaChangeForm(UploadMaxSizeMixin, forms.ModelForm):
 
 
 class OficinaInscricaoForm(forms.ModelForm):
-    oficinas = forms.ModelMultipleChoiceField(
+    atividades = forms.ModelMultipleChoiceField(
         queryset=Oficina.objects.filter(situacao=Oficina.Situacao.Aprovado),
         required=False)
 
     class Meta:
         model = Inscricao
-        fields = ['oficinas']
+        fields = ['atividades']
 
     def __init__(self, *args, **kwargs):
         if 'instance' in kwargs:
             instance = kwargs.get('instance')
             initial = kwargs.setdefault('initial', {})
-            initial['oficinas'] = instance.oficinas.values_list(
+            initial['atividades'] = instance.oficinas.values_list(
                 'pk', flat=True)
         super().__init__(*args, **kwargs)
 
@@ -54,8 +54,8 @@ class OficinaInscricaoForm(forms.ModelForm):
         cleaned_data = super().clean()
         prefs = global_preferences_registry.manager()
 
-        if ('oficinas' in cleaned_data and
-                len(cleaned_data['oficinas']) >
+        if ('atividades' in cleaned_data and
+                len(cleaned_data['atividades']) >
                 prefs['oficinas__inscricao_max']):
             raise ValidationError(
                 'Você deve selecionar no máximo %d oficina(s)' %
@@ -63,10 +63,10 @@ class OficinaInscricaoForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, *args, **kwargs):
-        instance = super().save(*args, **kwargs)
-        instance.oficinas.clear()
-        for o in Oficina.objects.filter(pk__in=self.cleaned_data['oficinas']):
-            o.inscricoes.add(instance)
+        self.instance.oficinas.clear()
+        for o in Oficina.objects.filter(
+                pk__in=self.cleaned_data['atividades']):
+            o.inscricoes.add(self.instance)
 
 
 class SubmeterMesaRedondaForm(UploadMaxSizeMixin, forms.ModelForm):
@@ -93,3 +93,27 @@ class ChangeMesaRedondaForm(UploadMaxSizeMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['nome'].label = 'Nome da mesa redonda'
+
+
+class MesaRedondaInscricaoForm(forms.ModelForm):
+    atividades = forms.ModelMultipleChoiceField(
+        queryset=MesaRedonda.objects.filter(
+            situacao=MesaRedonda.Situacao.Aprovado), required=False)
+
+    class Meta:
+        model = Inscricao
+        fields = ['atividades']
+
+    def __init__(self, *args, **kwargs):
+        if 'instance' in kwargs:
+            instance = kwargs.get('instance')
+            initial = kwargs.setdefault('initial', {})
+            initial['atividades'] = instance.mesasredondas.values_list(
+                'pk', flat=True)
+        super().__init__(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.instance.mesasredondas.clear()
+        for o in MesaRedonda.objects.filter(
+                pk__in=self.cleaned_data['atividades']):
+            o.inscricoes.add(self.instance)

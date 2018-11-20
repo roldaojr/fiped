@@ -31,7 +31,6 @@ class Oficina(models.Model):
         return self.vagas - self.inscricoes.count()
 
 
-
 class MesaRedonda(models.Model):
     class Situacao(DjangoChoices):
         Pendente = ChoiceItem(0)
@@ -45,6 +44,8 @@ class MesaRedonda(models.Model):
     situacao = models.IntegerField(choices=Situacao.choices,
                                    verbose_name='situação',
                                    default=0, editable=False)
+    inscricoes = models.ManyToManyField(Inscricao, blank=True, editable=False,
+                                        related_name='mesasredondas')
 
     class Meta:
         ordering = ('nome',)

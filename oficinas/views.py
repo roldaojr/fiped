@@ -5,7 +5,6 @@ from django.contrib import messages
 from cbvadmin.views.edit import AddView, EditView
 from comum.views import BasicView
 from eventos.models import Inscricao
-from .forms import OficinaInscricaoForm
 
 
 class SubmeterAtividadeView(AddView):
@@ -35,11 +34,13 @@ class AvaliarAtividadeView(SingleObjectMixin, BasicView):
         return redirect(success_url)
 
 
-class InscricaoOficinaView(EditView):
-    form_class = OficinaInscricaoForm
-    default_template = 'oficinas/oficina_inscricao.html'
-    success_message = 'Inscrição na(s) oficina(s) salva'
+class InscricaoAtividadeView(EditView):
+    default_template = 'oficinas/atividade_inscricao.html'
+    success_message = 'Inscrições salvas'
     permission_required = []
+
+    def get_form_class(self):
+        return self.admin.inscricao_form_class
 
     def get_object(self):
         try:
