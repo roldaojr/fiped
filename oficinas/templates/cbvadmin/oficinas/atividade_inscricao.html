@@ -12,7 +12,8 @@
 {% else %}
 {% if view.admin.max_inscriccoes %}
 <div class="ui warning message">
-  Você deve selecionar no máximo {{ view.admin.max_inscriccoes }} oficina(s)
+  Você deve selecionar no máximo {{ view.admin.max_inscriccoes }}
+  {% if view.admin.max_inscriccoes > 1 %}{{ view.admin.model_opts.verbose_name_plural }}{% else %}{{ view.admin.model_opts.verbose_name }}{% endif %}  
 </div>
 {% endif %}
 {% endif %}
@@ -58,7 +59,7 @@
       </tr>
     {% empty %}
     <tr>
-      <td colspan="3">Nenhuma oficina disponível</td>
+      <td colspan="{{ view.admin.limitar_vagas|yesno:'4,3' }}" class="center aligned">Nenhum {{ view.admin.model_opts.verbose_name }} disponível</td>
     </tr>
     {% endfor %}
     </tbody>
