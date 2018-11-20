@@ -100,6 +100,26 @@
     </td>
   </tr>
 </table>
+
+<h2>Inscrições</h2>
+<table class="ui compact table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for inscricao in object.inscricoes.all %}
+    <tr>
+      <td>{{ inscricao.usuario.nome_completo }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td>Nenhuma inscrição</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
 
 {% endblock %}
