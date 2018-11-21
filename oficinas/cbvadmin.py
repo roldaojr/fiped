@@ -5,8 +5,9 @@ import cbvadmin
 from comum.views import DetailView
 from .forms import (
     OficinaSubmeterForm, OficinaChangeForm, OficinaInscricaoForm,
-    SubmeterMesaRedondaForm, ChangeMesaRedondaForm, MesaRedondaInscricaoForm)
-from .models import Oficina, MesaRedonda, Livro
+    SubmeterMesaRedondaForm, ChangeMesaRedondaForm, MesaRedondaInscricaoForm,
+    SeminarioSubmeterForm, SeminarioChangeForm, SeminarioInscricaoForm)
+from .models import Oficina, MesaRedonda, Seminario, Livro
 from .views import (SubmeterAtividadeView, AvaliarAtividadeView,
                     InscricaoAtividadeView)
 
@@ -70,6 +71,11 @@ class OficinaAdmin(AtividadeAdmin):
     inscricao_form_class = OficinaInscricaoForm
     limitar_vagas = True
 
+    def pode_inscrever_se(self, request):
+        prefs = global_preferences_registry.manager()
+        return (prefs['oficinas__inscricao'] and
+                hasattr(request.user, 'inscricao'))
+
     def get_form_class(self, request, obj=None):
         if obj:
             return OficinaChangeForm
@@ -101,6 +107,27 @@ class MesaRedondaAdmin(AtividadeAdmin):
     def max_inscriccoes(self):
         prefs = global_preferences_registry.manager()
         return prefs['mesasredondas__inscricao_max']
+
+
+@cbvadmin.register(Seminario)
+class SeminarioAdmin(AtividadeAdmin):
+    inscricao_form_class = SeminarioInscricaoForm
+    limitar_vagas = True
+
+    def get_form_class(self, request, obj=None):
+        if obj:
+            return SeminarioChangeForm
+        else:
+            return SeminarioSubmeterForm
+
+    def pode_inscrever_se(self, request):
+        prefs = global_preferences_registry.manager()
+        return (prefs['seminarios__inscricao'] and
+                hasattr(request.user, 'inscricao'))
+
+    def max_inscriccoes(self):
+        prefs = global_preferences_registry.manager()
+        return prefs['seminarios__inscricao_max']
 
 
 @cbvadmin.register(Livro)

@@ -56,6 +56,35 @@ class MesaRedonda(models.Model):
         return self.nome
 
 
+class Seminario(models.Model):
+    class Situacao(DjangoChoices):
+        Pendente = ChoiceItem(0)
+        Aprovado = ChoiceItem(1)
+        Reprovado = ChoiceItem(2)
+
+    nome = models.CharField(max_length=100)
+    ministrante = models.ForeignKey(Usuario, on_delete=models.CASCADE,
+                                    related_name='seminarios')
+    arquivo = models.FileField(upload_to='seminarios', blank=False)
+    vagas = models.IntegerField(default=0)
+    situacao = models.IntegerField(choices=Situacao.choices,
+                                   verbose_name='situação',
+                                   default=0, editable=False)
+    inscricoes = models.ManyToManyField(Inscricao, related_name='seminarios',
+                                        blank=True, editable=False)
+
+    class Meta:
+        ordering = ('nome',)
+        verbose_name = 'seminário temático'
+        verbose_name_plural = 'seminários temáticos'
+
+    def __str__(self):
+        return self.nome
+
+    def vagas_restantes(self):
+        return self.vagas - self.inscricoes.count()
+
+
 class Livro(models.Model):
     class Situacao(DjangoChoices):
         Pendente = ChoiceItem(0)
