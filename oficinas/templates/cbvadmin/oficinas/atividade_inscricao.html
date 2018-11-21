@@ -24,7 +24,7 @@
       <tr>
         <th></th>
         <th>Oficina</th>
-        <th>Ministrante</th>
+       
         {% if view.admin.limitar_vagas %}
         <th>Vagas</th>
         {% endif %}
@@ -51,7 +51,7 @@
           {% endspaceless %}
         </td>
         <td>{{ choice.nome }}</td>
-        <td>{{ choice.ministrante }}</td>
+        
         {% if view.admin.limitar_vagas %}
         <td {% if choice.vagas_restantes == 0%} class="negative"{% endif %}>{{ choice.vagas_restantes }}</td>
         {% endif %}
