@@ -14,7 +14,7 @@ from ..filters import InscricaoFilter
 
 class ImprimirLista(TableListView):
     filterset_class = InscricaoFilter
-    list_display = ('nome_completo', 'email', ' ')
+    list_display = ('nome_completo', 'email', ' assinatura')
     template_name_suffix = '_print_list'
     paginate_by = False
 
@@ -22,6 +22,7 @@ class ImprimirLista(TableListView):
         extra = {
             'nome_completo': Column(accessor='usuario.nome_completo'),
             'email': Column(accessor='usuario.email')
+
         }
         return table_factory(self.model, self.list_display, action=None,
                              extra=extra)
