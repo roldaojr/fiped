@@ -23,7 +23,7 @@ class OficinaSubmeterForm(UploadMaxSizeMixin, forms.ModelForm):
 class OficinaChangeForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Oficina
-        exclude = ('tipo', 'ministrante', 'arquivo', 'inscricoes')
+        
         help_texts = {
             'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
         }
