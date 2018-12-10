@@ -23,7 +23,15 @@ class OficinaSubmeterForm(UploadMaxSizeMixin, forms.ModelForm):
 class OficinaChangeForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Oficina
-        
+        exclude = ('tipo', 'ministrante', 'arquivo', 'inscricoes')
+        help_texts = {
+            'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['nome'].label = 'Nome da oficina'
+
 
 class OficinaInscricaoForm(forms.ModelForm):
     atividades = forms.ModelMultipleChoiceField(
