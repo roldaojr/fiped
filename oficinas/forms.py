@@ -10,7 +10,7 @@ from .models import Oficina, MesaRedonda, Seminario
 class OficinaSubmeterForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Oficina
-        exclude = ('local', 'tipo', 'ministrante', 'inscricoes')
+        exclude = ('local', 'tipo', 'ministrante')
         help_texts = {
             'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
         }
