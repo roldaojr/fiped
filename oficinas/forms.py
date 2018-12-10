@@ -10,7 +10,7 @@ from .models import Oficina, MesaRedonda, Seminario
 class OficinaSubmeterForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Oficina
-        exclude = ('local', 'tipo', 'ministrante')
+        exclude = ('local', 'tipo', 'ministrante', 'inscricoes')
         help_texts = {
             'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
         }
@@ -23,15 +23,7 @@ class OficinaSubmeterForm(UploadMaxSizeMixin, forms.ModelForm):
 class OficinaChangeForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Oficina
-        exclude = ('tipo', 'ministrante', 'arquivo')
-        help_texts = {
-            'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
-        }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['nome'].label = 'Nome da oficina'
-
+        
 
 class OficinaInscricaoForm(forms.ModelForm):
     atividades = forms.ModelMultipleChoiceField(
@@ -72,7 +64,7 @@ class OficinaInscricaoForm(forms.ModelForm):
 class SubmeterMesaRedondaForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = MesaRedonda
-        exclude = ('local', 'tipo', 'ministrante')
+        exclude = ('local', 'tipo', 'ministrante', 'inscricoes')
         help_texts = {
             'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
         }
@@ -85,7 +77,7 @@ class SubmeterMesaRedondaForm(UploadMaxSizeMixin, forms.ModelForm):
 class ChangeMesaRedondaForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = MesaRedonda
-        exclude = ('tipo', 'ministrante', 'arquivo')
+        exclude = ('tipo', 'ministrante', 'arquivo', 'inscricoes')
         help_texts = {
             'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
         }
@@ -122,7 +114,7 @@ class MesaRedondaInscricaoForm(forms.ModelForm):
 class SeminarioSubmeterForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Seminario
-        exclude = ('local', 'tipo', 'ministrante')
+        exclude = ('local', 'tipo', 'ministrante', 'inscricoes')
         help_texts = {
             'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
         }
@@ -135,7 +127,7 @@ class SeminarioSubmeterForm(UploadMaxSizeMixin, forms.ModelForm):
 class SeminarioChangeForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Seminario
-        exclude = ('tipo', 'ministrante', 'arquivo')
+        exclude = ('tipo', 'ministrante', 'arquivo', 'inscricoes')
         help_texts = {
             'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
         }
