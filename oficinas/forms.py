@@ -72,7 +72,7 @@ class OficinaInscricaoForm(forms.ModelForm):
 class SubmeterMesaRedondaForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = MesaRedonda
-        exclude = ('local', 'tipo', 'ministrante', 'inscricoes')
+        exclude = ('local', 'tipo', 'ministrante')
         help_texts = {
             'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
         }
@@ -85,7 +85,7 @@ class SubmeterMesaRedondaForm(UploadMaxSizeMixin, forms.ModelForm):
 class ChangeMesaRedondaForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = MesaRedonda
-        exclude = ('tipo', 'ministrante', 'arquivo', 'inscricoes')
+        exclude = ('tipo', 'ministrante', 'arquivo')
         help_texts = {
             'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
         }
@@ -122,7 +122,7 @@ class MesaRedondaInscricaoForm(forms.ModelForm):
 class SeminarioSubmeterForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Seminario
-        exclude = ('local', 'tipo', 'ministrante', 'inscricoes')
+        exclude = ('local', 'tipo', 'ministrante')
         help_texts = {
             'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
         }
@@ -135,7 +135,7 @@ class SeminarioSubmeterForm(UploadMaxSizeMixin, forms.ModelForm):
 class SeminarioChangeForm(UploadMaxSizeMixin, forms.ModelForm):
     class Meta:
         model = Seminario
-        exclude = ('tipo', 'ministrante', 'arquivo', 'inscricoes')
+        exclude = ('tipo', 'ministrante', 'arquivo')
         help_texts = {
             'arquivo': 'Tamanho maximo de %s' % humanbytes(settings.FILE_UPLOAD_MAX_SIZE)
         }
