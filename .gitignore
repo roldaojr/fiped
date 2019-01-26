@@ -112,3 +112,4 @@ $RECYCLE.BIN/
 *.sqlite3
 .env
 /static/
+/media/
