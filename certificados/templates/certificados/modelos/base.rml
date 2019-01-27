@@ -1,0 +1,21 @@
+{% load l10n %}{% localize off %}<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<!DOCTYPE document SYSTEM "rml.dtd">
+<document>
+    <template pageSize="{% if modelo.paisagem %}(29.7cm, 21cm){% else %}(21cm, 29.7cm){% endif %}" showBoundary="0" title="Certificado" allowSplitting="0">
+        <pageTemplate id="main">
+            <pageGraphics>
+                <image file="{{ MEDIA_ROOT }}/{{ modelo.imagem }}" x="0" y="0"
+                {% if modelo.paisagem %}width="29.7cm" height="21cm"{% else %}width="21cm" height="29.7cm"{% endif %}/>
+            </pageGraphics>
+            <frame id="content" x1="{{ modelo.caixa_esquerda }}cm" y1="{{ modelo.caixa_topo }}cm"
+             width="{{ modelo.caixa_largura }}cm" height="{{ modelo.caixa_altura }}cm"/>
+        </pageTemplate>
+    </template>
+    <stylesheet>    
+        <paraStyle name="default" fontName="Helvetica" fontSize="{{ modelo.tamanho_fonte|default:16 }}" leading="{{ modelo.tamanho_fonte|add:2|default:18 }}" alignment="justify" textColor="black" />
+    </stylesheet>
+    <story>
+        <para style="default">{{ conteudo }}</para>
+    </story>
+</document>
+{% endlocalize %}

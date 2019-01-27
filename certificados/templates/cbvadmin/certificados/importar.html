@@ -1,0 +1,14 @@
+{% extends 'cbvadmin/semantic-ui/change_form.html' %}
+{% block title %}Importar certificados{% endblock %}
+{% block messages %}
+{% if messages %}
+<div class="ui info message">
+  <div class="header">Relatório de importação</div>
+  <ul class="list">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+{% endblock %}

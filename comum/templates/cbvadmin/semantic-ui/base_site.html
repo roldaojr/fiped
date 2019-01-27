@@ -31,6 +31,7 @@
 </div>
 
 <div class="pusher" id="content">
+{% block messages %}
 {% if messages %}
 {% for message in messages %}
   <div class="ui {{ message.tags }} message">
@@ -38,6 +39,7 @@
   </div>
 {% endfor %}
 {% endif %}
+{% endblock %}
   <div class="ui basic segment">
     {% block pageheader %}
     <h1 class="ui header">{% block title %}{% endblock %}</h1>

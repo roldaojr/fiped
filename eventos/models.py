@@ -88,7 +88,6 @@ class Inscricao(models.Model):
     tipo = models.ForeignKey(TipoInscricao, on_delete=models.CASCADE,
                              related_name='inscricoes', blank=False, null=True)
     alojamento = models.BooleanField(default=False)
-    certificado = models.BooleanField(default=False, editable=False)
     atividades = models.ManyToManyField(Atividade, related_name='inscricoes',
                                         blank=True)
     validado = models.BooleanField(default=True)

@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'eventos',
     'trabalhos',
     'oficinas',
+    'certificados',
     'comum',
     'cbvadmin',
     'cbvadmin_semantic_ui',

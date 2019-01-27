@@ -1,0 +1,44 @@
+{% extends 'cbvadmin/semantic-ui/list.html' %}
+{% load i18n %}
+{% block actions %}
+  <div class="ui mobile only fluid buttons">
+  {% if view.has_filters and filter.form %}
+    <div class="ui secondary basic filter button">
+      <i class="filter icon"></i>
+      {% trans 'Filter' %}
+    </div>
+  {% endif %}
+  {% if view.has_filters and filter.form and admin.urls.add %}
+    <div class="or" data-text="{% trans 'or' %}"></div>
+  {% endif %}
+  {% if admin.urls.add %}
+    <a href="{% url admin.urls.add %}" class="ui primary button">
+      <i class="plus icon"></i>
+      {% trans 'Add' %}
+    </a>
+  {% endif %}
+  </div>
+  <div class="ui secondary mobile hidden menu">
+  {% if view.has_filters and filter.form %}
+    <div class="item">    
+      <div class="ui secondary basic filter button">
+        <i class="filter icon"></i>
+        {% trans 'Filter' %}
+      </div>
+    </div>
+  {% endif %}
+  {% if admin.urls.add %}
+    <div class="right item">
+      <a href="{% url admin.urls.add %}" class="ui primary button">
+        <i class="plus icon"></i>
+        {% trans 'Add' %} {{ admin.model_opts.verbose_name }}
+      </a>
+      <a href="{% url admin.urls.importar %}" class="ui secondary button">
+        <i class="upload icon"></i>
+        {% trans 'Importar' %}
+      </a>
+    </div>
+  {% endif %}
+  </div>
+
+{% endblock %}
