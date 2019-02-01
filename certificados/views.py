@@ -20,6 +20,9 @@ class CertificadosListView(ListView):
 
 
 class MeusCertificadosListView(ListView):
+    def check_permissions(self, request):
+        return True
+
     def get_table_class(self):
         return table_factory(
             self.model, ('atividade', 'tipo_atividade'), action='imprimir')
@@ -33,6 +36,9 @@ class MeusCertificadosListView(ListView):
 
 
 class CertificadoImprimirView(DetailView):
+    def check_permissions(self, request):
+        return True
+
     def get_template_names(self):
         return ['certificados/modelos/base.rml']
 
@@ -59,6 +65,7 @@ class CertificadoImprimirView(DetailView):
 class CertificadoImportarView(AdminMixin, FormMixin, FormView):
     model = None
     template_name = 'certificados/importar.html'
+    permission_required = 'certificados.add_certificado'
 
     def get_form_class(self):
         return CertificadoImportarForm

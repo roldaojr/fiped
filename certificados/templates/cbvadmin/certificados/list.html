@@ -33,10 +33,12 @@
         <i class="plus icon"></i>
         {% trans 'Add' %} {{ admin.model_opts.verbose_name }}
       </a>
+      {% if admin.urls.importar %}
       <a href="{% url admin.urls.importar %}" class="ui secondary button">
         <i class="upload icon"></i>
         {% trans 'Importar' %}
       </a>
+      {% endif %}
     </div>
   {% endif %}
   </div>

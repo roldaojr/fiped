@@ -27,6 +27,13 @@ class CertificadoAdmin(cbvadmin.ModelAdmin):
     imprimir_view_class = CertificadoImprimirView
     importar_view_class = CertificadoImportarView
 
+    def has_permission(self, request, action, obj=None):
+        if action in ['meus', 'imprimir']:
+            return True
+        if action in 'importar':
+            action = 'add'
+        return super().has_permission(request, action, obj)
+
     def get_table_class(self):
         extra = {'Imprimir': TemplateColumn(
             template_name='certificados/tables_actions.html')}
@@ -45,14 +52,14 @@ class CertificadoAdmin(cbvadmin.ModelAdmin):
     def get_menu(self):
         app = self.model_class._meta.app_label
         model = self.model_class._meta.model_name
-        code = '%s.edit_%s' % (app, model)
+        code = '%s.change_%s' % (app, model)
         return [
             MenuItem('Gerenciar',
                      reverse(self.urls['default']),
+                     check=lambda request: request.user.has_perm(code),
                      weight=self.menu_weight),
             MenuItem('Meus Certificados',
                      reverse(self.urls['meus']),
-                     check=lambda request: request.user.has_perm(code),
                      weight=self.menu_weight + 1)
         ]
 
